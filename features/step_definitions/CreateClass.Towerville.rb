@@ -30,5 +30,12 @@ Then('initialize should run') do
   expect(@subject.howManyFloors).to eq(11)
 end
 
+Given('that I set the Tower name to {string}') do |string|
+  @subject.name = "BigAndRich"
+end
+
+Then('I should see the name {string}') do |string|
+  expect(@subject.name).to eq("BigAndRich")
+end
 
 # --- end of file ---
