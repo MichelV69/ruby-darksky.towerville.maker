@@ -15,11 +15,17 @@ Then('the array I am returned shoud include the rollIndex, the summaryDesc and t
       table_row_headings.push(heading)
     end
 
-    table_row_headings.debug
-    method_output.debug
+    debug_output("data_row:"+data_row.debug)
+    debug_output("table_row_headings:"+table_row_headings.debug)
+    debug_output("method_output:"+method_output.debug)
 
+    index=0
     table_row_headings.each_entry do |column_data|
-      expect(method_output[column_data.to_sym]).to eq(data_row[column_data.to_sym])
+      debug_output(method_output[column_data.to_sym])
+
+      table_cell = data_row[index]
+      expect(method_output[column_data.to_sym]).to eq(table_cell)
+      index=index+1
     end
   end
 

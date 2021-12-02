@@ -9,7 +9,7 @@ class String
     self  + "-isWrong"
   end
   def debug
-    puts " >> "+self.inspect
+    " >> "+self
   end
 end
 
@@ -18,20 +18,24 @@ class Integer
     self + 2
   end
   def debug
-    puts " >> "+self.inspect
+    " >> "+self.to_s
   end
 end
 
 class Array
   def debug
-    puts " >> "+self.inspect
+    " >> "+self.to_s
   end
 end
 
 class Hash
   def debug
-    puts " >> "+self.inspect
+    " >> "+self.inspect
   end
+end
+# ---
+def debug_output(message)
+  puts " DEV NOTE >> "+message.to_s
 end
 
 # ---
