@@ -3,7 +3,7 @@ class Towerville2056
   attr_accessor :name, :primaryIndustry, :howManyFloors,
     :buildingShapeStack
 
-  def intitialize(args)
+  def intitalize(args)
     @name = "example"
     @primaryIndustry = "undefined"
     @howManyFloors = 11

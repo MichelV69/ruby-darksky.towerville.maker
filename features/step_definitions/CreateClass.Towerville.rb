@@ -1,12 +1,16 @@
 require "rspec/expectations"
 require_relative('../../app.classes.rb')
 
-@output_trap = ""
-
-Given('that I run the app') do
-  @output_trap = This is test output"
+def assert_cucumber(assersion, msg = "an error was thrown")
+  assert(assersion == true, msg)
 end
 
-Then('I should see {string}') do |string|
-  @output_trap.contains(string)
+Given('that create a new instance of Towerville2056') do
+  @object_instance  = Towerville2056.new
 end
+
+Then('initialize should run') do
+  assert_cucumber(@object_instance.name.include?("this is wrong"))
+end
+
+# --- end of file ---

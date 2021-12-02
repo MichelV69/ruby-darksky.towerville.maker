@@ -3,5 +3,5 @@
 require_relative('app.classes.rb')
 
 # --- ---
-wok = new Towervile2056();
+wok = Towervile2056.new
 pp wok
