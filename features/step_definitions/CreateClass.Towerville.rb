@@ -38,4 +38,12 @@ Then('I should see the name {string}') do |string|
   expect(@subject.name).to eq("BigAndRich")
 end
 
+Given('that I set the Tower height to {int} stories') do |stories_tall|
+  @subject.howManyFloors = stories_tall
+end
+
+Then('I should see a height in metres of {int}m') do |metres_tall|
+  expect(@subject.getBuildingHeight).to eq(metres_tall)
+end
+
 # --- end of file ---
