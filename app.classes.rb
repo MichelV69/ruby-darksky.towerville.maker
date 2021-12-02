@@ -1,13 +1,12 @@
 
 class Towerville2056
-  attr_accessor :name, :primaryIndustry, :howManyFloors,
-    :buildingShapeStack
+  attr_accessor :name, :primaryIndustry, :howManyFloors, :buildingShapeStack
 
-  def intitalize(args)
-    @name = "example"
-    @primaryIndustry = "undefined"
-    @howManyFloors = 11
-    @buildingShapeStack[]
+  def initialize(args = {})
+    self.name = "example"
+    self.primaryIndustry = "undefined"
+    self.howManyFloors = 11
+    self.buildingShapeStack = {}
   end
 
   # ---
