@@ -19,4 +19,9 @@ class Towerville2056
     @howManyFloors * 3.5
   end
 
+  # ---
+  def getPrimaryIndustry(ptr)
+    {index: ptr, summaryDesc: "wrong", broadDesc: "still_wrong" }
+  end
+
 end

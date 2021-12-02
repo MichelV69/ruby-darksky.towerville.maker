@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
-gem "rspec-expectations"
 gem "sequel"
 gem "roda"
+gem "rspec-expectations"
+gem "cucumber"
