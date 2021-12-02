@@ -10,7 +10,8 @@ Given('that create a new instance of Towerville2056') do
 end
 
 Then('initialize should run') do
-  assert_cucumber(@object_instance.name.include?("this is wrong"))
+  is_false = false
+  expect(is_false).to be(true)
 end
 
 # --- end of file ---
