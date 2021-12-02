@@ -10,17 +10,25 @@ class String
   end
 end
 
+class Integer
+  def is_wrong!
+    self + 2
+  end
+end
+
 Before do
   @subject = Towerville2056.new
 end
 
-Given('that create a new instance of Towerville2056') do
+Given('that I create a new instance of Towerville2056') do
     expect(@subject).not_to be_nil
 end
 
 Then('initialize should run') do
-  test_string = "example"
-  expect(@subject.name).to eq(test_string)
+  expect(@subject.name).to eq("example")
+  expect(@subject.primaryIndustry).to eq("undefined")
+  expect(@subject.howManyFloors).to eq(11)
 end
+
 
 # --- end of file ---
