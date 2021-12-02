@@ -2,11 +2,25 @@ Given('that I provide a Number to the getPrimaryIndustry method') do
   @testVar_TableSize = 1
 end
 
-Then('the array I am returned shoud include the Number, the SummaryDesc and the BroadDesc') do |table|
+Then('the array I am returned shoud include the rollIndex, the summaryDesc and the broadDesc') do |table|
   # table is a Cucumber::MultilineArgument::DataTable
 
   1.upto(@testVar_TableSize) do | ptr |
-    expect(@subject::getPrimaryIndustry(ptr)).to eq("example")
+    header_row = table.raw[0]
+    data_row = table.raw[ptr]
+    method_output = @subject::getPrimaryIndustry(ptr)
+
+    table_row_headings = []
+    table_row_headings = header_row.each do |heading|
+      table_row_headings.push(heading)
+    end
+
+    table_row_headings.debug
+    method_output.debug
+
+    table_row_headings.each_entry do |column_data|
+      expect(method_output[column_data.to_sym]).to eq(data_row[column_data.to_sym])
+    end
   end
 
 end

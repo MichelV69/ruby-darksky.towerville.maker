@@ -8,14 +8,33 @@ class String
   def is_wrong!
     self  + "-isWrong"
   end
+  def debug
+    puts " >> "+self.inspect
+  end
 end
 
 class Integer
   def is_wrong!
     self + 2
   end
+  def debug
+    puts " >> "+self.inspect
+  end
 end
 
+class Array
+  def debug
+    puts " >> "+self.inspect
+  end
+end
+
+class Hash
+  def debug
+    puts " >> "+self.inspect
+  end
+end
+
+# ---
 Before do
   @subject = Towerville2056.new
 end

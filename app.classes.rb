@@ -21,7 +21,7 @@ class Towerville2056
 
   # ---
   def getPrimaryIndustry(ptr)
-    {index: ptr, summaryDesc: "wrong", broadDesc: "still_wrong" }
+    {rollIndex: ptr, summaryDesc: "wrong", broadDesc: "still_wrong" }
   end
 
 end

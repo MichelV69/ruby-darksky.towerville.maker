@@ -15,6 +15,6 @@ I want to create a randomly generated TV for DarkSky
   Scenario: Test Primary Industry Table
     Given that I create a new instance of Towerville2056
     And that I provide a Number to the getPrimaryIndustry method
-    Then the array I am returned shoud include the Number, the SummaryDesc and the BroadDesc
-    | Number   |  SummaryDesc    |  BroadDesc |
+    Then the array I am returned shoud include the rollIndex, the summaryDesc and the broadDesc
+    | rollIndex   |  summaryDesc    |  broadDesc |
     | 1        | Primary Sector  |  Processing & Refining of externally extracted or harvested goods.  Ore, Minerals, Oils, Produce, Forest Products and the like are examples. |
