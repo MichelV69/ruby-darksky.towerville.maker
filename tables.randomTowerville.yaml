@@ -1,0 +1,35 @@
+--- !<tag:wolfstar.ca,2021:DarkSky_table_randomTowerville>
+
+1:
+  summaryDesc : Primary Sector
+  broadDesc   :  Processing & Refining of externally extracted or harvested goods.  Ore, Minerals, Oils, Produce, Forest Products and the like are examples.
+
+2:
+  summaryDesc :  Secondary Sector
+  broadDesc   :  Processing & Construction using Primary Sector goods
+
+3:
+  summaryDesc:  Tertiary Sector
+  broadDesc:    "The service industry; Retail and Wholesale sales, Transportation and Distribution, Restaurants, Clerical Services, Media, Tourism, Insurance, Banking, Health Care, and Law"
+
+4:
+  summaryDesc:  Tertiary Sector
+  broadDesc:    "The service industry; Retail and Wholesale sales, Transportation and Distribution, Restaurants, Clerical Services, Media, Tourism, Insurance, Banking, Health Care, and Law"
+
+5:
+  summaryDesc:  Tertiary Sector
+  broadDesc:    "The service industry; Retail and Wholesale sales, Transportation and Distribution, Restaurants, Clerical Services, Media, Tourism, Insurance, Banking, Health Care, and Law"
+
+6:
+  summaryDesc:  Quaternary Sector
+  broadDesc:    The knowledge economy. Activities associated with this sector include government, culture, libraries, scientific research, education, and information technology. These intellectual services drive technological advancement
+
+7:
+  summaryDesc:  Quinary Sector
+  broadDesc:    The highest levels of decision-making in a society or economy. This sector includes top executives or officials in such fields as government, science, universities, nonprofits, health care, culture, and the media. It also includes police and fire departments, when those are actually are public services
+
+8:
+  summaryDesc:  Split Decsion
+  broadDesc:    Roll this table twice more, ignoring this outcome if it reoccurs.
+...
+# eof
