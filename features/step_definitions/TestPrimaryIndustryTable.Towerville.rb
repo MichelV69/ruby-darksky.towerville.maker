@@ -9,7 +9,7 @@ Then('the array I am returned shoud include the rollIndex, the summaryDesc and t
     method_output = @subject::getPrimaryIndustry(ptr)
 
     fields = {}
-    fields[1] = ptr.to_s
+    fields[1] = ptr.as_str
     fields[2] = primaryIndustryTable[ptr]["summaryDesc"]
     fields[3] = primaryIndustryTable[ptr]["broadDesc"]
 
@@ -20,7 +20,7 @@ Then('the array I am returned shoud include the rollIndex, the summaryDesc and t
 end
 
 Given('that the number sent to the getPrimaryIndustry method is {string}') do |string|
-  @isAnEight = string.to_int
+  @isAnEight = string.as_int
   @primaryIndustryTable = YAML.load_file("tables.randomTowerville.yaml")
   @method_output = @subject::getPrimaryIndustry(@isAnEight)
 

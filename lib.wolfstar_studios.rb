@@ -5,6 +5,12 @@ class String
   def debug
     " >> "+self
   end
+  def to_int
+    self.to_i
+  end
+  def as_int
+    self.to_i
+  end
 end
 
 class Integer
@@ -13,6 +19,9 @@ class Integer
   end
   def debug
     " >> "+self.to_s
+  end
+  def as_str
+    self.to_s
   end
 end
 
