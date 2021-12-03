@@ -8,14 +8,25 @@ Then('the array I am returned shoud include the rollIndex, the summaryDesc and t
   1.upto(@testVar_TableSize) do | ptr |
     method_output = @subject::getPrimaryIndustry(ptr)
 
-    #debug_output("method_output:"+method_output.debug)
+    fields = {}
+    fields[1] = ptr.to_s
+    fields[2] = primaryIndustryTable[ptr]["summaryDesc"]
+    fields[3] = primaryIndustryTable[ptr]["broadDesc"]
 
-    field(1) = primaryIndustryTable[ptr]["rollIndex"]
-    field(2) = primaryIndustryTable[ptr]["summaryDesc"]
-    field(3) = primaryIndustryTable[ptr]["broadDesc"]
-
-    expect(method_output["rollIndex".to_sym]).to    eq(field(1))
-    expect(method_output["summaryDesc".to_sym]).to  eq(field(2))
-    expect(method_output["broadDesc".to_sym]).to    eq(field(3))
+    expect(method_output["rollIndex".to_sym]).to    eq(fields[1])
+    expect(method_output["summaryDesc".to_sym]).to  eq(fields[2])
+    expect(method_output["broadDesc".to_sym]).to    eq(fields[3])
   end
+end
+
+Given('that the number sent to the getPrimaryIndustry method is {string}') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('I should not see {string}') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('the summaryDesc & broadDesc should contain {string}') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
 end

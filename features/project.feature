@@ -16,3 +16,7 @@ I want to create a randomly generated TV for DarkSky
     Given that I create a new instance of Towerville2056
     And that I provide a Number to the getPrimaryIndustry method
     Then the array I am returned shoud include the rollIndex, the summaryDesc and the broadDesc
+
+    Given that the number sent to the getPrimaryIndustry method is "8"
+    Then I should not see "Split Decsion"
+    And the summaryDesc & broadDesc should contain "|"
