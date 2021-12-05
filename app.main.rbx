@@ -13,6 +13,4 @@ puts yaml_data.inspect
 puts "... about to load YAML from disk..."
 yaml_data = Psych.load_file("tables.randomTowerville.yaml")
 
-puts yaml_data.inspect
-
-puts yaml_data[1].inspect
+puts yaml_data.last.inspect

@@ -4,18 +4,18 @@ require_relative('../../lib.wolfstar_studios.rb')
 
 # ---
 
-Given('that I provide a Number to the getPrimaryIndustry method') do
+Given('that I provide a Number other than {int} to the getPrimaryIndustry method') do |int|
   @testVar_TableSize = 8
 end
 
 Then('the array I am returned shoud include the rollIndex, the summaryDesc and the broadDesc') do
-  primaryIndustryTable = YAML.load_file("tables.randomTowerville.yaml")
+  primaryIndustryTable = Psych.load_file("tables.randomTowerville.yaml")
 
-  1.upto(@testVar_TableSize) do | ptr |
+  1.upto(@testVar_TableSize-1) do | ptr |
     method_output = @subject::getPrimaryIndustry(ptr)
 
     fields = {}
-    fields[1] = ptr.as_str
+    fields[1] = ptr
     fields[2] = primaryIndustryTable[ptr]["summaryDesc"]
     fields[3] = primaryIndustryTable[ptr]["broadDesc"]
 
@@ -27,7 +27,7 @@ end
 
 Given('that the number sent to the getPrimaryIndustry method is {string}') do |string|
   @isAnEight = string.as_int
-  @primaryIndustryTable = YAML.load_file("tables.randomTowerville.yaml")
+  @primaryIndustryTable = Psych.load_file("tables.randomTowerville.yaml")
   @method_output = @subject::getPrimaryIndustry(@isAnEight)
 
   expect(@isAnEight).to eq(8)
@@ -36,7 +36,7 @@ end
 Then('I should not see {string}') do |string|
 
   fields = {}
-  fields[1] = @isAnEight.to_s
+  fields[1] = @isAnEight
   fields[2] = @primaryIndustryTable[@isAnEight]["summaryDesc"]
   fields[3] = @primaryIndustryTable[@isAnEight]["broadDesc"]
 
@@ -47,5 +47,6 @@ Then('I should not see {string}') do |string|
 end
 
 Then('the summaryDesc & broadDesc should contain {string}') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@method_output["broadDesc".to_sym]).to    include(string)
+
 end
