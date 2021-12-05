@@ -32,4 +32,9 @@
   summaryDesc:  Split Decsion
   broadDesc:    Roll this table twice more, ignoring this outcome if it reoccurs.
 ...
+--- !<tag:wolfstar.ca,2021:DarkSky_table_unDefinedTestTableDocument>
+1: some data
+2: otha data
+3: ananutha data
+...
 # eof

@@ -1,3 +1,9 @@
+require "rspec/expectations"
+require_relative('../../app.classes.rb')
+require_relative('../../lib.wolfstar_studios.rb')
+
+# ---
+
 Given('that I provide a Number to the getPrimaryIndustry method') do
   @testVar_TableSize = 8
 end

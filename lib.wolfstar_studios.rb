@@ -5,9 +5,6 @@ class String
   def debug
     " >> "+self
   end
-  def to_int
-    self.to_i
-  end
   def as_int
     self.to_i
   end
