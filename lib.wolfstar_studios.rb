@@ -1,4 +1,20 @@
 # ---
+class	ExternalRandom
+	require 'random_org_http_api'
+	@rand_max=10000
+
+	def self.get(max)
+
+		rg = RandomOrgHttpApi::Generator.new
+		ten_thousand = rg.generate_integers(num: 1, max: @rand_max)
+
+		debug_output(ten_thousand)
+
+		return ((ten_thousand.first.to_f / @rand_max.to_f ) * max).to_i
+	end
+end # class Random
+
+# ---
 class String
   def is_wrong!
     self  + "-isWrong"
@@ -56,7 +72,7 @@ class Fixnum
   def d100
     workTotal=0
     1.upto(self) do |dicePtr|
-      workTotal += rand(100)+1
+      workTotal += ExternalRandom.get(100)+1
       end # do
     return workTotal
   end # def d100
@@ -64,7 +80,7 @@ class Fixnum
   def d10
     workTotal=0
     1.upto(self) do |dicePtr|
-      workTotal += rand(10)+1
+      workTotal += ExternalRandom.get(10)+1
       end # do
     return workTotal
   end # def d10
@@ -72,7 +88,7 @@ class Fixnum
   def d8
     workTotal=0
     1.upto(self) do |dicePtr|
-      workTotal += rand(8)+1
+      workTotal += ExternalRandom.get(8)+1
       end # do
     return workTotal
   end # def d6
@@ -80,7 +96,7 @@ class Fixnum
   def d6
     workTotal=0
     1.upto(self) do |dicePtr|
-      workTotal += rand(6)+1
+      workTotal += ExternalRandom.get(6)+1
       end # do
     return workTotal
   end # def d6
