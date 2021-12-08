@@ -3,10 +3,12 @@ class Towerville2056
   attr_accessor :name, :primaryIndustry, :howManyFloors, :buildingShapeStack
 
   def initialize(args = {})
+
     self.name = "example"
     self.primaryIndustry = "undefined"
     self.howManyFloors = 11
     self.buildingShapeStack = {}
+
   end
 
   # ---
@@ -33,12 +35,10 @@ class Towerville2056
       end
 
       r1 = set_of_results.first.last
-      debug_output(r1)
       r1c1 = r1[:summaryDesc]
       r1c2 = r1[:broadDesc]
 
       r2 = set_of_results.last.last
-      debug_output(r2)
       r2c1 = set_of_results[:summaryDesc]
       r2c2 = set_of_results[:broadDesc]
 
@@ -61,4 +61,5 @@ class Towerville2056
     {rollIndex: ptr, summaryDesc: f1, broadDesc: f2}
   end
 
-end
+end # class Towerville2056
+# ---

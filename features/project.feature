@@ -20,3 +20,8 @@ I want to create a randomly generated TV for DarkSky
     Given that the number sent to the getPrimaryIndustry method is "8"
     Then I should not see "Split Decsion"
     And the summaryDesc & broadDesc should contain "|"
+
+	Scenario: Roll 1d6, 1d8, 1d10
+		Given that I create a new instance of Towerville2056
+		And I request Die Rolls for "1d6", "1d8", and "1d10"
+		Then I should get three valid die results
