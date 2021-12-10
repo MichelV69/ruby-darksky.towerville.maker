@@ -70,40 +70,34 @@ class Fixnum
 		end # case self
 	end # def hex
 
-  def d100
+  def d(sides)
     workTotal=0
     1.upto(self) do |dicePtr|
-      workTotal += ExternalRandom.get(100)+1
+      workTotal += ExternalRandom.get(sides)+1
       end # do
     return workTotal
+  end
+
+  def d100
+    self.d(100)
   end # def d100
 
+  def d20
+    self.d(20)
+  end # def d10
+
   def d10
-    workTotal=0
-    1.upto(self) do |dicePtr|
-      workTotal += ExternalRandom.get(10)+1
-      end # do
-    return workTotal
+    self.d(10)
   end # def d10
 
   def d8
-    workTotal=0
-    1.upto(self) do |dicePtr|
-      workTotal += ExternalRandom.get(8)+1
-      end # do
-    return workTotal
+    self.d(8)
   end # def d6
 
   def d6
-    workTotal=0
-    1.upto(self) do |dicePtr|
-      workTotal += ExternalRandom.get(6)+1
-      end # do
-    return workTotal
+    self.d(6)
   end # def d6
-
 end # class Fixnum
-
 
 # ---
 class Array
