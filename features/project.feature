@@ -2,6 +2,11 @@ Feature: BuildATowerVille
 As a CommandLineUser
 I want to create a randomly generated TV for DarkSky
 
+	Scenario: Roll 1d6, 1d8, 1d10
+		Given that I create a new instance of Towerville2056
+		And I request Die Rolls for "1d6", "1d8", and "1d10"
+		Then I should get three valid die results
+
   Scenario: Test Class Featues
     Given that I create a new instance of Towerville2056
     Then initialize should run
@@ -21,7 +26,7 @@ I want to create a randomly generated TV for DarkSky
     Then I should not see "Split Decsion"
     And the summaryDesc & broadDesc should contain "|"
 
-	Scenario: Roll 1d6, 1d8, 1d10
-		Given that I create a new instance of Towerville2056
-		And I request Die Rolls for "1d6", "1d8", and "1d10"
-		Then I should get three valid die results
+  Scenario: Determine Number of Floors to Towerville
+    Given that I create a new instance of Towerville2056
+    And that I request a random floor count
+    Then the building floor count should be set
