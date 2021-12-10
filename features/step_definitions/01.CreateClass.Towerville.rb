@@ -17,7 +17,7 @@ end
 Then('initialize should run') do
   expect(@subject.name).to eq("example")
   expect(@subject.primaryIndustry).to eq("undefined")
-  expect(@subject.howManyFloors).to eq(11)
+  expect(@subject.howManyFloors).to eq(-1)
 end
 
 Given('that I set the Tower name to {string}') do |string|

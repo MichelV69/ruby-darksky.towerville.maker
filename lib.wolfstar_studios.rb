@@ -39,6 +39,14 @@ class Integer
   def as_str
     self.to_s
   end
+
+  def less_than?(test)
+    self < test
+  end
+
+  def greater_than?(test)
+    self > test
+  end
 end
 
 # ---

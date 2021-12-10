@@ -6,7 +6,7 @@ class Towerville2056
 
     self.name = "example"
     self.primaryIndustry = "undefined"
-    self.howManyFloors = 11
+    self.howManyFloors = -1
     self.buildingShapeStack = {}
 
   end
@@ -52,6 +52,7 @@ class Towerville2056
     end
   end
 
+  # ---
   def loadFromTablePrimaryIndustry(ptr)
     primaryIndustryTable = Psych.load_file("tables.randomTowerville.yaml")
 
@@ -59,6 +60,11 @@ class Towerville2056
     f1 = tableRow["summaryDesc"]
     f2 = tableRow["broadDesc"]
     {rollIndex: ptr, summaryDesc: f1, broadDesc: f2}
+  end
+
+  # ---
+  def self.getNewFloorCount()
+    return 4.d10+2.d20+20
   end
 
 end # class Towerville2056
