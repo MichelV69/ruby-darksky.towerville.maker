@@ -8,9 +8,10 @@ class	ExternalRandom
 		rg = RandomOrgHttpApi::Generator.new
 		ten_thousand = rg.generate_integers(num: 1, max: @rand_max)
 
-		debug_output(ten_thousand)
+    result = ((ten_thousand.first.to_f / @rand_max.to_f ) * max).to_i
 
-		return ((ten_thousand.first.to_f / @rand_max.to_f ) * max).to_i
+		debug_output("#{max}|#{ten_thousand}|#{result}")
+		return result
 	end
 end # class Random
 
