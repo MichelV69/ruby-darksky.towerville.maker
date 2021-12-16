@@ -1,6 +1,7 @@
 
 class Towerville2056
   attr_accessor :name, :primaryIndustry, :howManyFloors, :buildingShapeStack
+  TABLE_FILENAME = "tables.randomTowerville.yaml"
 
   def initialize(args = {})
 
@@ -54,7 +55,8 @@ class Towerville2056
 
   # ---
   def loadFromTablePrimaryIndustry(ptr)
-    primaryIndustryTable = Psych.load_file("tables.randomTowerville.yaml")
+    all_tables = Psych.load_file(TABLE_FILENAME)
+    primaryIndustryTable = all_tables[:PrimaryIndustry]
 
     tableRow = primaryIndustryTable[ptr]
     f1 = tableRow["summaryDesc"]

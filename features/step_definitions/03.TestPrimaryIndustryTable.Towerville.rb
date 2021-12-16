@@ -9,7 +9,7 @@ Given('that I provide a Number other than {int} to the getPrimaryIndustry method
 end
 
 Then('the array I am returned shoud include the rollIndex, the summaryDesc and the broadDesc') do
-  primaryIndustryTable = Psych.load_file("tables.randomTowerville.yaml")
+  primaryIndustryTable = @all_tables[:PrimaryIndustry]
 
   1.upto(@testVar_TableSize-1) do | ptr |
     method_output = @subject::getPrimaryIndustry(ptr)
@@ -27,7 +27,7 @@ end
 
 Given('that the number sent to the getPrimaryIndustry method is {string}') do |string|
   @isAnEight = string.as_int
-  @primaryIndustryTable = Psych.load_file("tables.randomTowerville.yaml")
+  @primaryIndustryTable = @all_tables[:PrimaryIndustry]
   @method_output = @subject::getPrimaryIndustry(@isAnEight)
 
   expect(@isAnEight).to eq(8)

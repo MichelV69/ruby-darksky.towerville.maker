@@ -8,6 +8,7 @@ require_relative('../../lib.wolfstar_studios.rb')
 # ---
 Before do
   @subject = Towerville2056.new
+  @all_tables = Psych.load_file(Towerville2056::TABLE_FILENAME)
 end
 
 Given('that I create a new instance of Towerville2056') do
