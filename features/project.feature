@@ -30,3 +30,4 @@ I want to create a randomly generated TV for DarkSky
     Given that I create a new instance of Towerville2056
     And that I request a random floor count
     Then the building floor count should be set
+    And should be within a valid range

@@ -17,8 +17,10 @@ end
 Then('the building floor count should be set') do
   puts "building floor count: #{@subject.howManyFloors}"
   expect(@subject.howManyFloors).not_to eq(-1)
+end
+
+Then('should be within a valid range') do
   expect(@subject.howManyFloors).to be_greater_than(20)
   expect(@subject.howManyFloors).to be_less_than(101)
 end
-
 # --- end of file ---
