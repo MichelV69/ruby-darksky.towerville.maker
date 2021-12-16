@@ -10,7 +10,7 @@ class	ExternalRandom
 
     result = ((ten_thousand.first.to_f / @rand_max.to_f ) * max).to_i
 
-		debug_output("#{max}|#{ten_thousand}|#{result}")
+		#debug_output("#{max}|#{ten_thousand}|#{result}")
 		return result
 	end
 end # class Random
