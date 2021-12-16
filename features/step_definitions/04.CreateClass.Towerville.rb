@@ -23,4 +23,12 @@ Then('should be within a valid range') do
   expect(@subject.howManyFloors).to be_greater_than(20)
   expect(@subject.howManyFloors).to be_less_than(101)
 end
+
+Given('I request a random Building Profile for the Bottom section') do
+  @subject.buildingProfile[:bottom] = Towerville2056.getRandomBuildingProfile(:bottom)
+end
+
+Then('Building Profile - Bottom should be set') do
+  expect(@subject.buildingProfile[:bottom]).not_to eq("unset")
+end
 # --- end of file ---

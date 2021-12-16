@@ -33,7 +33,7 @@
     broadDesc:    Roll this table twice more, ignoring this outcome if it reoccurs.
 # - eot -
 :BuildingShape:
-  :Bottom:
+  :bottom:
     1:  Rectangle
     2:  Rectangle
     3:  Hexagonal

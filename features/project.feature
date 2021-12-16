@@ -31,3 +31,8 @@ I want to create a randomly generated TV for DarkSky
     And that I request a random floor count
     Then the building floor count should be set
     And should be within a valid range
+
+  Scenario: Determine Building Profile for the Bottom section of Towerville
+    Given that I create a new instance of Towerville2056
+    And I request a random Building Profile for the Bottom section
+    Then Building Profile - Bottom should be set
