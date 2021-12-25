@@ -26,6 +26,11 @@ I want to create a randomly generated TV for DarkSky
     Then I should not see "Split Decsion"
     And the summaryDesc & broadDesc should contain "|"
 
+  Scenario: Test Random Primary Industry Getter
+    Given that I create a new instance of Towerville2056
+    Then the Instance should respond to "getRandomPrimarIndustry()"
+    And correctly set the Primary Industry
+  
   Scenario: Determine Number of Floors to Towerville
     Given that I create a new instance of Towerville2056
     And that I request a random floor count

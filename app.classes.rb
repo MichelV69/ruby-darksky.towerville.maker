@@ -1,17 +1,25 @@
 
 class Towerville2056
-  attr_accessor :name, :primaryIndustry, :howManyFloors, :buildingProfile
+  attr_accessor :name, :primaryIndustry, :howManyFloors, :buildingProfile, :table_content_sets
   TABLE_FILENAME = "tables.randomTowerville.yaml"
-  @table_content_sets = {}
 
   def initialize(args = {})
-    @table_content_sets = Psych.load_file(TABLE_FILENAME)
-    #debug_output("table_content_sets was |#{@table_content_sets.inspect}|")
+    self.table_content_sets == {}
+    load_table_content_sets()
 
     self.name = "example"
     self.primaryIndustry = "undefined"
     self.howManyFloors = -1
     self.buildingProfile = {:bottom => "unset", :middle => "unset", :top => "unset"}
+  end
+
+  # ---
+  def load_table_content_sets()
+    debug_output("load_table_content_sets")
+    unless self.table_content_sets
+      debug_output("... loading ...")
+      self.table_content_sets = Psych.load_file(TABLE_FILENAME)
+    end
   end
 
   # ---
@@ -22,6 +30,11 @@ class Towerville2056
   # ---
   def getBuildingHeight()
     @howManyFloors * 3.5
+  end
+
+  # ---
+  def getRandomPrimarIndustry()
+    getPrimaryIndustry(1.d8)
   end
 
   # ---
@@ -57,7 +70,7 @@ class Towerville2056
 
   # ---
   def loadFromTablePrimaryIndustry(ptr)
-    primaryIndustryTable = @table_content_sets[:PrimaryIndustry]
+    primaryIndustryTable = self.table_content_sets[:PrimaryIndustry]
 
     tableRow = primaryIndustryTable[ptr]
     f1 = tableRow["summaryDesc"]
@@ -71,10 +84,11 @@ class Towerville2056
   end
 
   def self.getRandomBuildingProfile(section)
+    load_table_content_sets()
     debug_output("section requested was |#{section.inspect}|")
-    debug_output("table_content_sets was |#{@table_content_sets.inspect}|")
+    debug_output("table_content_sets was |#{self.table_content_sets.inspect}|")
 
-    tableData = @table_content_sets[:BuildingShape][section]
+    tableData = self.table_content_sets[:BuildingShape][section]
     debug_output("tableData was |#{tableData.inspect}|")
 
     return "unset"
