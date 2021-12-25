@@ -33,7 +33,7 @@ class Towerville2056
   end
 
   # ---
-  def getRandomPrimarIndustry()
+  def self.getRandomPrimarIndustry()
     getPrimaryIndustry(1.d8)
   end
 

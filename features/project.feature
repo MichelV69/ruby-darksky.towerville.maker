@@ -28,9 +28,9 @@ I want to create a randomly generated TV for DarkSky
 
   Scenario: Test Random Primary Industry Getter
     Given that I create a new instance of Towerville2056
-    Then the Instance should respond to "getRandomPrimarIndustry()"
+    Then the Base Class should respond to "getRandomPrimarIndustry()"
     And correctly set the Primary Industry
-  
+
   Scenario: Determine Number of Floors to Towerville
     Given that I create a new instance of Towerville2056
     And that I request a random floor count

@@ -43,10 +43,19 @@ Then('I should not see {string}') do |string|
   expect(@method_output["rollIndex".to_sym]).to    eq(fields[1])
   expect(@method_output["summaryDesc".to_sym]).not_to  eq(fields[2])
   expect(@method_output["broadDesc".to_sym]).not_to    eq(fields[3])
-
 end
 
 Then('the summaryDesc & broadDesc should contain {string}') do |string|
   expect(@method_output["broadDesc".to_sym]).to    include(string)
-
 end
+
+Then('the Base Class should respond to {string}') do |string|
+  Towerville2056.respond_to? string
+end
+
+Then('correctly set the Primary Industry') do
+  @subject.PrimaryIndustry = Towerville2056::getRandomPrimarIndustry()
+  expect(@subject.PrimaryIndustry).not_to eq("undefined")
+end
+
+# --- end of file ---
