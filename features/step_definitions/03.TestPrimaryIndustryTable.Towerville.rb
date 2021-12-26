@@ -50,11 +50,11 @@ Then('the summaryDesc & broadDesc should contain {string}') do |string|
 end
 
 Then('the Base Class should respond to {string}') do |string|
-  Towerville2056.respond_to? string
+  Towerville2056.respond_to? string.to_sym
 end
 
 Then('correctly set the Primary Industry') do
-  @subject.PrimaryIndustry = Towerville2056::getRandomPrimarIndustry()
+  @subject.PrimaryIndustry = Towerville2056::getRandomPrimaryIndustry()
   expect(@subject.PrimaryIndustry).not_to eq("undefined")
 end
 
