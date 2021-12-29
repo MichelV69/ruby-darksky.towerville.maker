@@ -1,4 +1,4 @@
-# ---
+# --- # ---
 class	ExternalRandom
 	require 'random_org_http_api'
 	@rand_max=10000
@@ -15,7 +15,7 @@ class	ExternalRandom
 	end
 end # class Random
 
-# ---
+# --- # ---
 class String
   def is_wrong!
     self  + "-isWrong"
@@ -28,7 +28,7 @@ class String
   end
 end
 
-# ---
+# --- # ---
 class Integer
   def is_wrong!
     self + 2
@@ -49,7 +49,7 @@ class Integer
   end
 end
 
-# ---
+# --- # ---
 class Fixnum
   def billion
     self * 1000000000
@@ -107,14 +107,14 @@ class Fixnum
   end # def d6
 end # class Fixnum
 
-# ---
+# --- # ---
 class Array
   def debug
     " >> "+self.to_s
   end
 end
 
-# ---
+# --- # ---
 class Hash
   def last
     last = self.count
@@ -127,6 +127,7 @@ class Hash
     " >> "+self.inspect
   end
 end
+
 # ---
 def leastof(first, second)
 
@@ -137,6 +138,7 @@ def leastof(first, second)
 	end # if first, second
 end # def leastof(first, second)
 
+# ---
 def mostof(first, second)
 
 	if first > second then
@@ -146,14 +148,31 @@ def mostof(first, second)
 	end # if first, second
 end # def leastof(first, second)
 
+# ---
 def debug_output(message)
   puts " DEV NOTE >> "+message.to_s
 end
 
+# ---
 def signi2(to_round)
   up_value = to_round.to_f*100.00
   round_value = up_value.round
   down_value = round_value/100.00
   return down_value.to_f
 end
+
 # ---
+def roll_and_explode(dice_string)
+  max_roll = split(".d", dice_string).last.to_i
+  max_number_loops = 1
+  total_roll_result = 0
+  1.upto(max_number_loops) do |loop_tick|
+    this_roll = eval(dice_string)
+    total_roll_result = total_roll_result + this_roll
+    if this_roll.modulo(max_roll)
+      #dice exploded, add loops
+      max_number_loops = max_number_loops + (this_roll/max_roll).to_i
+    end
+  end
+end
+# --- # ---
