@@ -1,18 +1,18 @@
 require "rspec/expectations"
-require_relative('../../app.classes.rb')
 require_relative('../../lib.wolfstar_studios.rb')
+require_relative('../../app.classes.rb')
 
 # ---
 
 Given('that I provide a Number other than {int} to the getPrimaryIndustry method') do |int|
-  @testVar_TableSize = 8
+  @testVar_TableSize = int -1
 end
 
 Then('the array I am returned shoud include the rollIndex, the summaryDesc and the broadDesc') do
   primaryIndustryTable = @all_tables[:PrimaryIndustry]
 
-  1.upto(@testVar_TableSize-1) do | ptr |
-    method_output = @subject::getPrimaryIndustry(ptr)
+  1.upto(@testVar_TableSize) do | ptr |
+    method_output = @subject.getPrimaryIndustry(ptr)
 
     fields = {}
     fields[1] = ptr
@@ -28,7 +28,7 @@ end
 Given('that the number sent to the getPrimaryIndustry method is {string}') do |string|
   @isAnEight = string.as_int
   @primaryIndustryTable = @all_tables[:PrimaryIndustry]
-  @method_output = @subject::getPrimaryIndustry(@isAnEight)
+  @method_output = @subject.getPrimaryIndustry(@isAnEight)
 
   expect(@isAnEight).to eq(8)
 end
@@ -54,8 +54,8 @@ Then('the Base Class should respond to {string}') do |string|
 end
 
 Then('correctly set the Primary Industry') do
-  @subject.PrimaryIndustry = Towerville2056::getRandomPrimaryIndustry()
-  expect(@subject.PrimaryIndustry).not_to eq("undefined")
+  @subject.primaryIndustry = Towerville2056.getRandomPrimaryIndustry()
+  expect(@subject.primaryIndustry).not_to eq("undefined")
 end
 
 # --- end of file ---

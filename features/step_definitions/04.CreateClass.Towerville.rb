@@ -2,8 +2,8 @@
 # https://www.rubyguides.com/2018/07/rspec-tutorial/#RSpec_Testing_Example
 
 require "rspec/expectations"
-require_relative('../../app.classes.rb')
 require_relative('../../lib.wolfstar_studios.rb')
+require_relative('../../app.classes.rb')
 
 # ---
 Before do
