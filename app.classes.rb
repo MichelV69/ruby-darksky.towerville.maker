@@ -23,47 +23,6 @@ class Towerville2056
   end
 
   # ---
-  def self.getPrimaryIndustry(ptr)
-    if ptr == 8
-      good_rolls = 0
-      set_of_results = {}
-      until good_rolls == 2
-        this_roll = 1.d8
-        unless this_roll == 8
-          good_rolls = good_rolls+1
-          set_of_results[good_rolls] = self.loadFromTablePrimaryIndustry(this_roll)
-        end
-      end
-
-      r1 = set_of_results.first.last
-      r1c1 = r1[:summaryDesc]
-      r1c2 = r1[:broadDesc]
-
-      r2 = set_of_results.last.last
-      r2c1 = set_of_results[:summaryDesc]
-      r2c2 = set_of_results[:broadDesc]
-
-      f1 = "#{r1c1} | #{r2c1}"
-      f2 = "#{r1c2} | #{r2c2}"
-
-      {rollIndex: ptr, summaryDesc: f1, broadDesc: f2}
-
-    else
-      self.loadFromTablePrimaryIndustry(ptr)
-    end
-  end
-
-  # ---
-  def self.loadFromTablePrimaryIndustry(ptr)
-    primaryIndustryTable = TABLE_CONTENT_SETS[:PrimaryIndustry]
-
-    tableRow = primaryIndustryTable[ptr]
-    f1 = tableRow["summaryDesc"]
-    f2 = tableRow["broadDesc"]
-    {rollIndex: ptr, summaryDesc: f1, broadDesc: f2}
-  end
-
-  # ---
   def self.getNewFloorCount()
     return 4.d10+2.d20+20
   end
@@ -78,8 +37,45 @@ class Towerville2056
   end
 
   # ---
-  def self.getRandomPrimaryIndustry()
-    self.getPrimaryIndustry(1.d8)
+  def self.getRandomPrimaryIndustry(ptr = 0)
+    if ptr == 0
+      ptr = 1.d8
+      ptr_2 = ptr
+      if ptr == 8
+        while ptr == 8
+          ptr = 1.d8
+        end
+        while ptr_2 == 8 || ptr_2 == ptr
+          ptr_2 = 1.d8
+        end
+      end
+    end
+
+    loop_list = Array.new
+    debug_output "loop_list.new:#{loop_list.inspect}"
+    loop_list << ptr
+    unless ptr_2 == -1
+      loop_list << ptr_2
+    end
+    debug_output "loop_list.loaded:#{loop_list.inspect}"
+
+    table_col_1 = ""
+    table_col_2 = ""
+    primaryIndustryTable = TABLE_CONTENT_SETS[:PrimaryIndustry]
+    loop_list.compact.each do |list_ptr|
+      table_row = primaryIndustryTable[list_ptr]
+      debug_output "table_row:#{table_row.inspect}"
+      if loop_list.count > 1 &&
+        list_ptr == loop_list.last
+        table_col_1 = table_col_1 + " | "
+        table_col_2 = table_col_2 + " | "
+      end
+      table_col_1 = table_col_1 + table_row["summaryDesc"]
+      table_col_2 = table_col_2 + table_row["broadDesc"]
+    end
+
+    {rollIndex: ptr, summaryDesc: table_col_1, broadDesc: table_col_2}
+
   end
 end # class Towerville2056
 # ---
