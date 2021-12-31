@@ -105,6 +105,10 @@ class Fixnum
   def d6
     self.d(6)
   end # def d6
+
+  def d4
+    self.d(4)
+  end # def d6
 end # class Fixnum
 
 # --- # ---
@@ -163,16 +167,18 @@ end
 
 # ---
 def roll_and_explode(dice_string)
-  max_roll = split(".d", dice_string).last.to_i
-  max_number_loops = 1
+  rolls_requested = dice_string.split(".d").first.to_i
+  dice_sides = dice_string.split(".d").last.to_i
   total_roll_result = 0
-  1.upto(max_number_loops) do |loop_tick|
-    this_roll = eval(dice_string)
+  loop_tick = 0
+  while loop_tick < rolls_requested do
+    loop_tick = loop_tick +1
+    this_roll = eval("1.d#{dice_sides}")
     total_roll_result = total_roll_result + this_roll
-    if this_roll.modulo(max_roll)
-      #dice exploded, add loops
-      max_number_loops = max_number_loops + (this_roll/max_roll).to_i
+    if this_roll.modulo(dice_sides) == 0
+      rolls_requested = rolls_requested +1
     end
   end
+  return total_roll_result
 end
 # --- # ---
