@@ -166,7 +166,7 @@ def signi2(to_round)
 end
 
 # ---
-def roll_and_explode(dice_string)
+def roll_and_explode(dice_string, args = {cap: -1})
   rolls_requested = dice_string.split(".d").first.to_i
   dice_sides = dice_string.split(".d").last.to_i
   total_roll_result = 0
@@ -179,6 +179,19 @@ def roll_and_explode(dice_string)
       rolls_requested = rolls_requested +1
     end
   end
+
+  unless args[:cap] == -1
+    if total_roll_result > args[:cap]
+      total_roll_result = args[:cap]
+    end
+  end
   return total_roll_result
+end
+
+# ---
+def spaces(number_of = 4)
+  spaces = ""
+  number_of.times do spaces = spaces + " " end
+  return spaces
 end
 # --- # ---

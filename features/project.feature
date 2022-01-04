@@ -22,10 +22,6 @@ I want to create a randomly generated TV for DarkSky
     And that I provide a Number other than 8 to the getRandomPrimaryIndustry method
     Then the array I am returned shoud include the rollIndex, the summaryDesc and the broadDesc
 
-    Given that the number sent to the getRandomPrimaryIndustry method is "8"
-    Then I should not see "Split Decsion"
-    And the summaryDesc & broadDesc should contain "|"
-
   Scenario: Test Random Primary Industry Getter
     Given that I create a new instance of Towerville2056
     Then the Base Class should respond to "getRandomPrimaryIndustry"

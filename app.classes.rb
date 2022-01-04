@@ -23,17 +23,16 @@ class Towerville2056
   end
 
   # ---
-  def self.getNewFloorCount()
+  def self.getRandomFloorCount()
     return 4.d10+2.d20+20
   end
 
   def self.getRandomBuildingProfile(section)
-    debug_output("section requested was |#{section.inspect}|")
-
+    tableColumn = "unset"
     tableData = TABLE_CONTENT_SETS[:BuildingShape][section]
-    debug_output("tableData was |#{tableData.inspect}|")
+    tableColumn = tableData[roll_and_explode("1.d6", {cap: 18})]
 
-    return "unset"
+    return tableColumn
   end
 
   # ---
@@ -52,19 +51,16 @@ class Towerville2056
     end
 
     loop_list = Array.new
-    debug_output "loop_list.new:#{loop_list.inspect}"
     loop_list << ptr
     unless ptr_2 == -1
       loop_list << ptr_2
     end
-    debug_output "loop_list.loaded:#{loop_list.inspect}"
 
     table_col_1 = ""
     table_col_2 = ""
     primaryIndustryTable = TABLE_CONTENT_SETS[:PrimaryIndustry]
     loop_list.compact.each do |list_ptr|
       table_row = primaryIndustryTable[list_ptr]
-      debug_output "table_row:#{table_row.inspect}"
       if loop_list.count > 1 &&
         list_ptr == loop_list.last
         table_col_1 = table_col_1 + " | "
@@ -75,7 +71,6 @@ class Towerville2056
     end
 
     {rollIndex: ptr, summaryDesc: table_col_1, broadDesc: table_col_2}
-
   end
 end # class Towerville2056
 # ---

@@ -11,7 +11,7 @@ Before do
 end
 
 Given('that I request a random floor count') do
-  @subject.howManyFloors = Towerville2056.getNewFloorCount()
+  @subject.howManyFloors = Towerville2056.getRandomFloorCount()
 end
 
 Then('the building floor count should be set') do
