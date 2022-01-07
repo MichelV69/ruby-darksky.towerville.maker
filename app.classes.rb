@@ -23,7 +23,7 @@ class Towerville2056
   def getPopulationEstimate()
 		estimated_population = self.getNumberOfHomesEstimate * self.construction_rules[:people_per_home]
 
-		return estimated_population
+		return estimated_population.round_up().to_i
   end
 
 	# ---
