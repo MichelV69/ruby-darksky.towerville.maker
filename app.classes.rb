@@ -2,7 +2,7 @@ class Towerville2056
   TABLE_FILENAME = "tables.randomTowerville.yaml"
   TABLE_CONTENT_SETS = Psych.load_file(TABLE_FILENAME)
 
-  attr_accessor :tables_count, :name, :primaryIndustry, :howManyFloors, :buildingProfile
+  attr_accessor :tables_count, :name, :primaryIndustry, :howManyFloors, :buildingProfile, :construction_rules
 
   def initialize(args = {})
     self.tables_count = TABLE_CONTENT_SETS.count
@@ -11,16 +11,38 @@ class Towerville2056
     self.howManyFloors = -1
     self.buildingProfile = {:bottom => "unset", :middle => "unset",
 			:crown => "unset", :crown_cap => "unset"}
+
+		self.construction_rules = {}
+		self.construction_rules[:story_height_in_m] = 3.5
+		self.construction_rules[:efficiency_of_design] = 0.70
+		self.construction_rules[:home_volume_in_m3] = 700
+		self.construction_rules[:people_per_home] = 3.5
   end
 
   # ---
   def getPopulationEstimate()
-    "TO DO"
+		estimated_population = number_of_homes * self.construction_rules[:people_per_home]
+
+		return estimated_population
   end
+
+	# ---
+	def getNumberOfHomesEstimate()
+		building_in_m = {}
+		building_in_m[:height]	= self.getBuildingHeight()
+		building_in_m[:width]		= building_in_m[:height].half
+		building_in_m[:depth]		= building_in_m[:width].two_thirds
+
+		functional_volume_in_m3	= building_in_m[:height] * building_in_m[:width] * building_in_m[:depth] * self.construction_rules[:efficiency_of_design]
+
+		number_of_homes 	= functional_volume_in_m3 / self.construction_rules[:home_volume_in_m3]
+
+		return number_of_homes.round_up().to_i
+	end
 
   # ---
   def getBuildingHeight()
-    self.howManyFloors * 3.5
+    return self.howManyFloors * self.construction_rules[:story_height_in_m]
   end
 
   # ---

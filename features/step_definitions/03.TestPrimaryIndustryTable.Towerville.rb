@@ -4,7 +4,7 @@ require_relative('../../app.classes.rb')
 
 # ---
 
-Given('that I provide a Number other than {int} to the getRandomPrimaryIndustry method') do |int|
+When ('I provide a Number other than {int} to the getRandomPrimaryIndustry method') do |int|
   @testVar_TableSize = int -1
 end
 

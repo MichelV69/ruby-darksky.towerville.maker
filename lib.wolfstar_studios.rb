@@ -53,6 +53,21 @@ class Integer
 end
 
 # --- # ---
+class	Float
+	def half
+		self * 1.00/2.00
+	end
+
+	def two_thirds
+		self * 2.00/3.00
+	end
+
+	def round_up
+		self.ceil
+	end
+end
+
+# --- # ---
 class Fixnum
   def billion
     self * 1000000000

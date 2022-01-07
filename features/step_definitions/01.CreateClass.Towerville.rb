@@ -7,12 +7,17 @@ require_relative('../../app.classes.rb')
 
 # ---
 Before do
-  @subject = Towerville2056.new
   @all_tables = Psych.load_file(Towerville2056::TABLE_FILENAME)
 end
 
 Given('that I create a new instance of Towerville2056') do
+		@subject = Towerville2056.new
     expect(@subject).not_to be_nil
+end
+
+Given('that I use the existing instance of Towerville2056') do
+  expect(@subject.name).to eq("example")
+	@subject.name = "Recycled Property"
 end
 
 Then('initialize should run') do
@@ -21,12 +26,12 @@ Then('initialize should run') do
   expect(@subject.howManyFloors).to eq(-1)
 end
 
-Given('that I set the Tower name to {string}') do |string|
-  @subject.name = "BigAndRich"
+Given('that I set the Tower name to {string}') do |new_building_name|
+  @subject.name = new_building_name
 end
 
-Then('I should see the name {string}') do |string|
-  expect(@subject.name).to eq("BigAndRich")
+Then('I should see the name {string}') do |new_building_name|
+  expect(@subject.name).to eq(new_building_name)
 end
 
 Given('that I set the Tower height to {int} stories') do |stories_tall|

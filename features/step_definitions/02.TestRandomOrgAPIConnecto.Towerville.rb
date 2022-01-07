@@ -4,7 +4,6 @@ require_relative('../../app.classes.rb')
 
 # ---
 Before do
-  @subject = Towerville2056.new
 end
 
 Given('I request Die Rolls for {string}, {string}, and {string}') do |string, string2, string3|
