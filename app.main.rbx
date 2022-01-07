@@ -8,7 +8,8 @@ tv = Towerville2056.new()
 puts "tables found: #{tv.tables_count}"
 
 tv.name = "Example Tower"
-tv.primaryIndustry = Towerville2056::getRandomPrimaryIndustry()
+tv.howManyFloors = Towerville2056::getRandomFloorCount
+tv.primaryIndustry = Towerville2056::getRandomPrimaryIndustry
 tv.buildingProfile[:bottom] = Towerville2056.getRandomBuildingProfile(:bottom)
 tv.buildingProfile[:middle] = Towerville2056.getRandomBuildingProfile(:middle)
 tv.buildingProfile[:crown] = Towerville2056.getRandomBuildingProfile(:crown)
@@ -20,4 +21,9 @@ puts " #{tv.name} :: Bottom section: #{tv.buildingProfile[:bottom]} "
 puts " #{space_bar} :: Middle section: #{tv.buildingProfile[:middle]} "
 puts " #{space_bar} :: Crown section: #{tv.buildingProfile[:crown]} "
 puts " #{space_bar} :: 'Crown Forest': #{tv.buildingProfile[:crown_cap]} "
+puts " #{tv.name} :: # of Floors: #{tv.howManyFloors}"
+puts " #{space_bar} :: Height: #{tv.getBuildingHeight} meters tall"
+puts " #{space_bar} :: Foot Print: ????"
+puts " #{space_bar} :: # of Homes : #{tv.getNumberOfHomesEstimate}"
+puts " #{space_bar} :: # of People : #{tv.getPopulationEstimate}"
 # --- ---
