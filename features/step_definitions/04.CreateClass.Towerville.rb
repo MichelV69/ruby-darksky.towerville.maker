@@ -44,7 +44,6 @@ When('I Calculate the Towerville Population') do
 end
 
 Then('the Towerville Population should be {string}') do |string|
-	expect(@subject.name).to eq("Recycled Property")
   expect(@test_population).to eq(string.as_int)
 end
 # --- end of file ---

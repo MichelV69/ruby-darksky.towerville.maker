@@ -8,18 +8,12 @@ require_relative('../../app.classes.rb')
 # ---
 Before do
   @all_tables = Psych.load_file(Towerville2056::TABLE_FILENAME)
+	@subject = Towerville2056.new
 end
 
-Given('that I create a new instance of Towerville2056') do
-		@subject = Towerville2056.new
-    expect(@subject).not_to be_nil
+Given('that I have an instance of Towerville2056') do
+  expect(@subject).not_to be_nil
 end
-
-Given('that I use the existing instance of Towerville2056') do
-  expect(@subject.name).to eq("example")
-	@subject.name = "Recycled Property"
-end
-
 Then('initialize should run') do
   expect(@subject.name).to eq("example")
   expect(@subject.primaryIndustry).to eq("undefined")
