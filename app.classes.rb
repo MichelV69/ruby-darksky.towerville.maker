@@ -21,7 +21,7 @@ class Towerville2056
 
   # ---
   def getPopulationEstimate()
-		estimated_population = number_of_homes * self.construction_rules[:people_per_home]
+		estimated_population = self.getNumberOfHomesEstimate * self.construction_rules[:people_per_home]
 
 		return estimated_population
   end
@@ -50,6 +50,7 @@ class Towerville2056
     return 4.d10+2.d20+20
   end
 
+	# ---
   def self.getRandomBuildingProfile(section)
     tableColumn = "unset"
     tableData = TABLE_CONTENT_SETS[:BuildingShape][section]
