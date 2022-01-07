@@ -26,6 +26,9 @@ class String
   def as_int
     self.to_i
   end
+	def to_lower
+		self.downcase
+	end
 end
 
 # --- # ---
