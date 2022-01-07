@@ -52,5 +52,28 @@
     16:  Pillars - Circular
     17:  Pillars - Oval
     18:  Pillars - Triangular
+  :middle:
+    1:  Rectangle
+    2:  Rectangle
+    3:  Hexagonal
+    4:  Hexagonal
+    5:  Octagonal
+    6:  Explode To Next Tier
+    7:  Oval
+    8:  Oval
+    9:  Oval
+    10: Circular
+    11: Diamond (4 Sided)
+    12: Explode To Next Tier
+    13: Kite (4 Sided)
+    14: Kite (5 Sided)
+    17: Concentric rings (1d4+1). 1 in 8 chance that they rotate at a rate of once every hour or two.
+    18: Explode To Next Tier
+    19: Hexagonal “Pillars”
+    20: Hexagonal “Pillars”
+    21: Octagonal “Pillars”
+    22: Octagonal “Pillars”
+    23: Octagonal “Pillars”
+    24: Special Outcome (See Rules)
 # - eot -
 # eof
