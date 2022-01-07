@@ -9,7 +9,7 @@ class Towerville2056
     self.name = "example"
     self.primaryIndustry = "undefined"
     self.howManyFloors = -1
-    self.buildingProfile = {:bottom => "unset", :middle => "unset", :top => "unset"}
+    self.buildingProfile = {:bottom => "unset", :middle => "unset", :crown => "unset"}
   end
 
   # ---
@@ -34,7 +34,7 @@ class Towerville2056
 		cap_by_section = {}
 		cap_by_section[:bottom] = 18
 		cap_by_section[:middle] = 24
-		cap_by_section[:top] = 12
+		cap_by_section[:crown] = 12
 
     tableColumn = tableData[roll_and_explode("1.d6", {cap: cap_by_section[section]})]
 
