@@ -9,7 +9,8 @@ class Towerville2056
     self.name = "example"
     self.primaryIndustry = "undefined"
     self.howManyFloors = -1
-    self.buildingProfile = {:bottom => "unset", :middle => "unset", :crown => "unset"}
+    self.buildingProfile = {:bottom => "unset", :middle => "unset",
+			:crown => "unset", :crown_cap => "unset"}
   end
 
   # ---
@@ -36,7 +37,19 @@ class Towerville2056
 		cap_by_section[:middle] = 24
 		cap_by_section[:crown] = 12
 
-    tableColumn = tableData[roll_and_explode("1.d6", {cap: cap_by_section[section]})]
+		tableColumn = {}
+		unless section == :crown_cap
+			tableColumn = tableData[roll_and_explode("1.d6", {cap: cap_by_section[section]})]
+		else
+			percent_lower_has_cap = 70
+			ptr_1 = 1.d100
+			unless ptr_1 <= percent_lower_has_cap
+				tableColumn = "(none)"
+			else
+				how_tall = 1.d4 + 1.d6
+				tableColumn = "The 'Crown' is capped with forest of RF antennas, microwave link dishes, aircraft warning lights, weather sensors, cameras, and even very short range anti-aircraft systems. Additionally, there will heavy cables, struts, hatches, ladders and scaffolding to allow access and maintenance to all that hardware.  The 'Cap Forest' unofficially increases the height of the building another #{how_tall} stories."
+			end
+		end
 
     return tableColumn
   end

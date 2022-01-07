@@ -25,12 +25,13 @@ Then('should be within a valid range') do
 end
 
 Given('I request a random Building Profile for the {string} section') do |string|
-	building_profile_section = string.to_lower.to_sym
+	building_profile_section = string.to_lower.gsub(' ','_').to_sym
   @subject.buildingProfile[building_profile_section] = Towerville2056.getRandomBuildingProfile(building_profile_section)
 end
 
 Then('Building Profile - {string} should be set') do |string|
-	building_profile_section = string.to_lower.to_sym
-  expect(@subject.buildingProfile[building_profile_section]).not_to eq("unset")
+	building_profile_section = string.to_lower.gsub(' ','_').to_sym
+	expect(@subject.buildingProfile[building_profile_section]).not_to eq("unset")
+  expect(@subject.buildingProfile[building_profile_section]).not_to eq("")
 end
 # --- end of file ---

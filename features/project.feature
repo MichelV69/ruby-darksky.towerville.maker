@@ -2,12 +2,12 @@ Feature: BuildATowerVille
 As a CommandLineUser
 I want to create a randomly generated TV for DarkSky
 
-	Scenario: Roll 1d6, 1d8, 1d10
+	Scenario Outline: Roll 1d6, 1d8, 1d10
 		Given that I create a new instance of Towerville2056
 		And I request Die Rolls for "1d6", "1d8", and "1d10"
 		Then I should get three valid die results
 
-  Scenario: Test Class Featues
+  Scenario Outline: Test Class Featues
     Given that I create a new instance of Towerville2056
     Then initialize should run
 
@@ -17,36 +17,40 @@ I want to create a randomly generated TV for DarkSky
     Given that I set the Tower height to 20 stories
     Then I should see a height in metres of 70m
 
-  Scenario: Test Primary Industry Table
+  Scenario Outline: Test Primary Industry Table
     Given that I create a new instance of Towerville2056
     And that I provide a Number other than 8 to the getRandomPrimaryIndustry method
     Then the array I am returned shoud include the rollIndex, the summaryDesc and the broadDesc
 
-  Scenario: Test Random Primary Industry Getter
+  Scenario Outline: Test Random Primary Industry Getter
     Given that I create a new instance of Towerville2056
     Then the Base Class should respond to "getRandomPrimaryIndustry"
     And correctly set the Primary Industry
 
-  Scenario: Determine Number of Floors to Towerville
+  Scenario Outline: Determine Number of Floors to Towerville
     Given that I create a new instance of Towerville2056
     And that I request a random floor count
     Then the building floor count should be set
     And should be within a valid range
 
-	@WIP
-  Scenario: Determine Building Profile for the "Bottom" section of Towerville
+  Scenario Outline: Determine Building Profile for the "Bottom" section of Towerville
     Given that I create a new instance of Towerville2056
     And I request a random Building Profile for the "Bottom" section
     Then Building Profile - "Bottom" should be set
 
-	@WIP
-	Scenario: Determine Building Profile for the "Middle" section of Towerville
+	Scenario Outline: Determine Building Profile for the "Middle" section of Towerville
     Given that I create a new instance of Towerville2056
     And I request a random Building Profile for the "Middle" section
     Then Building Profile - "Middle" should be set
 
-		@WIP
-	Scenario: Determine Building Profile for the "Crown" section of Towerville
+	@WIP
+	Scenario Outline: Determine Building Profile for the "Crown" section of Towerville
     Given that I create a new instance of Towerville2056
     And I request a random Building Profile for the "Crown" section
     Then Building Profile - "Crown" should be set
+
+	@WIP
+	Scenario Outline: Determine Building Profile for the "Crown Cap" section of Towerville
+    Given that I create a new instance of Towerville2056
+    And I request a random Building Profile for the "Crown Cap" section
+    Then Building Profile - "Crown Cap" should be set
