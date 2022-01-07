@@ -11,9 +11,11 @@ tv.name = "Example Tower"
 tv.primaryIndustry = Towerville2056::getRandomPrimaryIndustry()
 tv.buildingProfile[:bottom] = Towerville2056.getRandomBuildingProfile(:bottom)
 tv.buildingProfile[:middle] = Towerville2056.getRandomBuildingProfile(:middle)
+tv.buildingProfile[:top] = Towerville2056.getRandomBuildingProfile(:top)
 
 space_bar = spaces(tv.name.length)
 puts "\n\n ----- \n  #{tv.name} :: #{tv.primaryIndustry[:summaryDesc]} (#{tv.primaryIndustry[:broadDesc]})"
 puts " #{tv.name} :: bottom section: #{tv.buildingProfile[:bottom]} "
 puts " #{space_bar} :: middle section: #{tv.buildingProfile[:middle]} "
+puts " #{space_bar} :: top section: #{tv.buildingProfile[:top]} "
 # --- ---

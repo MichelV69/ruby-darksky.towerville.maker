@@ -34,6 +34,8 @@ class Towerville2056
 		cap_by_section = {}
 		cap_by_section[:bottom] = 18
 		cap_by_section[:middle] = 24
+		cap_by_section[:top] = 12
+
     tableColumn = tableData[roll_and_explode("1.d6", {cap: cap_by_section[section]})]
 
     return tableColumn

@@ -42,3 +42,8 @@ I want to create a randomly generated TV for DarkSky
 	    Given that I create a new instance of Towerville2056
 	    And I request a random Building Profile for the "Middle" section
 	    Then Building Profile - "Middle" should be set
+
+		Scenario: Determine Building Profile for the "Top" section of Towerville
+	    Given that I create a new instance of Towerville2056
+	    And I request a random Building Profile for the "Top" section
+	    Then Building Profile - "Top" should be set
