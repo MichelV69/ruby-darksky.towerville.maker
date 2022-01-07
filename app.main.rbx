@@ -4,8 +4,6 @@ require('psych')
 require_relative('lib.wolfstar_studios.rb')
 require_relative('app.classes.rb')
 
-4.times do | count| puts "#{count+1}:" + roll_and_explode("4.d4").to_s ; end
-
 tv = Towerville2056.new()
 puts "tables found: #{tv.tables_count}"
 

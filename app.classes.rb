@@ -40,22 +40,24 @@ class Towerville2056
   end
 
   # ---
-  def self.getRandomPrimaryIndustry(ptr = 0)
-    if ptr == 0
-      ptr = 1.d8
-      ptr_2 = ptr
-      if ptr == 8
-        while ptr == 8
-          ptr = 1.d8
-        end
-        while ptr_2 == 8 || ptr_2 == ptr
-          ptr_2 = 1.d8
-        end
-      end
-    end
+  def self.getRandomPrimaryIndustry(ptr_1 = 0)
+		ptr_2 = -1
+
+    if ptr_1 == 0
+      ptr_1 = 1.d8
+	  end
+		if ptr_1 == 8
+			while ptr_1 == 8
+				ptr_1 = 1.d8
+			end
+			while ptr_1 == 8 &&
+				(ptr_2 == -1 || ptr_2 == 8)
+				ptr_2 = 1.d8
+			end
+		end
 
     loop_list = Array.new
-    loop_list << ptr
+    loop_list << ptr_1
     unless ptr_2 == -1
       loop_list << ptr_2
     end
@@ -74,7 +76,7 @@ class Towerville2056
       table_col_2 = table_col_2 + table_row["broadDesc"]
     end
 
-    {rollIndex: ptr, summaryDesc: table_col_1, broadDesc: table_col_2}
+    {rollIndex: ptr_1, summaryDesc: table_col_1, broadDesc: table_col_2}
   end
 end # class Towerville2056
 # ---
