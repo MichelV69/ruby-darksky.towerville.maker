@@ -1,9 +1,24 @@
 # --- # ---
 class DiceString
-  def parse_string
+  #NOTA BENE: currently only handles one roll command per to_parse request
+  def self.parse(to_parse, args={})
+    number_of_rolls = -1;
+    type_of_dice = -1;
+    total_roll = -1;
+    roll_mod = 0;
+
+    dice_command[:start] = "[roll:"
+    dice_command[:stop]  = ":]"
+
+    if to_parse.contains? dice_command[:start]
+      roll_text = to_parse.split(dice_command[:start]).last.split(dice_command[:stop]).first
+
+    end
+
 
   end # def parse_string
 end # class DiceString
+
 # --- # ---
 class String
   def is_wrong!
