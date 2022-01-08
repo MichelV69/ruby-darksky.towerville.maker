@@ -7,6 +7,7 @@ class DiceString
     total_roll = -1;
     roll_mod = 0;
 
+    dice_command = {}
     dice_command[:start] = "[roll:"
     dice_command[:stop]  = "]"
 
@@ -33,6 +34,9 @@ class String
 	def to_lower
 		self.downcase
 	end
+  def contains?(test)
+    self.include?(test)
+  end
 end
 
 # --- # ---
@@ -175,8 +179,8 @@ def mostof(first, second)
 end # def leastof(first, second)
 
 # ---
-def debug_output(message)
-  puts " DEV NOTE >> "+message.to_s
+def dev_msg(message)
+  puts " DEV NOTE >> "+message.to_s if (!ENV["RUBY_ENV"].nil? && ENV["RUBY_ENV"].contains?("dev"))
 end
 
 # ---

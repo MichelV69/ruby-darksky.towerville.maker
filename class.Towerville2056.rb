@@ -1,4 +1,6 @@
 # --- # ---
+require('psych')
+
 class Towerville2056
   TABLE_FILENAME = "tables.randomTowerville.yaml"
   TABLE_CONTENT_SETS = Psych.load_file(TABLE_FILENAME)
