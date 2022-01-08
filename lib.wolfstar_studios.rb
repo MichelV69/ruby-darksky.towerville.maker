@@ -8,7 +8,7 @@ class DiceString
     roll_mod = 0;
 
     dice_command[:start] = "[roll:"
-    dice_command[:stop]  = ":]"
+    dice_command[:stop]  = "]"
 
     if to_parse.contains? dice_command[:start]
       roll_text = to_parse.split(dice_command[:start]).last.split(dice_command[:stop]).first
