@@ -48,14 +48,12 @@ I want to create a randomly generated TV for DarkSky
     When I request a random Building Profile for the "Crown" section
     Then Building Profile - "Crown" should be set
 
-@WIP
 	Scenario Outline: Determine Building Profile for the "Crown Cap" section of Towerville
     Given that I have an instance of Towerville2056
     When I request a random Building Profile for the "Crown Cap" section
     Then Building Profile - "Crown Cap" should be set
 
-@WIP
-Scenario Outline: Calculate the Number of Homes in the Building
+  Scenario Outline: Calculate the Number of Homes in the Building
 #Comment : NS:	60.0	Stories
 #Comment : SH:	3.5	m
 #Comment : H:	210.0	m
@@ -64,10 +62,10 @@ Scenario Outline: Calculate the Number of Homes in the Building
 #Comment : FV:	1,080,450.0	m3
 #Comment : M3/Home:	700	M3
 #Comment : Homes:	1,544 (Round up always)
-  Given that I have an instance of Towerville2056
-	And that I set the Tower height to 60 stories
-  When I request the Number of Homes in the Building
-  Then the Number of Homes in the Building should be 1544
+    Given that I have an instance of Towerville2056
+  	And that I set the Tower height to 60 stories
+    When I request the Number of Homes in the Building
+    Then the Number of Homes in the Building should be 1544
 
 @WIP
 	Scenario Outline: Calculate Building Population
@@ -78,3 +76,9 @@ Scenario Outline: Calculate the Number of Homes in the Building
 		And that I set the Tower height to 60 stories
 	  When I Calculate the Towerville Population
 	  Then the Towerville Population should be "5404"
+
+@WIP
+  Scenario Outline: Description for Pillars includes a random-rolled height
+    Given the Description for Pillars includes a random-rolled height
+    When a formatted string like "height is [roll:1d4+1d6+1] stories"
+    Then the dice string should be parsed and replaced with a number
