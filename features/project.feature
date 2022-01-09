@@ -67,7 +67,6 @@ I want to create a randomly generated TV for DarkSky
     When I request the Number of Homes in the Building
     Then the Number of Homes in the Building should be 1544
 
-@WIP
 	Scenario Outline: Calculate Building Population
 #Comment : Homes:	1,544 (Round up always)
 #Comment : Ppl/Home:	3.5	Ppl
@@ -77,7 +76,7 @@ I want to create a randomly generated TV for DarkSky
 	  When I Calculate the Towerville Population
 	  Then the Towerville Population should be "5404"
 
-@WIP
+@DiceStrings
   Scenario Outline: Description for Pillars includes a random-rolled height
     Given the Description for Pillars includes a random-rolled height
     When a formatted string like "height is [roll:1d4+1d6+1] stories"

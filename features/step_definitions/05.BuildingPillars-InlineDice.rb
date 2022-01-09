@@ -28,11 +28,13 @@ Then('the dice string should be parsed and replaced with a number') do
 end
 
 Given('that a Building Section is added') do
-  pending # Write code here that turns the phrase above into concrete actions
+  @subject.buildingProfile[:middle] = Towerville2056.getRandomBuildingProfile(:middle, {get_row_value: 21})
 end
 
-When('the table result is {string}') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+When('the table result is {string}') do |table_result|
+  if table_result.downcase == "pillars"
+    expect(@subject.buildingProfile[:middle].downcase).to include(table_result.downcase)
+  end
 end
 
 Then('Shape Description should have the {string} added to it.') do |string|

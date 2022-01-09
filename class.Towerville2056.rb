@@ -54,7 +54,7 @@ class Towerville2056
   end
 
 	# ---
-  def self.getRandomBuildingProfile(section)
+  def self.getRandomBuildingProfile(section, args={})
     tableColumn = "unset"
     tableData = TABLE_CONTENT_SETS[:BuildingShape][section]
 
@@ -65,7 +65,11 @@ class Towerville2056
 
 		tableColumn = {}
 		unless section == :crown_cap
-			tableColumn = tableData[roll_and_explode("1.d6", {cap: cap_by_section[section]})]
+      unless ! args[:get_row_value].nil?
+        tableColumn = tableData[roll_and_explode("1.d6", {cap: cap_by_section[section]})]
+      else
+        tableColumn = tableData[args[:get_row_value]]
+      end
 		else
 			percent_lower_has_cap = 70
 			ptr_1 = 1.d100
