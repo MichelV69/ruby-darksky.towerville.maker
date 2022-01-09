@@ -1,22 +1,35 @@
 # --- # ---
-class DiceString
+class DiceStrings
   #NOTA BENE: currently only handles one roll command per to_parse request
   def self.parse(to_parse, args={})
-    number_of_rolls = -1;
-    type_of_dice = -1;
-    total_roll = -1;
-    roll_mod = 0;
+    output_string = to_parse
 
     dice_command = {}
     dice_command[:start] = "[roll:"
     dice_command[:stop]  = "]"
 
-    if to_parse.contains? dice_command[:start]
-      roll_text = to_parse.split(dice_command[:start]).last.split(dice_command[:stop]).first
-
+    delimiters = ["and",',','.']
+    phrases = {}
+    phrases = to_parse.split(Regexp.union(delimiters))
+      .select{|x| x.contains? dice_command[:start]}
+    phrases.each do |phrase|
+      if phrase.contains? dice_command[:start]
+        # isolate the roll syntax
+        roll_text = phrase.split(dice_command[:start])
+        .last
+        .split(dice_command[:stop])
+        .first
+        # now handle compound roll requests
+        delimiters = ['+']
+        roll_total_for_phrase = 0
+        roll_text.split(Regexp.union(delimiters)).each do |roll_to_eval|
+          roll_total_for_phrase += eval(roll_to_eval.gsub("d",".d"))
+        end
+        # now replace the roll syntax in the original String
+        output_string.gsub!("#{dice_command[:start]}#{roll_text}#{dice_command[:stop]}", roll_total_for_phrase.to_s)
+      end
     end
-
-
+    return output_string
   end # def parse_string
 end # class DiceString
 
