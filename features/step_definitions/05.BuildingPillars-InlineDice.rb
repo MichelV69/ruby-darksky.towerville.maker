@@ -20,8 +20,10 @@ Then('the dice string should be parsed and replaced with a number') do
   expect(parsed_simple_dice_string).not_to  eq(@simple_dice_string)
   expect(parsed_example_string).not_to      eq(@example_string)
 
-  expect(parsed_simple_dice_string).not_to  contain("[roll:")
-  expect(parsed_example_string).not_to      contain("[roll:")
+  expect(parsed_simple_dice_string).not_to  include("[roll:")
+  expect(parsed_example_string).not_to      include("[roll:")
 
+  dev_msg(parsed_simple_dice_string)
+  dev_msg(parsed_example_string)
 end
 # --- end of file ---
