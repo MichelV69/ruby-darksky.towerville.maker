@@ -82,3 +82,10 @@ I want to create a randomly generated TV for DarkSky
     Given the Description for Pillars includes a random-rolled height
     When a formatted string like "height is [roll:1d4+1d6+1] stories"
     Then the dice string should be parsed and replaced with a number
+
+@WIP
+  Scenario Outline: Add expanded Description for Pillars
+    Given that a Building Section is added
+    When the table result is 'Pillars'
+    Then Shape Description should have the 'Pillars Description' added to it.
+    And the inline dice string should be parsed and replaced with the result rolled.

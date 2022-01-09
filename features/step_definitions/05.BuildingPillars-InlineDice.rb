@@ -26,4 +26,20 @@ Then('the dice string should be parsed and replaced with a number') do
   dev_msg(parsed_simple_dice_string)
   dev_msg(parsed_example_string)
 end
+
+Given('that a Building Section is added') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When('the table result is {string}') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('Shape Description should have the {string} added to it.') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('the inline dice string should be parsed and replaced with the result rolled.') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
 # --- end of file ---
