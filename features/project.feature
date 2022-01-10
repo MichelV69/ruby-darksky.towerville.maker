@@ -82,9 +82,15 @@ I want to create a randomly generated TV for DarkSky
     When a formatted string like "height is [roll:1d4+1d6+1] stories"
     Then the dice string should be parsed and replaced with a number
 
-@WIP
   Scenario Outline: Add expanded Description for Pillars
     Given that a Building Section is added
     When the table result is 'Pillars'
     Then Shape Description should have the 'Pillars Description' added to it.
     And the inline dice string should be parsed and replaced with the result rolled.
+
+@WIP
+	Scenario Outline: Directly set and get Primary Employer Scale
+	  Given that I have an instance of Towerville2056
+		And the Primary Industry has been generated
+	  When Directly set the Primary Employer Scale
+	  Then I should get the details for the Primary Employer Scale that I expect

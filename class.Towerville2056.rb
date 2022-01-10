@@ -5,7 +5,7 @@ class Towerville2056
   TABLE_FILENAME = "tables.randomTowerville.yaml"
   TABLE_CONTENT_SETS = Psych.load_file(TABLE_FILENAME)
 
-  attr_accessor :tables_count, :name, :primaryIndustry, :howManyFloors, :buildingProfile, :construction_rules
+  attr_accessor :construction_rules, :tables_count, :name, :primaryIndustry, :howManyFloors, :buildingProfile, :primaryEmployerScale
 
   def initialize(args = {})
     self.tables_count = TABLE_CONTENT_SETS.count
@@ -14,6 +14,7 @@ class Towerville2056
     self.howManyFloors = -1
     self.buildingProfile = {:bottom => "unset", :middle => "unset",
 			:crown => "unset", :crown_cap => "unset"}
+		self.primaryEmployerScale = -1
 
 		self.construction_rules = {}
 		self.construction_rules[:story_height_in_m] = 3.5
@@ -22,7 +23,12 @@ class Towerville2056
 		self.construction_rules[:people_per_home] = 3.5
   end
 
-  # ---
+# ---
+	def getprimaryEmployerScale_as_text
+
+	end
+
+# ---
   def getPopulationEstimate()
 		estimated_population = self.getNumberOfHomesEstimate * self.construction_rules[:people_per_home]
 

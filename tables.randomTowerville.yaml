@@ -91,4 +91,21 @@
   :supporting_info:
     pillar_blurb: “Pillars” are [roll:2d4+2] in number and [roll:1d4+1d6+1] stories tall, and leave 50% void space of the foot print.
 # - eot -
+:PrimaryEmployerScale:
+  1:  Independent Workers Cooperative
+  2:  City-Level Neo-Corp
+  3:  City-Level Neo-Corp
+  4:  City-Level Neo-Corp
+  5:  City-Level Neo-Corp
+  6:  Explode To Next Tier
+  7:  Regional-Level Neo- Corp
+  8:  Regional-Level Neo- Corp
+  9:  Regional-Level Neo- Corp
+  10: Regional-Level Neo- Corp
+  11: Regional-Level Neo- Corp
+  12: Explode To Next Tier
+  13: International-Level Neo-Corp
+  14: International-Level Neo-Corp
+  15: Split Decsion - Roll Again, ignoring repeats of this.
+# - eot -
 # eof
