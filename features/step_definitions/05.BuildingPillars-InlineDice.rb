@@ -44,6 +44,7 @@ Then('Shape Description should have the {string} added to it.') do |pillar_blurb
 end
 
 Then('the inline dice string should be parsed and replaced with the result rolled.') do
-  pending # Write code here that turns the phrase above into concrete actions
+  expect(@subject.buildingProfile[:middle]).not_to  include("[roll:")
+	p @subject.buildingProfile[:middle]
 end
 # --- end of file ---
