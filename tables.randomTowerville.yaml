@@ -69,11 +69,11 @@
     14: Kite (5 Sided)
     17: Concentric rings (1d4+1). 1 in 8 chance that they rotate at a rate of once every hour or two.
     18: Explode To Next Tier
-    19: Hexagonal “Pillars”
-    20: Hexagonal “Pillars”
-    21: Octagonal “Pillars”
-    22: Octagonal “Pillars”
-    23: Octagonal “Pillars”
+    19: Pillars - Hexagonal
+    20: Pillars - Hexagonal
+    21: Pillars - Octagonal
+    22: Pillars - Octagonal
+    23: Pillars - Octagonal
     24: Special Outcome (See Rules)
   :crown:
     1:  Ziggurat
@@ -88,5 +88,7 @@
     10: Mushroom Cap with 20% over-hang
     11: 3 Triangular pillars leading to single full-area pyramid cap
     12: 4 Octagonal pillars leading to single full-area ziggurat cap
+  :supporting_info:
+    pillar_blurb: “Pillars” are [roll:2d4+2] in number and [roll:1d4+1d6+1] stories tall, and leave 50% void space of the foot print.
 # - eot -
 # eof

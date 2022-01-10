@@ -28,7 +28,9 @@ Then('the dice string should be parsed and replaced with a number') do
 end
 
 Given('that a Building Section is added') do
-  @subject.buildingProfile[:middle] = Towerville2056.getRandomBuildingProfile(:middle, {get_row_value: 21})
+  data_row_index = 21
+  @subject.buildingProfile[:middle] = Towerville2056.getRandomBuildingProfile(:middle, {get_row_value: data_row_index})
+  @table_row_data = @all_tables[:BuildingShape][:middle][data_row_index]
 end
 
 When('the table result is {string}') do |table_result|
@@ -37,8 +39,8 @@ When('the table result is {string}') do |table_result|
   end
 end
 
-Then('Shape Description should have the {string} added to it.') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('Shape Description should have the {string} added to it.') do |pillar_blurb|
+  expect(@subject.buildingProfile[:middle]).not_to eq(@table_row_data)
 end
 
 Then('the inline dice string should be parsed and replaced with the result rolled.') do

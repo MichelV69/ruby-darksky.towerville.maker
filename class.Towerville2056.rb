@@ -81,6 +81,11 @@ class Towerville2056
 			end
 		end
 
+    if tableColumn.downcase.include? "pillars"
+      text_to_insert = DiceStrings.parse TABLE_CONTENT_SETS[:BuildingShape][:supporting_info]["pillar_blurb"]
+      tableColumn = "#{tableColumn} (#{text_to_insert})"
+    end
+
     return tableColumn
   end
 
