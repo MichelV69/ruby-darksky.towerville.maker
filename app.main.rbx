@@ -2,10 +2,13 @@
 # presumes cucumber –init // for Testing
 require_relative('lib.wolfstar_studios.rb')
 require_relative('class.Towerville2056.rb')
-require_relative('class.ExternalRandom.rb')
 
 myAppConfig = AppConfig.new
 puts "config option sets found: #{myAppConfig.config_option_sets_count}"
+
+if myAppConfig.general_options[use_random_org_for_dice]
+  require_relative('class.ExternalRandom.rb')
+end
 
 tv = Towerville2056.new()
 puts "tables found: #{tv.tables_count}"
