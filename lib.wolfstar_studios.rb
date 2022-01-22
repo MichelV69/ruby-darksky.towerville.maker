@@ -1,6 +1,27 @@
 # --- # ---
+class AppConfig
+  require('psych')
+  CONFIG_FILENAME = "config.yaml"
+  CONFIG_OPTION_SETS = Psych.load_file(CONFIG_FILENAME)[:wolfstar_studios]
+
+  attr_accessor :config_option_sets_count, :general_options
+
+  def initialize(args = {})
+    self.config_option_sets_count = CONFIG_OPTION_SETS.count
+    self.general_options = CONFIG_OPTION_SETS[:general]
+  end
+
+  def get_options_for(category, args = {})
+    options_for = CONFIG_OPTION_SETS[category.to_sym]
+    if args[:sub_category]
+      options_for = CONFIG_OPTION_SETS[category.to_sym][args[:sub_category].to_sym]
+    end
+    return options_for
+  end
+end #class AppConfig
+
+# --- # ---
 class DiceStrings
-  #NOTA BENE: currently only handles one roll command per to_parse request
   def self.parse(to_parse, args={})
     output_string = to_parse
 
