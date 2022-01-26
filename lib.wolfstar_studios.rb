@@ -1,4 +1,28 @@
 # --- # ---
+class StoryTools
+  def self.get_character_gender_by_age_category(age_category)
+    case age_category.to_lower
+    when "teen"
+      case 1.d10
+      when 1..4
+        "masc"
+      when 5..7
+        "femme"
+      when 8
+        case 1.d6
+        when 1..4
+          "andro femme"
+        when 5..6
+          "andro masc"
+        end
+      when 9..10
+        "fluid"
+      end
+    end
+  end
+end # class StoryTools
+
+# --- # ---
 class AppConfig
   require('psych')
   CONFIG_FILENAME = "config.yaml"
