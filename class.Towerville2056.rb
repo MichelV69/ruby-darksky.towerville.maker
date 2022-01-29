@@ -25,7 +25,7 @@ class Towerville2056
 
 # ---
 	def getprimaryEmployerScale_as_text
-
+    TABLE_CONTENT_SETS[:PrimaryEmployerScale][self.primaryEmployerScale]
 	end
 
 # ---
