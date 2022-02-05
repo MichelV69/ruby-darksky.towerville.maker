@@ -35,7 +35,7 @@
 # - eot -
 :BuildingShape:
   :bottom:
-    :dice_rule:  1.ex.d6
+    :dice_rule:  1.d6({ex:true})
     1:  Rectangle
     2:  Rectangle
     3:  Hexagonal
@@ -55,7 +55,7 @@
     17:  Pillars - Oval
     18:  Pillars - Triangular
   :middle:
-    :dice_rule:  1.ex.d6
+    :dice_rule:  1.d6({ex:true})
     1:  Rectangle
     2:  Rectangle
     3:  Hexagonal
@@ -79,7 +79,7 @@
     23: Pillars - Octagonal
     24: Special Outcome (See Rules)
   :crown:
-    :dice_rule:  1.ex.d6
+    :dice_rule:  1.d6({ex:true})
     1:  Ziggurat
     2:  Ziggurat
     3:  Ziggurat
@@ -96,7 +96,7 @@
     pillar_blurb: “Pillars” are [roll:2d4+2] in number and [roll:1d4+1d6+1] stories tall, and leave 50% void space of the foot print.
 # - eot -
 :PrimaryEmployerScale:
-  :dice_rule:  1.ex.d6
+  :dice_rule:  1.d6({ex:true})
   1:  Independent Workers Cooperative
   2:  City-Level Meta-Corp
   3:  City-Level Meta-Corp

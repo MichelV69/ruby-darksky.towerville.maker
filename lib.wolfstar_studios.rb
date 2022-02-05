@@ -162,11 +162,30 @@ class Fixnum
 		end # case self
 	end # def hex
 
-  def d(sides)
-    workTotal=0
-    1.upto(self) do |dicePtr|
-      workTotal += rand(sides)+1
+  def d(dice_sides, args={})
+    workTotal = 0
+    loop_tick = 0
+    number_rolls_needed = self
+
+    dev_msg "exploded dice: requested" if args[:ex]
+
+    while loop_tick < number_rolls_needed do
+      loop_tick = loop_tick +1
+      this_roll = rand(dice_sides) +1
+      workTotal += this_roll
+      if (args[:ex] && this_roll.modulo(dice_sides) == 0 )
+        dev_msg "exploded dice:  number_rolls_needed was #{number_rolls_needed}"
+        number_rolls_needed += 1
+        dev_msg "exploded dice:  number_rolls_needed is now #{number_rolls_needed}"
+        end
       end # do
+
+    unless (args[:cap].nil? || args[:cap] == :no)
+      if workTotal > args[:cap]
+        workTotal = args[:cap]
+        end
+      end
+
     return workTotal
   end
 
@@ -186,13 +205,13 @@ class Fixnum
     self.d(8)
   end # def d6
 
-  def d6
-    self.d(6)
+  def d6(args = {ex: false, cap: :no})
+    self.d(6, args)
   end # def d6
 
-  def d4
-    self.d(4)
-  end # def d6
+  def d4(args = {ex: false, cap: :no})
+    self.d(4, args)
+  end # def d4
 end # class Fixnum
 
 # --- # ---
@@ -251,25 +270,7 @@ end
 
 # ---
 def roll_and_explode(dice_string, args = {cap: -1})
-  rolls_requested = dice_string.split(".d").first.to_i
-  dice_sides = dice_string.split(".d").last.to_i
-  total_roll_result = 0
-  loop_tick = 0
-  while loop_tick < rolls_requested do
-    loop_tick = loop_tick +1
-    this_roll = eval("1.d#{dice_sides}")
-    total_roll_result = total_roll_result + this_roll
-    if this_roll.modulo(dice_sides) == 0
-      rolls_requested = rolls_requested +1
-    end
-  end
-
-  unless args[:cap] == -1
-    if total_roll_result > args[:cap]
-      total_roll_result = args[:cap]
-    end
-  end
-  return total_roll_result
+  return "Function Deprecated"
 end
 
 # ---
