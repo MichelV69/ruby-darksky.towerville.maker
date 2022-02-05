@@ -4,6 +4,14 @@ require_relative('../../class.Towerville2056.rb')
 require_relative('../../class.ExternalRandom.rb')
 # ---
 
+When('initialize has run') do
+  object_post_intialize_expectations()
+end
+
+Then('Primary Employer Scale should be {int}') do |expect_value|
+  expect(@subject.primaryEmployerScale).to eq(expect_value)
+end
+
 Given('the Primary Industry has been generated') do
   @subject.primaryIndustry = Towerville2056::getRandomPrimaryIndustry
 	p @subject.primaryIndustry

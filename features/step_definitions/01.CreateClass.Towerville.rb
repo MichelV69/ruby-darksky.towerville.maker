@@ -10,15 +10,21 @@ require_relative('../../class.ExternalRandom.rb')
 Before do
   @all_tables = Psych.load_file(Towerville2056::TABLE_FILENAME)
 	@subject = Towerville2056.new
+
+  def object_post_intialize_expectations()
+    expect(@subject.name).to eq("example")
+    expect(@subject.primaryIndustry).to eq("undefined")
+    expect(@subject.howManyFloors).to eq(-1)
+    expect(@subject.primaryEmployerScale).to eq(-1)
+  end
 end
 
 Given('that I have an instance of Towerville2056') do
   expect(@subject).not_to be_nil
 end
+
 Then('initialize should run') do
-  expect(@subject.name).to eq("example")
-  expect(@subject.primaryIndustry).to eq("undefined")
-  expect(@subject.howManyFloors).to eq(-1)
+  object_post_intialize_expectations()
 end
 
 Given('that I set the Tower name to {string}') do |new_building_name|
