@@ -100,3 +100,13 @@ I want to create a randomly generated TV for DarkSky
 		And the Primary Industry has been generated
 	  When I directly set the Primary Employer Scale
 	  Then I should get the details for the Primary Employer Scale that I expect
+
+@WIP
+  Scenario Outline: Randomly set and get Primary Employer Scale
+    Given that I have an instance of Towerville2056
+    And the Primary Industry has been generated
+    When I randomly set the Primary Employer Scale
+    Then Primary Employer Scale should be valid
+    And I should get valid details for the Primary Employer Scale
+
+# ----- end of file -----
