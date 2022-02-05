@@ -24,8 +24,14 @@ class Towerville2056
   end
 
 # ---
+  def self.getRandomPrimaryEmployerScale()
+    max_value = TABLE_CONTENT_SETS[:PrimaryEmployerScale].last.first
+    self.primaryEmployerScale = roll_and_explode(TABLE_CONTENT_SETS[:PrimaryEmployerScale][:dice_rule],{cap: max_value})
+  end
+
+# ---
 	def getprimaryEmployerScale_as_text
-    TABLE_CONTENT_SETS[:PrimaryEmployerScale][self.primaryEmployerScale]
+    TABLE_CONTENT_SETS[:PrimaryEmployerScale][self.primaryEmployerScale] || "undefined"
 	end
 
 # ---
@@ -134,5 +140,6 @@ class Towerville2056
 
     {rollIndex: ptr_1, summaryDesc: table_col_1, broadDesc: table_col_2}
   end
+
 end # class Towerville2056
 # --- end of file ---
