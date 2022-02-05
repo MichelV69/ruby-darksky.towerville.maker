@@ -6,7 +6,7 @@ require_relative('class.Towerville2056.rb')
 myAppConfig = AppConfig.new
 puts "config option sets found: #{myAppConfig.config_option_sets_count}"
 
-if myAppConfig.general_options[use_random_org_for_dice]
+if myAppConfig.general_options[:use_random_org_for_dice]
   require_relative('class.ExternalRandom.rb')
 end
 
