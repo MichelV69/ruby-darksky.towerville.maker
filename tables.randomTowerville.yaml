@@ -1,9 +1,6 @@
 ---
 :PrimaryIndustry:
-<<<<<<< HEAD
-=======
   dice_rule:  1.d8
->>>>>>> 705d0a3 (Git having a fit after moved folder to new HDD)
   1:
     summaryDesc : Primary Sector
     broadDesc   :  Processing & Refining of externally extracted or harvested goods.  Ore, Minerals, Oils, Produce, Forest Products and the like are examples.
@@ -38,10 +35,7 @@
 # - eot -
 :BuildingShape:
   :bottom:
-<<<<<<< HEAD
-=======
     dice_rule:  1.ex.d6
->>>>>>> 705d0a3 (Git having a fit after moved folder to new HDD)
     1:  Rectangle
     2:  Rectangle
     3:  Hexagonal
@@ -61,10 +55,7 @@
     17:  Pillars - Oval
     18:  Pillars - Triangular
   :middle:
-<<<<<<< HEAD
-=======
     dice_rule:  1.ex.d6
->>>>>>> 705d0a3 (Git having a fit after moved folder to new HDD)
     1:  Rectangle
     2:  Rectangle
     3:  Hexagonal
@@ -88,10 +79,7 @@
     23: Pillars - Octagonal
     24: Special Outcome (See Rules)
   :crown:
-<<<<<<< HEAD
-=======
     dice_rule:  1.ex.d6
->>>>>>> 705d0a3 (Git having a fit after moved folder to new HDD)
     1:  Ziggurat
     2:  Ziggurat
     3:  Ziggurat
@@ -108,20 +96,12 @@
     pillar_blurb: “Pillars” are [roll:2d4+2] in number and [roll:1d4+1d6+1] stories tall, and leave 50% void space of the foot print.
 # - eot -
 :PrimaryEmployerScale:
-<<<<<<< HEAD
-  1:  Independent Workers Cooperative
-  2:  City-Level Neo-Corp
-  3:  City-Level Neo-Corp
-  4:  City-Level Neo-Corp
-  5:  City-Level Neo-Corp
-=======
   dice_rule:  1.ex.d6
   1:  Independent Workers Cooperative
   2:  City-Level Meta-Corp
   3:  City-Level Meta-Corp
   4:  City-Level Meta-Corp
   5:  City-Level Meta-Corp
->>>>>>> 705d0a3 (Git having a fit after moved folder to new HDD)
   6:  Explode To Next Tier
   7:  Regional-Level Neo- Corp
   8:  Regional-Level Neo- Corp
