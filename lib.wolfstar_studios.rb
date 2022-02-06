@@ -189,20 +189,20 @@ class Fixnum
     return workTotal
   end
 
-  def d100
-    self.d(100)
+  def d100(args = {ex: false, cap: :no})
+    self.d(100, args)
   end # def d100
 
-  def d20
-    self.d(20)
+  def d20(args = {ex: false, cap: :no})
+    self.d(20, args)
   end # def d10
 
-  def d10
-    self.d(10)
+  def d10(args = {ex: false, cap: :no})
+    self.d(10, args)
   end # def d10
 
-  def d8
-    self.d(8)
+  def d8(args = {ex: false, cap: :no})
+    self.d(8, args)
   end # def d6
 
   def d6(args = {ex: false, cap: :no})

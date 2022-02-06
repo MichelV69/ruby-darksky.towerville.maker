@@ -78,7 +78,7 @@ class Towerville2056
 		tableColumn = {}
 		unless section == :crown_cap
       unless ! args[:get_row_value].nil?
-        tableColumn = tableData[roll_and_explode("1.d6", {cap: cap_by_section[section]})]
+        tableColumn = tableData[1.d6({ex: true, cap: cap_by_section[section]})]
       else
         tableColumn = tableData[args[:get_row_value]]
       end
