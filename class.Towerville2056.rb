@@ -14,13 +14,29 @@ class Towerville2056
     self.howManyFloors = -1
     self.buildingProfile = {:bottom => "unset", :middle => "unset",
 			:crown => "unset", :crown_cap => "unset"}
-		self.primaryEmployerScale = -1
+    self.primaryEmployerScale = -1
 
 		self.construction_rules = {}
 		self.construction_rules[:story_height_in_m] = 3.5
 		self.construction_rules[:efficiency_of_design] = 0.70
 		self.construction_rules[:home_volume_in_m3] = 700
 		self.construction_rules[:people_per_home] = 3.5
+  end
+
+# ---
+  def getPrimaryEconomicRating()
+    primaryEconomicRating = -1
+    unless (self.primaryIndustry == "undefined" ||
+      self.howManyFloors == -1 ||
+      self.primaryEmployerScale == -1)
+
+      primaryEconomicRating = 3.0 * self.primaryEmployerScale +
+            SQRT(self.getNumberOfHomesEstimate).to_f +
+            3.0 * self.primaryEmployerScale #+
+      #      Something.Something - Something.Else
+    end
+
+    return primaryEconomicRating
   end
 
 # ---
