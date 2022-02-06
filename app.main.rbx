@@ -20,9 +20,12 @@ tv.buildingProfile[:bottom] = Towerville2056.getRandomBuildingProfile(:bottom)
 tv.buildingProfile[:middle] = Towerville2056.getRandomBuildingProfile(:middle)
 tv.buildingProfile[:crown] = Towerville2056.getRandomBuildingProfile(:crown)
 tv.buildingProfile[:crown_cap] = Towerville2056.getRandomBuildingProfile(:crown_cap)
+tv.primaryEmployerScale = Towerville2056::getRandomPrimaryEmployerScale()
 
 space_bar = spaces(tv.name.length)
 puts "\n\n ----- \n  #{tv.name} :: #{tv.primaryIndustry[:summaryDesc]} (#{tv.primaryIndustry[:broadDesc]})"
+puts " #{space_bar} :: primary Employer Scale: #{tv.primaryEmployerScale}: #{tv.getprimaryEmployerScale_as_text} "
+
 puts " #{tv.name} :: Bottom section: #{tv.buildingProfile[:bottom]} "
 puts " #{space_bar} :: Middle section: #{tv.buildingProfile[:middle]} "
 puts " #{space_bar} :: Crown section: #{tv.buildingProfile[:crown]} "

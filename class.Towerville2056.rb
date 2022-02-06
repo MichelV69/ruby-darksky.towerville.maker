@@ -26,7 +26,8 @@ class Towerville2056
 # ---
   def self.getRandomPrimaryEmployerScale()
     max_value = TABLE_CONTENT_SETS[:PrimaryEmployerScale].last.first
-    self.primaryEmployerScale = roll_and_explode(TABLE_CONTENT_SETS[:PrimaryEmployerScale][:dice_rule],{cap: max_value})
+    roll_string = TABLE_CONTENT_SETS[:PrimaryEmployerScale][:dice_rule].gsub("}",", cap: #{max_value}}")
+    return eval(roll_string)
   end
 
 # ---
