@@ -88,13 +88,11 @@ I want to create a randomly generated TV for DarkSky
     Then Shape Description should have the 'Pillars Description' added to it.
     And the inline dice string should be parsed and replaced with the result rolled.
 
-@WIP
   Scenario Outline: New TV should have PES -1
     Given that I have an instance of Towerville2056
     When initialize has run
     Then Primary Employer Scale should be -1
 
-@WIP
 	Scenario Outline: Directly set and get Primary Employer Scale
 	  Given that I have an instance of Towerville2056
 		And the Primary Industry has been generated
@@ -108,5 +106,19 @@ I want to create a randomly generated TV for DarkSky
     When I randomly set the Primary Employer Scale
     Then Primary Employer Scale should be valid
     And I should get valid details for the Primary Employer Scale
+
+@WIP
+  Scenario Outline: New TV should have PER -1
+    Given that I have an instance of Towerville2056
+    When initialize has run
+    Then Primary Economic Rating should be -1
+
+@WIP
+  Scenario Outline: Get Primary Economic Rating as both value and text
+    Given that I have an instance of Towerville2056
+    And the Primary Industry has been generated
+    When I randomly set the Primary Employer Scale
+    Then Primary Economic Rating should be valid
+    And I should get valid details for the Primary Economic Rating
 
 # ----- end of file -----

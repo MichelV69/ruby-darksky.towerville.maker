@@ -41,9 +41,4 @@ Then('I should get valid details for the Primary Employer Scale') do
   expect(@subject.getprimaryEmployerScale_as_text).not_to eq("")
 end
 
-# economic_scale =  3 * @new_primary_employers_scale +
-#      SQRT(@subject.getNumberOfHomesEstimate) +
-#      3x Primary Employer Scale +
-#      Something.Something - Something.Else
-
 # --- end of file ---
