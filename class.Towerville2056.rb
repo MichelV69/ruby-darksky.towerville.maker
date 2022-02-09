@@ -125,36 +125,46 @@ class Towerville2056
     roll_string = TABLE_CONTENT_SETS[:PrimaryIndustry][:dice_rule].gsub("}",", cap: #{max_value}}")
 
     roll_result =  eval(roll_string)
-    if roll_result = 8
-      # ReRoll twice, but cap at 7, multiply second roll by 10 before adding
-    end
+    if roll_result == 8 then
+			max_value =-1
+			roll_string = TABLE_CONTENT_SETS[:PrimaryIndustry][:dice_rule].gsub("}",", cap: #{max_value}}")
 
-    return
+			1.upto(2) do |pointer|
+				if pointer == 1 then
+					roll_result =  eval(roll_string)
+				else
+					roll_result_10x =  10 * eval(roll_string)
+				end
+			end
+			roll_result = roll_result + roll_result_10x
+    end
+    return roll_result
   end
 
   def getPrimaryIndustry_as_text()
-    #if RandomPrimaryIndustryIndex > 9
-    #then each digit is a different Industry
-    # 265 would be three industries, indexes of 2, 6, 5.
+    # RandomPrimaryIndustryIndex
+    # each digit is a different Industry
+    # 26 would be three industries, indexes of 2 & 6.
 
-    # for each digit, loop, look up that digit
-
-    table_col_1 = ""
+		table_col_1 = ""
     table_col_2 = ""
     primaryIndustryTable = TABLE_CONTENT_SETS[:PrimaryIndustry]
-    loop_list.compact.each do |list_ptr|
-      table_row = primaryIndustryTable[list_ptr]
-      if loop_list.count > 1 &&
-        list_ptr == loop_list.last
-        table_col_1 = table_col_1 + " | "
-        table_col_2 = table_col_2 + " | "
-      end
-      table_col_1 = table_col_1 + table_row["summaryDesc"]
-      table_col_2 = table_col_2 + table_row["broadDesc"]
-    end
 
-    {rollIndex: ptr_1, summaryDesc: table_col_1, broadDesc: table_col_2}
-  end
+		1.upto(self.primaryIndustryIndex.to_s.length) do |index|
+			row_pointer = self.primaryIndustryIndex[index]
+			table_row = primaryIndustryTable[row_pointer]
+
+			if index == 2 then
+				table_col_1 = table_col_1 + " | "
+				table_col_2 = table_col_2 + " | "
+			end
+
+			table_col_1 = table_col_1 + table_row["summaryDesc"]
+      table_col_2 = table_col_2 + table_row["broadDesc"]
+		end # if index == 2
+
+    {summaryDesc: table_col_1, broadDesc: table_col_2}
+  end # 1.upto
 
 end # class Towerville2056
 # --- end of file ---
