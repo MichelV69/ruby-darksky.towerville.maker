@@ -13,7 +13,7 @@ Before do
 
   def object_post_intialize_expectations()
     expect(@subject.name).to eq("example")
-    expect(@subject.primaryIndustry).to eq("undefined")
+    expect(@subject.primaryIndustryIndex).to eq(-1)
     expect(@subject.howManyFloors).to eq(-1)
     expect(@subject.primaryEmployerScale).to eq(-1)
   end

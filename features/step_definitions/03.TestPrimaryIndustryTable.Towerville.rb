@@ -35,8 +35,8 @@ Then('the Base Class should respond to {string}') do |string|
 end
 
 Then('correctly set the Primary Industry') do
-  @subject.primaryIndustry = Towerville2056.getRandomPrimaryIndustry()
-  expect(@subject.primaryIndustry).not_to eq("undefined")
+  @subject.primaryIndustryIndex = Towerville2056.getRandomPrimaryIndustryIndex()
+  expect(@subject.primaryIndustryIndex).not_to eq(-1)
 end
 
 # --- end of file ---

@@ -5,12 +5,12 @@ class Towerville2056
   TABLE_FILENAME = "tables.randomTowerville.yaml"
   TABLE_CONTENT_SETS = Psych.load_file(TABLE_FILENAME)
 
-  attr_accessor :construction_rules, :tables_count, :name, :primaryIndustry, :howManyFloors, :buildingProfile, :primaryEmployerScale
+  attr_accessor :construction_rules, :tables_count, :name, :primaryIndustryIndex, :howManyFloors, :buildingProfile, :primaryEmployerScale
 
   def initialize(args = {})
     self.tables_count = TABLE_CONTENT_SETS.count
     self.name = "example"
-    self.primaryIndustry = "undefined"
+    self.primaryIndustryIndex = -1
     self.howManyFloors = -1
     self.buildingProfile = {:bottom => "unset", :middle => "unset",
 			:crown => "unset", :crown_cap => "unset"}
@@ -26,14 +26,15 @@ class Towerville2056
 # ---
   def getPrimaryEconomicRating()
     primaryEconomicRating = -1
-    unless (self.primaryIndustry == "undefined" ||
+    unless (self.primaryIndustryIndex == -1 ||
       self.howManyFloors == -1 ||
       self.primaryEmployerScale == -1)
 
-      primaryEconomicRating = 3.0 * self.primaryEmployerScale +
-            SQRT(self.getNumberOfHomesEstimate).to_f +
-            3.0 * self.primaryEmployerScale #+
-      #      Something.Something - Something.Else
+      pii_value = 3.0 * self.primaryIndustryIndex
+      pes_value = 3.0 * self.primaryEmployerScale
+      nohs_value = Math.sqrt(self.getNumberOfHomesEstimate).to_f
+
+      primaryEconomicRating =  pii_value + pes_value + nohs_value
     end
 
     return primaryEconomicRating
@@ -119,27 +120,24 @@ class Towerville2056
   end
 
   # ---
-  def self.getRandomPrimaryIndustry(ptr_1 = 0)
-		ptr_2 = -1
+  def self.getRandomPrimaryIndustryIndex()
+    max_value = TABLE_CONTENT_SETS[:PrimaryIndustry].last.first
+    roll_string = TABLE_CONTENT_SETS[:PrimaryIndustry][:dice_rule].gsub("}",", cap: #{max_value}}")
 
-    if ptr_1 == 0
-      ptr_1 = 1.d8
-	  end
-		if ptr_1 == 8
-			while ptr_1 == 8
-				ptr_1 = 1.d8
-			end
-			while ptr_1 == 8 &&
-				(ptr_2 == -1 || ptr_2 == 8)
-				ptr_2 = 1.d8
-			end
-		end
-
-    loop_list = Array.new
-    loop_list << ptr_1
-    unless ptr_2 == -1
-      loop_list << ptr_2
+    roll_result =  eval(roll_string)
+    if roll_result = 8
+      # ReRoll twice, but cap at 7, multiply second roll by 10 before adding
     end
+
+    return
+  end
+
+  def getPrimaryIndustry_as_text()
+    #if RandomPrimaryIndustryIndex > 9
+    #then each digit is a different Industry
+    # 265 would be three industries, indexes of 2, 6, 5.
+
+    # for each digit, loop, look up that digit
 
     table_col_1 = ""
     table_col_2 = ""

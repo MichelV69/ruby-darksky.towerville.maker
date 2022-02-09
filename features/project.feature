@@ -118,6 +118,7 @@ I want to create a randomly generated TV for DarkSky
     Given that I have an instance of Towerville2056
     And the Primary Industry has been generated
     When I randomly set the Primary Employer Scale
+    And I request a random floor count
     Then Primary Economic Rating should be valid
     And I should get valid details for the Primary Economic Rating
 
