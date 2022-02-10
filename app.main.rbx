@@ -15,15 +15,17 @@ puts "tables found: #{tv.tables_count}"
 
 tv.name = "Example Tower"
 tv.howManyFloors = Towerville2056::getRandomFloorCount
-tv.primaryIndustry = Towerville2056::getRandomPrimaryIndustry
+tv.primaryIndustryIndex = Towerville2056::getRandomPrimaryIndustryIndex
+
 tv.buildingProfile[:bottom] = Towerville2056.getRandomBuildingProfile(:bottom)
 tv.buildingProfile[:middle] = Towerville2056.getRandomBuildingProfile(:middle)
 tv.buildingProfile[:crown] = Towerville2056.getRandomBuildingProfile(:crown)
 tv.buildingProfile[:crown_cap] = Towerville2056.getRandomBuildingProfile(:crown_cap)
+
 tv.primaryEmployerScale = Towerville2056::getRandomPrimaryEmployerScale()
 
 space_bar = spaces(tv.name.length)
-puts "\n\n ----- \n  #{tv.name} :: #{tv.primaryIndustry[:summaryDesc]} (#{tv.primaryIndustry[:broadDesc]})"
+puts "\n\n ----- \n  #{tv.name} :: #{tv.getPrimaryIndustry_as_text[:summaryDesc]} (#{tv.getPrimaryIndustry_as_text[:broadDesc]})"
 puts " #{space_bar} :: primary Employer Scale: #{tv.primaryEmployerScale}: #{tv.getprimaryEmployerScale_as_text} "
 
 puts " #{tv.name} :: Bottom section: #{tv.buildingProfile[:bottom]} "

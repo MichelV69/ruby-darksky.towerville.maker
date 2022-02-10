@@ -121,15 +121,22 @@ class Towerville2056
 
   # ---
   def self.getRandomPrimaryIndustryIndex()
-    max_value = TABLE_CONTENT_SETS[:PrimaryIndustry].last.first
+		roll_result = 0
+
+		end_of_table = TABLE_CONTENT_SETS[:PrimaryIndustry].last.first
+		max_value = end_of_table
     roll_string = TABLE_CONTENT_SETS[:PrimaryIndustry][:dice_rule].gsub("}",", cap: #{max_value}}")
 
     roll_result =  eval(roll_string)
-    if roll_result == 8 then
-			max_value =-1
+		roll_result_10x = 0
+    if roll_result == end_of_table then
+			max_value = end_of_table - 1
 			roll_string = TABLE_CONTENT_SETS[:PrimaryIndustry][:dice_rule].gsub("}",", cap: #{max_value}}")
 
 			1.upto(2) do |pointer|
+				roll_result = 0
+				roll_result_10x = 0
+
 				if pointer == 1 then
 					roll_result =  eval(roll_string)
 				else
@@ -150,11 +157,11 @@ class Towerville2056
     table_col_2 = ""
     primaryIndustryTable = TABLE_CONTENT_SETS[:PrimaryIndustry]
 
-		1.upto(self.primaryIndustryIndex.to_s.length) do |index|
-			row_pointer = self.primaryIndustryIndex[index]
+		0.upto(self.primaryIndustryIndex.to_s.length - 1) do |pi_ptr|
+			row_pointer = self.primaryIndustryIndex.to_s[pi_ptr].to_i
 			table_row = primaryIndustryTable[row_pointer]
 
-			if index == 2 then
+			if pi_ptr !=  0 then
 				table_col_1 = table_col_1 + " | "
 				table_col_2 = table_col_2 + " | "
 			end
@@ -163,7 +170,7 @@ class Towerville2056
       table_col_2 = table_col_2 + table_row["broadDesc"]
 		end # if index == 2
 
-    {summaryDesc: table_col_1, broadDesc: table_col_2}
+    return {summaryDesc: table_col_1, broadDesc: table_col_2}
   end # 1.upto
 
 end # class Towerville2056
