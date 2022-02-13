@@ -13,8 +13,8 @@ Then('Primary Employer Scale should be {int}') do |expect_value|
 end
 
 Given('the Primary Industry has been generated') do
-  @subject.primaryIndustry = Towerville2056::getRandomPrimaryIndustry
-	p @subject.primaryIndustry
+  @subject.primaryIndustryIndex = Towerville2056::getRandomPrimaryIndustryIndex
+	p @subject.primaryIndustryIndex
 end
 
 When('I directly set the Primary Employer Scale') do
