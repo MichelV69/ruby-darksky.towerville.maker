@@ -31,7 +31,7 @@
 
   8:
     summaryDesc:  Split Decsion
-    broadDesc:    Roll this table twice more, ignoring this outcome if it reoccurs.
+    broadDesc:    Roll twice again, ignoring repeats of this result.
 # - eot -
 :BuildingShape:
   :bottom:
@@ -111,6 +111,6 @@
   12: Explode To Next Tier
   13: International-Level Neo-Corp
   14: International-Level Neo-Corp
-  15: Split Decsion - Roll Again, ignoring repeats of this.
+  15: Split Decsion - Roll twice again, ignoring repeats of this result.
 # - eot -
-# eof
+# --- eof ---
