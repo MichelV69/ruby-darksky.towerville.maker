@@ -9,7 +9,7 @@ Then('Primary Economic Rating should be {int}') do |expect_value|
 end
 
 Then('Primary Economic Rating should be valid') do
-  expect(@subject.getPrimaryEconomicRating).to be_greater_than(0)
+  expect(@subject.getPrimaryEconomicRating.round.to_i).to be_greater_than(0)
 end
 
 Then('I should get valid details for the Primary Economic Rating') do
