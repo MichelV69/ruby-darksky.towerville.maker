@@ -5,7 +5,10 @@ class Towerville2056
   TABLE_FILENAME = "tables.randomTowerville.yaml"
   TABLE_CONTENT_SETS = Psych.load_file(TABLE_FILENAME)
 
-  attr_accessor :construction_rules, :tables_count, :name, :primaryIndustryIndex, :howManyFloors, :buildingProfile, :primaryEmployerScale
+  attr_accessor :tables_count,
+    :construction_rules, :economy_rules,
+    :name, :howManyFloors, :buildingProfile,
+    :primaryIndustryIndex, :primaryEmployerScale
 
   def initialize(args = {})
     self.tables_count = TABLE_CONTENT_SETS.count
@@ -21,6 +24,9 @@ class Towerville2056
 		self.construction_rules[:efficiency_of_design] = 0.70
 		self.construction_rules[:home_volume_in_m3] = 700
 		self.construction_rules[:people_per_home] = 3.5
+
+    self.economy_rules = {}
+		self.economy_rules[:worker_annual_salary_in_nafta] = 35000
   end
 
 # ---
@@ -30,14 +36,20 @@ class Towerville2056
       self.howManyFloors == -1 ||
       self.primaryEmployerScale == -1)
 
-      pii_value = 3.0 * self.primaryIndustryIndex
-      pes_value = 3.0 * self.primaryEmployerScale
-      nohs_value = Math.sqrt(self.getNumberOfHomesEstimate).to_f
+      pii_value = 21 * self.primaryIndustryIndex
+      pes_value = self.primaryEmployerScale
+      if self.primaryEmployerScale.to_s.size > 2
+        first_industry = self.primaryEmployerScale % 100
+        second_industry = self.primaryEmployerScale / 100
+        pes_value = first_industry + second_industry
+      end
+      nohs_value = Math.sqrt(self.getNumberOfHomesEstimate).to_f.round
 
       primaryEconomicRating =  pii_value + pes_value + nohs_value
     end
 
-    return primaryEconomicRating
+    dbz_scalar = 9000.0/4770.0
+    return (primaryEconomicRating * dbz_scalar).round
   end
 
 # ---
