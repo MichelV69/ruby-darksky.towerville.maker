@@ -36,7 +36,16 @@ class Towerville2056
       self.howManyFloors == -1 ||
       self.primaryEmployerScale == -1)
 
-      pii_value = 21 * self.primaryIndustryIndex
+      spare_tv = Towerville2056.new
+      house_count_scalar = 43 / 12 # NOTE : if building min/max random numbers change, this needs to be recalcted as SQRT of average house count
+
+      pii_value = self.primaryIndustryIndex
+      if self.primaryIndustryIndex.to_s.size == 2
+        first_industry = self.primaryEmployerScale % 10
+        second_industry = self.primaryEmployerScale / 10
+        pes_value = first_industry + second_industry
+      end
+
       pes_value = self.primaryEmployerScale
       if self.primaryEmployerScale.to_s.size > 2
         first_industry = self.primaryEmployerScale % 100
@@ -45,10 +54,10 @@ class Towerville2056
       end
       nohs_value = Math.sqrt(self.getNumberOfHomesEstimate).to_f.round
 
-      primaryEconomicRating =  pii_value + pes_value + nohs_value
+      primaryEconomicRating =  (pii_value + pes_value) * house_count_scalar + nohs_value
     end
 
-    dbz_scalar = 9000.0/4770.0
+    dbz_scalar = 9000.0/599.0 # 15.025
     return (primaryEconomicRating * dbz_scalar).round
   end
 
@@ -91,8 +100,15 @@ class Towerville2056
   end
 
   # ---
-  def self.getRandomFloorCount()
-    return 4.d10+2.d20+20
+  def self.getRandomFloorCount(args = {})
+    tens = 4
+    twentys = 2
+    const = 20
+
+    return tens+twentys+const if args[:force] == :min
+    return (tens*5.5+twentys*11+const).round if args[:force] == :avg
+    return tens*10+twentys*20+const if args[:force] == :max
+    return tens.d10+twentys.d20+const
   end
 
 	# ---

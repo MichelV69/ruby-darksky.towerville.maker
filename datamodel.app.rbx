@@ -26,9 +26,19 @@ example_string = "This is a test paragraph with three rolls in it. The first is 
 
 puts "Finished result > '#{DiceStrings.parse example_string}'"
 
-puts title_line "Economic Scale Curve Test"
+puts title_line "height to housing check"
+tv = Towerville2056.new
+tv.howManyFloors = Towerville2056::getRandomFloorCount({force: :min})
+puts "min houses for #{tv.howManyFloors} is #{tv.getNumberOfHomesEstimate} w/ SQRT #{Math.sqrt(tv.getNumberOfHomesEstimate)}"
 
-stat_analysis = Array.new
+tv.howManyFloors = Towerville2056::getRandomFloorCount({force: :avg})
+puts "avg houses for #{tv.howManyFloors} is #{tv.getNumberOfHomesEstimate} w/ SQRT #{Math.sqrt(tv.getNumberOfHomesEstimate)}"
+
+tv.howManyFloors = Towerville2056::getRandomFloorCount({force: :max})
+puts "max houses for #{tv.howManyFloors} is #{tv.getNumberOfHomesEstimate} w/ SQRT #{Math.sqrt(tv.getNumberOfHomesEstimate)}"
+
+puts title_line "Economic Scale Curve Test"
+stat_analysis = Hash.new
 
 tv = Towerville2056.new
 tv.name = "Testing Tower"
