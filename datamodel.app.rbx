@@ -39,25 +39,20 @@ puts "max houses for #{tv.howManyFloors} is #{tv.getNumberOfHomesEstimate} w/ SQ
 
 puts title_line "Economic Scale Curve Test"
 stat_analysis = Hash.new
+stat_analysis.default = 0
 
 tv = Towerville2056.new
 tv.name = "Testing Tower"
 putc "!>"
-1.upto(7) do |ones|
+1.upto(7) do |primaryIndustryIndex|
   putc "+"
   26.upto(100) do |howManyFloors|
-    1.upto(15) do |primaryEmployerScale|
-      tv.primaryIndustryIndex = ones
-      tv.howManyFloors = howManyFloors
+    1.upto(6) do |primaryEmployerScale|
+      tv.primaryIndustryIndex = primaryIndustryIndex
       tv.primaryEmployerScale = primaryEmployerScale
+      tv.howManyFloors = howManyFloors
       primaryEconomicRating = tv.getPrimaryEconomicRating
-
-      unless stat_analysis[primaryEconomicRating].nil?
-        stat_analysis[primaryEconomicRating] += 1
-      else
-        stat_analysis[primaryEconomicRating] = 1
-      end
-
+      stat_analysis[primaryEconomicRating] += 1
     end
   end
 end
