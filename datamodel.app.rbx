@@ -43,24 +43,21 @@ stat_analysis = Hash.new
 tv = Towerville2056.new
 tv.name = "Testing Tower"
 putc "!>"
-1.upto(7) do |tens|
-  1.upto(7) do |ones|
-    putc "+"
+1.upto(7) do |ones|
+  putc "+"
+  26.upto(100) do |howManyFloors|
+    1.upto(15) do |primaryEmployerScale|
+      tv.primaryIndustryIndex = ones
+      tv.howManyFloors = howManyFloors
+      tv.primaryEmployerScale = primaryEmployerScale
+      primaryEconomicRating = tv.getPrimaryEconomicRating
 
-    26.upto(100) do |howManyFloors|
-      151.upto(1515) do |primaryEmployerScale|
-        tv.primaryIndustryIndex = tens * 10 + ones
-        tv.howManyFloors = howManyFloors
-        tv.primaryEmployerScale = primaryEmployerScale
-        primaryEconomicRating = tv.getPrimaryEconomicRating
-
-        unless stat_analysis[primaryEconomicRating].nil?
-          stat_analysis[primaryEconomicRating] += 1
-        else
-          stat_analysis[primaryEconomicRating] = 1
-        end
-
+      unless stat_analysis[primaryEconomicRating].nil?
+        stat_analysis[primaryEconomicRating] += 1
+      else
+        stat_analysis[primaryEconomicRating] = 1
       end
+
     end
   end
 end
