@@ -118,12 +118,12 @@
   0:      Application Error
   225:    Collapsed / Ruined  !e
   350:    Recovering !e, w/ no Sector influence
-  480:    Weak !e, w/ slight Sector influence
-  1066:   Average !e, w/ Sector-influencing
+  480:    Weak !e, w/ some Sector influence
+  1066:   Average !e, w/ Sector influence
   1245:   Healthy !e, w/ noticeable City influence
   1337:   Strong !e, w/ substantial City influence
   1616:   Booming !e, City famous
-  1888:   Power-house !e, w/ slight Regional-level influence
+  1888:   Power-house !e, w/ some Regional-level influence
   3678:   Power-house !e, w/ Regional-level influence
   5445:   Power-house !e, w/ substantial Regional-level influence
   7227:   Power-house !e, Regionally famous
