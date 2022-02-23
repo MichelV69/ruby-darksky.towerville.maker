@@ -13,7 +13,12 @@ Then('Primary Economic Rating should be valid') do
 end
 
 Then('I should get valid details for the Primary Economic Rating') do
-  pending # Write code here that turns the phrase above into concrete actions
+  peri = {}
+  peri[:min_value] = 250
+  peri[:max_value] = 9000
+  expect(@subject.getPrimaryEconomicRating).to be_greater_than(peri[:min_value])
+  expect(@subject.getPrimaryEconomicRating).to be_less_than(peri[:max_value])
+  puts @subject.getPrimaryEconomicRating
 end
 
 # economic_scale =  3 * @new_primary_employers_scale +
