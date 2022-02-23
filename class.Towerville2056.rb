@@ -59,7 +59,7 @@ class Towerville2056
     end
 
     dbz_scalar = 9000.0/599.0 # 15.025
-    return (primaryEconomicRating * dbz_scalar).round
+    return (primaryEconomicRating > 0 ? (primaryEconomicRating * dbz_scalar).round : primaryEconomicRating)
   end
 
 # ---
