@@ -99,7 +99,6 @@ I want to create a randomly generated TV for DarkSky
 	  When I directly set the Primary Employer Scale
 	  Then I should get the details for the Primary Employer Scale that I expect
 
-@WIP
   Scenario Outline: Randomly set and get Primary Employer Scale
     Given that I have an instance of Towerville2056
     And the Primary Industry has been generated
@@ -114,12 +113,22 @@ I want to create a randomly generated TV for DarkSky
     Then Primary Economic Rating should be -1
 
 @WIP
-  Scenario Outline: Get Primary Economic Rating as both value and text
+  Scenario Outline: Get Primary Economic Rating as value with randoms
     Given that I have an instance of Towerville2056
     And the Primary Industry has been generated
     When I randomly set the Primary Employer Scale
     And I request a random floor count
     Then Primary Economic Rating should be valid
     And I should get valid details for the Primary Economic Rating
+
+@WIP
+  Scenario Outline: Get Primary Economic Rating as value and text with 7s
+    Given that I have an instance of Towerville2056
+    And I set the Primary Industry to 7
+    And I set the Primary Employer Scale to 7
+    When I set the Floor Count to 77
+    Then the Primary Economic Rating value should be 88
+    And the Primary Economic Rating description should be "roomba bork"
+
 
 # ----- end of file -----

@@ -21,9 +21,24 @@ Then('I should get valid details for the Primary Economic Rating') do
   puts @subject.getPrimaryEconomicRating
 end
 
-# economic_scale =  3 * @new_primary_employers_scale +
-#      SQRT(@subject.getNumberOfHomesEstimate) +
-#      3x Primary Employer Scale +
-#      Something.Something - Something.Else
+Given('I set the Primary Industry to {int}') do |int|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given('I set the Primary Employer Scale to {int}') do |int|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When('I set the Floor Count to {int}') do |int|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('the Primary Economic Rating value should be {int}') do |int|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('the Primary Economic Rating description should be {string}') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
 
 # --- end of file ---
