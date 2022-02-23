@@ -37,7 +37,8 @@ class Towerville2056
       self.primaryEmployerScale == -1)
 
       spare_tv = Towerville2056.new
-      house_count_scalar = 43 / 12 # NOTE : if building min/max random numbers change, this needs to be recalcted as SQRT of average house count
+      house_count_scalar = 43 / 12 # 3.58
+      # NOTE : if building min/max random numbers change, this needs to be recalcted as SQRT of average house count
 
       pii_value = self.primaryIndustryIndex
       if self.primaryIndustryIndex.to_s.size == 2
