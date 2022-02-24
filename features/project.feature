@@ -124,10 +124,10 @@ I want to create a randomly generated TV for DarkSky
 @WIP
   Scenario Outline: Get Primary Economic Rating as value and text with 7s
     Given that I have an instance of Towerville2056
-    And I set the Primary Industry to 7
-    And I set the Primary Employer Scale to 7
-    When I set the Floor Count to 77
-    Then the Primary Economic Rating value should be 88
+    And I set the Primary Industry to 5
+    And I set the Primary Employer Scale to 6
+    When I set the Floor Count to 78
+    Then the Primary Economic Rating value should be 1474
     And the Primary Economic Rating description should be "roomba bork"
 
 

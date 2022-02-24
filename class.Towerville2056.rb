@@ -37,8 +37,6 @@ class Towerville2056
       self.primaryEmployerScale == -1)
 
       spare_tv = Towerville2056.new
-      house_count_scalar = 43 / 12 # 3.58
-      # NOTE : if building min/max random numbers change, this needs to be recalcted as SQRT of average house count
 
       pii_value = self.primaryIndustryIndex
       if self.primaryIndustryIndex.to_s.size == 2
@@ -55,10 +53,11 @@ class Towerville2056
       end
       nohs_value = Math.sqrt(self.getNumberOfHomesEstimate).to_f.round
 
-      primaryEconomicRating =  (pii_value + pes_value) * house_count_scalar + nohs_value
+      pii_pes_relevance_scalar = 4
+      primaryEconomicRating =  (pii_value + pes_value) * pii_pes_relevance_scalar + nohs_value
     end
 
-    dbz_scalar = 9000.0/599.0 # 15.025
+    dbz_scalar =  9000.0/624.0 # 14.42
     return (primaryEconomicRating > 0 ? (primaryEconomicRating * dbz_scalar).round : primaryEconomicRating)
   end
 

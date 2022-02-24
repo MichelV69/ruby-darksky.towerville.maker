@@ -44,15 +44,21 @@ stat_analysis.default = 0
 tv = Towerville2056.new
 tv.name = "Testing Tower"
 putc "!>"
-1.upto(7) do |primaryIndustryIndex|
-  putc "+"
-  26.upto(100) do |howManyFloors|
-    1.upto(6) do |primaryEmployerScale|
-      tv.primaryIndustryIndex = primaryIndustryIndex
-      tv.primaryEmployerScale = primaryEmployerScale
-      tv.howManyFloors = howManyFloors
-      primaryEconomicRating = tv.getPrimaryEconomicRating
-      stat_analysis[primaryEconomicRating] += 1
+0.upto(7) do |pii_tens|
+  1.upto(7) do |pii_ones|
+    putc "+"
+    primaryIndustryIndex = "#{pii_tens}#{pii_ones}".to_i
+    0.upto(6) do |pes_tens|
+      1.upto(6) do |pes_ones|
+        primaryEmployerScale = "#{pes_tens}#{pes_ones}".to_i
+        26.upto(100) do |howManyFloors|
+          tv.primaryIndustryIndex = primaryIndustryIndex
+          tv.primaryEmployerScale = primaryEmployerScale
+          tv.howManyFloors = howManyFloors
+          pER = tv.getPrimaryEconomicRating
+          stat_analysis[pER].nil? ? stat_analysis[pER] = 1 : stat_analysis[pER] += 1
+      end
+    end
     end
   end
 end

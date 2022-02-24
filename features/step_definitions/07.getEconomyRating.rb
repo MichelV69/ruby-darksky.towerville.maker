@@ -14,7 +14,7 @@ end
 
 Then('I should get valid details for the Primary Economic Rating') do
   peri = {}
-  peri[:min_value] = 250
+  peri[:min_value] = 270
   peri[:max_value] = 9000
   expect(@subject.getPrimaryEconomicRating).to be_greater_than(peri[:min_value])
   expect(@subject.getPrimaryEconomicRating).to be_less_than(peri[:max_value])
@@ -31,10 +31,11 @@ end
 
 When('I set the Floor Count to {int}') do |new_FloorCount|
   @subject.howManyFloors = new_FloorCount
+  puts "Number of Homes:  #{@subject.getNumberOfHomesEstimate}"
 end
 
-Then('the Primary Economic Rating value should be {int}') do |int|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the Primary Economic Rating value should be {int}') do |expect_value|
+  expect(@subject.getPrimaryEconomicRating).to be(expect_value)
 end
 
 Then('the Primary Economic Rating description should be {string}') do |string|
