@@ -21,16 +21,16 @@ Then('I should get valid details for the Primary Economic Rating') do
   puts @subject.getPrimaryEconomicRating
 end
 
-Given('I set the Primary Industry to {int}') do |int|
-  pending # Write code here that turns the phrase above into concrete actions
+Given('I set the Primary Industry to {int}') do |new_PII|
+  @subject.primaryIndustryIndex = new_PII
 end
 
-Given('I set the Primary Employer Scale to {int}') do |int|
-  pending # Write code here that turns the phrase above into concrete actions
+Given('I set the Primary Employer Scale to {int}') do |new_PES|
+  @subject.primaryEmployerScale = new_PES
 end
 
-When('I set the Floor Count to {int}') do |int|
-  pending # Write code here that turns the phrase above into concrete actions
+When('I set the Floor Count to {int}') do |new_FloorCount|
+  @subject.howManyFloors = new_FloorCount
 end
 
 Then('the Primary Economic Rating value should be {int}') do |int|
