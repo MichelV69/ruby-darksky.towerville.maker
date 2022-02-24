@@ -116,17 +116,17 @@
 :primaryEconomicRatingScale:
   :dice_rule: 0.d0
   0:      Application Error
-  225:    Collapsed / Ruined  !e
-  350:    Recovering !e, w/ no Sector influence
-  480:    Weak !e, w/ some Sector influence
-  1066:   Average !e, w/ Sector influence
-  1245:   Healthy !e, w/ noticeable City influence
-  1337:   Strong !e, w/ substantial City influence
-  1616:   Booming !e, City famous
-  1888:   Power-house !e, w/ some Regional-level influence
-  3678:   Power-house !e, w/ Regional-level influence
-  5445:   Power-house !e, w/ substantial Regional-level influence
-  7227:   Power-house !e, Regionally famous
+  270:    Collapsed / Ruined  !e
+  434:    Recovering !e, w/ no Sector influence
+  626:    Weak !e, w/ some Sector influence
+  808:    Average !e, w/ Sector influence
+  999:    Healthy !e, w/ noticeable City influence
+  1221:   Strong !e, w/ substantial City influence
+  1331:   Booming !e, City famous
+  1551:   Power-house !e, w/ some Regional-level influence
+  3443:   Power-house !e, w/ Regional-level influence
+  5225:   Power-house !e, w/ substantial Regional-level influence
+  7117:   Power-house !e, Regionally famous
   9000:   Power-house !e, trans-Regionally famous
 # - eot -
 # --- eof ---
