@@ -30,6 +30,18 @@ class Towerville2056
   end
 
 # ---
+  def getPrimaryEconomicRating_as_Text()
+    per_text ="undefined"
+
+    primaryEconomicRatingTable = TABLE_CONTENT_SETS[:primaryEconomicRatingScale].select {|minimum_roll, desc| minimum_roll != :dice_rule}
+
+    primaryEconomicRatingTable.each do |minimum_roll, desc|
+      per_text = desc if self.getPrimaryEconomicRating >= minimum_roll
+    end
+    return per_text.gsub("!e", "economy").gsub("\w", "with")
+  end
+
+# ---
   def getPrimaryEconomicRating()
     primaryEconomicRating = -1
     unless (self.primaryIndustryIndex == -1 ||

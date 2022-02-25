@@ -35,11 +35,11 @@ When('I set the Floor Count to {int}') do |new_FloorCount|
 end
 
 Then('the Primary Economic Rating value should be {int}') do |expect_value|
-  expect(@subject.getPrimaryEconomicRating).to be(expect_value)
+  expect(@subject.getPrimaryEconomicRating).to eq(expect_value)
 end
 
-Then('the Primary Economic Rating description should be {string}') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the Primary Economic Rating description should be {string}') do |expect_text|
+  expect(@subject.getPrimaryEconomicRating_as_Text).to eq(expect_text)
 end
 
 # --- end of file ---

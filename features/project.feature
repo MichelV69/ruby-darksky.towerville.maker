@@ -127,8 +127,8 @@ I want to create a randomly generated TV for DarkSky
     And I set the Primary Industry to 5
     And I set the Primary Employer Scale to 6
     When I set the Floor Count to 78
-    Then the Primary Economic Rating value should be 1474
-    And the Primary Economic Rating description should be "roomba bork"
+    Then the Primary Economic Rating value should be 1471
+    And the Primary Economic Rating description should be "Booming economy, City-famous"
 
 
 # ----- end of file -----
