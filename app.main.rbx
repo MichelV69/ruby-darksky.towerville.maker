@@ -37,4 +37,5 @@ puts " #{space_bar} :: Height: #{tv.getBuildingHeight} meters tall"
 puts " #{space_bar} :: Foot Print: ????"
 puts " #{space_bar} :: # of Homes : #{tv.getNumberOfHomesEstimate}"
 puts " #{space_bar} :: # of People : #{tv.getPopulationEstimate}"
+puts " #{space_bar} :: Relative Economic Status : #{tv.getPrimaryEconomicRating } : #{tv.getPrimaryEconomicRating_as_Text}"
 # --- ---
