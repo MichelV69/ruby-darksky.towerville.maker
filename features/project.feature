@@ -106,13 +106,11 @@ I want to create a randomly generated TV for DarkSky
     Then Primary Employer Scale should be valid
     And I should get valid details for the Primary Employer Scale
 
-@WIP
   Scenario Outline: New TV should have PER -1
     Given that I have an instance of Towerville2056
     When initialize has run
     Then Primary Economic Rating should be -1
 
-@WIP
   Scenario Outline: Get Primary Economic Rating as value with randoms
     Given that I have an instance of Towerville2056
     And the Primary Industry has been generated
@@ -130,5 +128,21 @@ I want to create a randomly generated TV for DarkSky
     Then the Primary Economic Rating value should be 1471
     And the Primary Economic Rating description should be "Booming economy, City-famous"
 
+@WIP
+  Scenario Outline: Provide other Details; How Many Shops?
+    Given a "5/6/78" Test-Build Towerville
+    When I check for the number of shops
+    Then then I should get 2222
 
+@WIP
+  Scenario Outline: Provide other Details; How Many Social Spaces?
+    Given a "5/6/78" Test-Build Towerville
+    When I check for the number of social spaces
+    Then then I should get 2222
+
+@WIP
+  Scenario Outline: Provide other Details; How Many Green Spaces?
+    Given a "5/6/78" Test-Build Towerville
+    When I check for the number of social spaces
+    Then then I should get 2222
 # ----- end of file -----
