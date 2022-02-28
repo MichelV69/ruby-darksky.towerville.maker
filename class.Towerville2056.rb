@@ -23,10 +23,16 @@ class Towerville2056
 		self.construction_rules[:story_height_in_m] = 3.5
 		self.construction_rules[:efficiency_of_design] = 0.70
 		self.construction_rules[:home_volume_in_m3] = 700
-		self.construction_rules[:people_per_home] = 3.5
+    self.construction_rules[:people_per_home] = 3.5
+		self.construction_rules[:shops_per_person] = 7700.0/1906865.0 # Montreal 7700 retail stores for 1,906,865 people
 
     self.economy_rules = {}
 		self.economy_rules[:worker_annual_salary_in_nafta] = 35000
+  end
+
+# ---
+  def getShopCountEstimate
+    (self.getPopulationEstimate * self.construction_rules[:shops_per_person]).round(-1)
   end
 
 # ---

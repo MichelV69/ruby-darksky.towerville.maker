@@ -131,18 +131,18 @@ I want to create a randomly generated TV for DarkSky
 @WIP
   Scenario Outline: Provide other Details; How Many Shops?
     Given a "5/6/78" Test-Build Towerville
-    When I check for the number of shops
-    Then then I should get 2222
+    When I check for the number of Shops
+    Then then I should get 50
 
 @WIP
   Scenario Outline: Provide other Details; How Many Social Spaces?
     Given a "5/6/78" Test-Build Towerville
-    When I check for the number of social spaces
+    When I check for the number of Social Spaces
     Then then I should get 2222
 
 @WIP
   Scenario Outline: Provide other Details; How Many Green Spaces?
     Given a "5/6/78" Test-Build Towerville
-    When I check for the number of social spaces
+    When I check for the number of Green Spaces
     Then then I should get 2222
 # ----- end of file -----
