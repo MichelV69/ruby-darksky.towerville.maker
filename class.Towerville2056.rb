@@ -8,7 +8,8 @@ class Towerville2056
   attr_accessor :tables_count,
     :construction_rules, :economy_rules,
     :name, :howManyFloors, :buildingProfile,
-    :primaryIndustryIndex, :primaryEmployerScale
+    :primaryIndustryIndex, :primaryEmployerScale,
+    :shopCountVariancePercent
 
   def initialize(args = {})
     self.tables_count = TABLE_CONTENT_SETS.count
@@ -18,6 +19,7 @@ class Towerville2056
     self.buildingProfile = {:bottom => "unset", :middle => "unset",
 			:crown => "unset", :crown_cap => "unset"}
     self.primaryEmployerScale = -1
+    self.shopCountVariancePercent = -111
 
 		self.construction_rules = {}
 		self.construction_rules[:story_height_in_m] = 3.5
@@ -31,8 +33,15 @@ class Towerville2056
   end
 
 # ---
+  def self.getRandomShopCountVariancePercent(parimaryEconomicRating)
+    dieMod = -14.0 + (parimaryEconomicRating/500.0 - 9.0)
+    return (4.d6 + dieMod)
+  end
+
+# ---
   def getShopCountEstimate
-    (self.getPopulationEstimate * self.construction_rules[:shops_per_person]).round(-1)
+    ((self.getPopulationEstimate * self.construction_rules[:shops_per_person]) * (1.0 + self.shopCountVariancePercent/100.0))
+    .round(0)
   end
 
 # ---

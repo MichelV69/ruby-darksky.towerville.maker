@@ -131,8 +131,8 @@ I want to create a randomly generated TV for DarkSky
 @WIP
   Scenario Outline: Provide other Details; How Many Shops?
     Given a "5/6/78" Test-Build Towerville
-    When I check for the number of Shops
-    Then then I should get 50
+    When I use getRandomShopCountVariancePercent
+    Then then the number of shops should be around 50
 
 @WIP
   Scenario Outline: Provide other Details; How Many Social Spaces?
