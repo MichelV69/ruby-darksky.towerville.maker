@@ -16,7 +16,7 @@ When('I use getRandomShopCountVariancePercent') do
   puts @subject.shopCountVariancePercent
 end
 
-Then('then the number of shops should be around {int}') do |expectedShopCountEstimate|
+Then('the number of shops should be around {int}') do |expectedShopCountEstimate|
 
   maxPERModifier = 9000/500 - 9
   minPERModifier =   90/500 - 9
@@ -32,6 +32,14 @@ Then('then the number of shops should be around {int}') do |expectedShopCountEst
   expect(@subject.getShopCountEstimate).to be_greater_than(lowShopCount)
   expect(@subject.getShopCountEstimate).to be_less_than(highShopCount)
   puts @subject.getShopCountEstimate
+end
+
+When('I use getBuildingFootPrint') do
+  @buildingFootPrintText = @subject.getBuildingFootPrint
+end
+
+Then('the Building Footprint should be {string}') do |expected_string|
+  expect(@buildingFootPrintText).to eq(expected_string)
 end
 
 When('I check for the number of Social Spaces') do

@@ -119,7 +119,6 @@ I want to create a randomly generated TV for DarkSky
     Then Primary Economic Rating should be valid
     And I should get valid details for the Primary Economic Rating
 
-@WIP
   Scenario Outline: Get Primary Economic Rating as value and text with 7s
     Given that I have an instance of Towerville2056
     And I set the Primary Industry to 5
@@ -132,17 +131,23 @@ I want to create a randomly generated TV for DarkSky
   Scenario Outline: Provide other Details; How Many Shops?
     Given a "5/6/78" Test-Build Towerville
     When I use getRandomShopCountVariancePercent
-    Then then the number of shops should be around 50
+    Then the number of shops should be around 50
 
 @WIP
-  Scenario Outline: Provide other Details; How Many Social Spaces?
+  Scenario Outline: Provide other Details; Building Footprint
     Given a "5/6/78" Test-Build Towerville
-    When I check for the number of Social Spaces
-    Then then I should get 2222
+    When I use getBuildingFootPrint
+    Then the Building Footprint should be "111m by 222m, totalling 3333m.sq"
 
-@WIP
-  Scenario Outline: Provide other Details; How Many Green Spaces?
-    Given a "5/6/78" Test-Build Towerville
-    When I check for the number of Green Spaces
-    Then then I should get 2222
+# @WIP
+#   Scenario Outline: Provide other Details; How Many Social Spaces?
+#     Given a "5/6/78" Test-Build Towerville
+#     When I check for the number of Social Spaces
+#     Then then I should get 2222
+#
+# @WIP
+#   Scenario Outline: Provide other Details; How Many Green Spaces?
+#     Given a "5/6/78" Test-Build Towerville
+#     When I check for the number of Green Spaces
+#     Then then I should get 2222
 # ----- end of file -----
