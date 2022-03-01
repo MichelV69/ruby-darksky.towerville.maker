@@ -23,19 +23,23 @@ tv.buildingProfile[:crown] = Towerville2056.getRandomBuildingProfile(:crown)
 tv.buildingProfile[:crown_cap] = Towerville2056.getRandomBuildingProfile(:crown_cap)
 
 tv.primaryEmployerScale = Towerville2056::getRandomPrimaryEmployerScale()
+tv.shopCountVariancePercent = Towerville2056::getRandomShopCountVariancePercent(tv.primaryIndustryIndex)
 
 space_bar = spaces(tv.name.length)
-puts "\n\n ----- \n  #{tv.name} :: #{tv.getPrimaryIndustry_as_text[:summaryDesc]} (#{tv.getPrimaryIndustry_as_text[:broadDesc]})"
+puts "\n\n ----- \n #{tv.name} :: #{tv.getPrimaryIndustry_as_text[:summaryDesc]} (#{tv.getPrimaryIndustry_as_text[:broadDesc]})"
 puts " #{space_bar} :: primary Employer Scale: #{tv.primaryEmployerScale}: #{tv.getprimaryEmployerScale_as_text} "
 
-puts " #{tv.name} :: Bottom section: #{tv.buildingProfile[:bottom]} "
+puts "\n #{tv.name} :: Bottom section: #{tv.buildingProfile[:bottom]} "
 puts " #{space_bar} :: Middle section: #{tv.buildingProfile[:middle]} "
 puts " #{space_bar} :: Crown section: #{tv.buildingProfile[:crown]} "
 puts " #{space_bar} :: 'Crown Forest': #{tv.buildingProfile[:crown_cap]} "
-puts " #{tv.name} :: # of Floors: #{tv.howManyFloors}"
+
+puts "\n #{tv.name} :: # of Floors: #{tv.howManyFloors}"
 puts " #{space_bar} :: Height: #{tv.getBuildingHeight} meters tall"
 puts " #{space_bar} :: Foot Print: ????"
 puts " #{space_bar} :: # of Homes : #{tv.getNumberOfHomesEstimate}"
 puts " #{space_bar} :: # of People : #{tv.getPopulationEstimate}"
-puts " #{space_bar} :: Relative Economic Status : #{tv.getPrimaryEconomicRating } : #{tv.getPrimaryEconomicRating_as_Text}"
+
+puts "\n #{tv.name} :: Relative Economic Status : #{tv.getPrimaryEconomicRating } : #{tv.getPrimaryEconomicRating_as_Text}"
+puts " #{space_bar} :: Approximate # of shops : #{tv.getShopCountEstimate}"
 # --- ---
