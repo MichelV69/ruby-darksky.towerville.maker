@@ -36,7 +36,7 @@ puts " #{space_bar} :: 'Crown Forest': #{tv.buildingProfile[:crown_cap]} "
 
 puts "\n #{tv.name} :: # of Floors: #{tv.howManyFloors}"
 puts " #{space_bar} :: Height: #{tv.getBuildingHeight} meters tall"
-puts " #{space_bar} :: Foot Print: ????"
+puts " #{space_bar} :: Ground area footprint: #{tv.getBuildingFootPrint_as_Text}"
 puts " #{space_bar} :: # of Homes : #{tv.getNumberOfHomesEstimate}"
 puts " #{space_bar} :: # of People : #{tv.getPopulationEstimate}"
 
