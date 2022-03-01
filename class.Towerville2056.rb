@@ -9,7 +9,7 @@ class Towerville2056
     :construction_rules, :economy_rules,
     :name, :howManyFloors, :buildingProfile,
     :primaryIndustryIndex, :primaryEmployerScale,
-    :shopCountVariancePercent
+    :shopCountVariancePercent, :socialSpacesVariancePercent
 
   def initialize(args = {})
     self.tables_count = TABLE_CONTENT_SETS.count
@@ -20,6 +20,7 @@ class Towerville2056
 			:crown => "unset", :crown_cap => "unset"}
     self.primaryEmployerScale = -1
     self.shopCountVariancePercent = -111
+    self.socialSpacesVariancePercent = -111
 
 		self.construction_rules = {}
 		self.construction_rules[:story_height_in_m] = 3.5
@@ -28,8 +29,44 @@ class Towerville2056
     self.construction_rules[:people_per_home] = 3.5
 		self.construction_rules[:shops_per_person] = 7700.0/1906865.0 # Montreal 7700 retail stores for 1,906,865 people
 
+    self.construction_rules[:base_area_social_space_percent] = (3.0 / 70.0)
+    self.construction_rules[:social_spaces_count_by_floor_count] = (22.0 / 70.0)
+    self.construction_rules[:social_space_size_msq] = (12421.0 * 3  / 22).round(-1)
+
     self.economy_rules = {}
 		self.economy_rules[:worker_annual_salary_in_nafta] = 35000
+  end
+
+# ---
+  def self.getRandomSocialSpacesVariancePercent(primaryEconomicRating)
+    dieMod = -14.0 + (primaryEconomicRating/500.0 - 9.0)
+    return (4.d6 + dieMod)
+  end
+
+# ---
+  def getSocialSpacesData
+    socialSpacesData = {} if self.socialSpacesVariancePercent != -111
+
+    change_modifier = 1 + self.construction_rules[:base_area_social_space_percent] + self.socialSpacesVariancePercent.percent
+
+    puts "change_modifier => #{change_modifier}"
+
+    socialSpacesData[:number_of_spaces] = (self.construction_rules[:social_spaces_count_by_floor_count] * self.howManyFloors * change_modifier).round
+
+    socialSpacesData[:social_space_size_avg_msq] = (self.construction_rules[:social_space_size_msq] * change_modifier).round(-1)
+
+    socialSpacesData[:total_m_sq] = socialSpacesData[:social_space_size_avg_msq] * socialSpacesData[:number_of_spaces]
+
+    socialSpacesData[:floors_used] = (socialSpacesData[:total_m_sq] / self.getBuildingFootPrint[:sq]).to_f.round(1)
+
+
+    return socialSpacesData
+  end
+
+# ---
+  def getSocialSpaces_as_Text
+    socialSpacesData = self.getSocialSpacesData
+    "socialSpacesData => #{socialSpacesData.inspect}"
   end
 
 # ---
@@ -49,15 +86,15 @@ class Towerville2056
   end
 
 # ---
-  def self.getRandomShopCountVariancePercent(parimaryEconomicRating)
-    dieMod = -14.0 + (parimaryEconomicRating/500.0 - 9.0)
+  def self.getRandomShopCountVariancePercent(primaryEconomicRating)
+    dieMod = -14.0 + (primaryEconomicRating/500.0 - 9.0)
     return (4.d6 + dieMod)
   end
 
 # ---
   def getShopCountEstimate
-    ((self.getPopulationEstimate * self.construction_rules[:shops_per_person]) * (1.0 + self.shopCountVariancePercent/100.0))
-    .round(0)
+    ((self.getPopulationEstimate * self.construction_rules[:shops_per_person]) * (1.0 + self.shopCountVariancePercent.percent))
+    .round(0) if self.shopCountVariancePercent != -111
   end
 
 # ---

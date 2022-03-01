@@ -127,7 +127,6 @@ I want to create a randomly generated TV for DarkSky
     Then the Primary Economic Rating value should be 1471
     And the Primary Economic Rating description should be "Booming economy, City-famous"
 
-@WIP
   Scenario Outline: Provide other Details; How Many Shops?
     Given a "5/6/78" Test-Build Towerville
     When I use getRandomShopCountVariancePercent
@@ -139,12 +138,12 @@ I want to create a randomly generated TV for DarkSky
     When I use getBuildingFootPrint_as_Text
     Then the Building Footprint text should be "136.5m by 91.0m, totalling 12421.5m.sq"
 
-# @WIP
-#   Scenario Outline: Provide other Details; How Many Social Spaces?
-#     Given a "5/6/78" Test-Build Towerville
-#     When I check for the number of Social Spaces
-#     Then then I should get 2222
-#
+@WIP
+ Scenario Outline: Provide other Details; How Many Social Spaces?
+   Given a "5/6/78" Test-Build Towerville
+   When I set getRandomSocialSpacesVariancePercent to 0.0 with getSocialSpaces_as_Text
+   Then the description of Social Spaces should be "22 or so 1400m.sq spaces, totaling 28000m.sq over 2 floors"
+
 # @WIP
 #   Scenario Outline: Provide other Details; How Many Green Spaces?
 #     Given a "5/6/78" Test-Build Towerville

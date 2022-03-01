@@ -42,11 +42,15 @@ Then('the Building Footprint text should be {string}') do |expected_string|
   expect(@buildingFootPrintText).to eq(expected_string)
 end
 
-When('I check for the number of Social Spaces') do
-  pending # Write code here that turns the phrase above into concrete actions
+When('I set getRandomSocialSpacesVariancePercent to 0.0 with getSocialSpaces_as_Text') do
+  #@subject.socialSpacesVariancePercent = Towerville2056.getRandomSocialSpacesVariancePercent(@subject.getPrimaryEconomicRating)
+  @subject.socialSpacesVariancePercent = 0.0
+  puts @subject.socialSpacesVariancePercent
+
+  @socialSpacesText = @subject.getSocialSpaces_as_Text
 end
 
-When('I check for the number of Gocial Spaces') do
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the description of Social Spaces should be {string}') do |expected_string|
+  expect(@socialSpacesText).to eq(expected_string)
 end
 # ---
