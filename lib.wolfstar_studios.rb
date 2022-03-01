@@ -128,8 +128,8 @@ class	Float
 		self * 2.00/3.00
 	end
 
-	def round_up
-		self.ceil
+	def round_up(bar=2)
+		self.ceil(bar)
 	end
 end
 
