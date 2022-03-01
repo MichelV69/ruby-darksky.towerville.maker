@@ -131,6 +131,10 @@ class	Float
 	def round_up(bar=2)
 		self.ceil(bar)
 	end
+
+  def percent
+    self / 100.0000
+  end # def percent
 end
 
 # --- # ---
@@ -144,7 +148,7 @@ class Fixnum
   end # def billion
 
   def percent
-    (self / 100).to_f
+    (self / 100.0000).to_f
   end # def percent
 
   def hex
