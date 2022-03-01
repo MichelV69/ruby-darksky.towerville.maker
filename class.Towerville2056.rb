@@ -162,7 +162,7 @@ class Towerville2056
 				tableColumn = "(none)"
 			else
 				how_tall = 1.d4 + 1.d6
-				tableColumn = "The 'Crown' is capped with forest of RF antennas, microwave link dishes, aircraft warning lights, weather sensors, cameras, and even very short range anti-aircraft systems. Additionally, there will heavy cables, struts, hatches, ladders and scaffolding to allow access and maintenance to all that hardware.  The 'Cap Forest' unofficially increases the height of the building another #{how_tall} stories."
+				tableColumn = "The 'Crown' is capped with forest of RF antennas, microwave link dishes, aircraft warning lights, weather sensors, cameras, and even very short range anti-aircraft systems. Additionally, there will heavy cables, struts, hatches, ladders and scaffolding to allow access and maintenance to all that hardware.  The 'Crown Forest' unofficially increases the height of the building another #{how_tall} stories."
 			end
 		end
 
