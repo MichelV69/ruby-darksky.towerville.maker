@@ -125,16 +125,13 @@ class Towerville2056
 
 	# ---
 	def getNumberOfHomesEstimate()
-		building_in_m = {}
-		building_in_m[:height]	= self.getBuildingHeight()
-		building_in_m[:width]		= building_in_m[:height].half
-		building_in_m[:depth]		= building_in_m[:width].two_thirds
+		building_in_m = self.getBuildingFootPrint
 
-		functional_volume_in_m3	= building_in_m[:height] * building_in_m[:width] * building_in_m[:depth] * self.construction_rules[:efficiency_of_design]
+		functional_volume_in_m3	= building_in_m[:height] * building_in_m[:sq] * self.construction_rules[:efficiency_of_design]
 
 		number_of_homes 	= functional_volume_in_m3 / self.construction_rules[:home_volume_in_m3]
 
-		return number_of_homes.round_up().to_i
+		return number_of_homes.round_up(-1).to_i
 	end
 
   # ---
