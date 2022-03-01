@@ -34,11 +34,11 @@ Then('the number of shops should be around {int}') do |expectedShopCountEstimate
   puts @subject.getShopCountEstimate
 end
 
-When('I use getBuildingFootPrint') do
-  @buildingFootPrintText = @subject.getBuildingFootPrint
+When('I use getBuildingFootPrint_as_Text') do
+  @buildingFootPrintText = @subject.getBuildingFootPrint_as_Text
 end
 
-Then('the Building Footprint should be {string}') do |expected_string|
+Then('the Building Footprint text should be {string}') do |expected_string|
   expect(@buildingFootPrintText).to eq(expected_string)
 end
 

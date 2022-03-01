@@ -33,6 +33,22 @@ class Towerville2056
   end
 
 # ---
+  def getBuildingFootPrint
+    building_in_m = {}
+		building_in_m[:height]	= self.getBuildingHeight()
+		building_in_m[:width]		= building_in_m[:height].half.round(1)
+		building_in_m[:depth]		= building_in_m[:width].two_thirds.round(1)
+    building_in_m[:sq]      = (building_in_m[:width] * building_in_m[:depth]).round(1)
+    return building_in_m
+  end
+# ---
+  def getBuildingFootPrint_as_Text
+    building_in_m = self.getBuildingFootPrint
+
+    "#{building_in_m[:width]}m by #{building_in_m[:depth]}m, totalling #{building_in_m[:sq]}m.sq"
+  end
+
+# ---
   def self.getRandomShopCountVariancePercent(parimaryEconomicRating)
     dieMod = -14.0 + (parimaryEconomicRating/500.0 - 9.0)
     return (4.d6 + dieMod)

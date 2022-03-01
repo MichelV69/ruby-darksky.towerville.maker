@@ -136,8 +136,8 @@ I want to create a randomly generated TV for DarkSky
 @WIP
   Scenario Outline: Provide other Details; Building Footprint
     Given a "5/6/78" Test-Build Towerville
-    When I use getBuildingFootPrint
-    Then the Building Footprint should be "111m by 222m, totalling 3333m.sq"
+    When I use getBuildingFootPrint_as_Text
+    Then the Building Footprint text should be "136.5m by 91.0m, totalling 12421.5m.sq"
 
 # @WIP
 #   Scenario Outline: Provide other Details; How Many Social Spaces?
