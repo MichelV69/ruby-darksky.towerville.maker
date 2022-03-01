@@ -131,7 +131,7 @@ class Towerville2056
 
 		number_of_homes 	= functional_volume_in_m3 / self.construction_rules[:home_volume_in_m3]
 
-		return number_of_homes.round_up(-1).to_i
+		return number_of_homes.round_up(0).to_i
 	end
 
   # ---
