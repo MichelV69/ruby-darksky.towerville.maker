@@ -132,6 +132,10 @@ class	Float
 		self.ceil(bar)
 	end
 
+  def round_down(bar=2)
+		self.floor(bar)
+	end
+
   def percent
     self / 100.0000
   end # def percent
