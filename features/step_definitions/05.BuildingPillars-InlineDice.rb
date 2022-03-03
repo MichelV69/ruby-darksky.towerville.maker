@@ -45,6 +45,5 @@ end
 
 Then('the inline dice string should be parsed and replaced with the result rolled.') do
   expect(@subject.building_profile[:middle]).not_to  include("[roll:")
-	p @subject.building_profile[:middle]
 end
 # --- end of file ---

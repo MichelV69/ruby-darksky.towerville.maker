@@ -13,7 +13,6 @@ Then('the array I am returned shoud include the rollIndex, the summary_desc and 
   table_primary_industry = @all_tables[:primary_industry]
 
   1.upto(@testVar_TableSize) do | ptr |
-		puts "#{ptr}"
 		@subject.primary_industry_index = ptr
     @method_output = @subject.get_primary_industry_as_text
 

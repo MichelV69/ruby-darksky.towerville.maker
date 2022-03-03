@@ -18,7 +18,6 @@ Then('I should get valid details for the Primary Economic Rating') do
   peri[:max_value] = 9000
   expect(@subject.get_primary_economic_rating).to be_greater_than(peri[:min_value])
   expect(@subject.get_primary_economic_rating).to be_less_than(peri[:max_value])
-  puts @subject.get_primary_economic_rating
 end
 
 Given('I set the Primary Industry to {int}') do |new_PII|

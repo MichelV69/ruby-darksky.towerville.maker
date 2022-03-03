@@ -14,7 +14,6 @@ end
 
 Given('the Primary Industry has been generated') do
   @subject.primary_industry_index = Towerville2056::get_random_primary_industry_index
-	p @subject.primary_industry_index
 end
 
 When('I directly set the Primary Employer Scale') do
