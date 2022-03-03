@@ -11,6 +11,10 @@ Before do
   @all_tables = Psych.load_file(Towerville2056::TABLE_FILENAME)
 	@subject = Towerville2056.new
 
+  @roll4d6 = {}
+  @roll4d6[:max] = 24 - 14
+  @roll4d6[:min] =  4 - 14
+
   def object_post_intialize_expectations()
     expect(@subject.name).to eq("example")
     expect(@subject.primaryIndustryIndex).to eq(-1)

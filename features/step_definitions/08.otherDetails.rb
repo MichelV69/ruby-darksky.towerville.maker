@@ -18,11 +18,9 @@ Then('the number of shops should be around {int}') do |expectedShopCountEstimate
 
   maxPERModifier = 9000/500 - 9
   minPERModifier =   90/500 - 9
-  max4d6Roll = 24 - 14
-  min4d6Roll =  4 - 14
 
-  maxShopCountModifierPercent = 1 + (maxPERModifier + max4d6Roll)/100.0
-  minShopCountModifierPercent = 1 + (minPERModifier + min4d6Roll)/100.0
+  maxShopCountModifierPercent = 1 + (maxPERModifier + @roll4d6[:max])/100.0
+  minShopCountModifierPercent = 1 + (minPERModifier + @roll4d6[:min])/100.0
 
   highShopCount = expectedShopCountEstimate * maxShopCountModifierPercent
   lowShopCount  = expectedShopCountEstimate * minShopCountModifierPercent
@@ -40,7 +38,6 @@ Then('the Building Footprint text should be {string}') do |expected_string|
 end
 
 When('I set getRandomSocialSpacesVariancePercent to 0.0 with getSocialSpaces_as_Text') do
-  #@subject.socialSpacesVariancePercent = Towerville2056.getRandomSocialSpacesVariancePercent(@subject.getPrimaryEconomicRating)
   @subject.socialSpacesVariancePercent = 0.0
 
   @socialSpacesText = @subject.getSocialSpaces_as_Text
@@ -51,10 +48,21 @@ Then('the description of Social Spaces should be {string}') do |expected_string|
 end
 
 When('I use getSocialSpaces with set getRandomSocialSpacesVariancePercent fully randomized') do
-  pending # Write code here that turns the phrase above into concrete actions
+  @subject.socialSpacesVariancePercent = 0.0
+  @social_spaces_median_data = @subject.getSocialSpacesData
+  @subject.socialSpacesVariancePercent = Towerville2056.getRandomSocialSpacesVariancePercent(@subject.getPrimaryEconomicRating)
 end
 
 Then('the Social Spaces data should be reasonable') do
-  pending # Write code here that turns the phrase above into concrete actions
+  low_variance  = 1.0 + @roll4d6[:min]
+  high_variance = 1.0 + @roll4d6[:max]
+
+  expect(@subject.getSocialSpacesData[:social_space_total_msq].to_i).to be_greater_than((@social_spaces_median_data[:social_space_total_msq] * low_variance).to_i)
+
+  expect(@subject.getSocialSpacesData[:social_space_total_msq].to_i).to be_less_than((@social_spaces_median_data[:social_space_total_msq] * high_variance).to_i)
+
+  expect(@subject.getSocialSpacesData[:social_space_size_msq].to_i).to be_greater_than((@social_spaces_median_data[:social_space_size_msq] * low_variance).to_i)
+
+  expect(@subject.getSocialSpacesData[:social_space_size_msq].to_i).to be_less_than((@social_spaces_median_data[:social_space_size_msq] * high_variance).to_i)
 end
 # ---

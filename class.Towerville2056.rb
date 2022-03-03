@@ -50,7 +50,6 @@ class Towerville2056
     socialSpacesData.default = -1.1
 
     change_modifier = 1 + self.socialSpacesVariancePercent.percent
-    puts "change_modifier => #{change_modifier}"
 
     socialSpacesData[:social_space_total_msq] = change_modifier * self.construction_rules[:base_area_social_space_fraction] * self.howManyFloors
     socialSpacesData[:social_space_size_msq] = change_modifier * self.construction_rules[:social_space_size_msq]
@@ -66,9 +65,6 @@ class Towerville2056
     socialSpacesData[:floors_used] = socialSpacesData[:social_space_total_msq] / self.getBuildingFootPrint[:sq]
 
     socialSpacesData[:number_of_spaces] = socialSpacesData[:social_space_total_msq] / socialSpacesData[:social_space_size_msq]
-
-
-    #"#{socialSpacesData.inspect}"
 
     "#{socialSpacesData[:number_of_spaces].round_to_nearest_5} or so #{socialSpacesData[:social_space_size_msq].round_to_nearest_5}m.sq spaces, totaling #{socialSpacesData[:social_space_total_msq].round_to_nearest_5}m.sq over #{socialSpacesData[:floors_used].round_up(0)} floors"
   end
