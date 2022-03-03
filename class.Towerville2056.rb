@@ -9,44 +9,84 @@ class Towerville2056
     :construction_rules, :economy_rules,
     :name, :number_of_floors, :building_profile,
     :primary_industry_index, :primary_employer_scale,
-    :shop_count_variance_percent, :social_spaces_variance_percent
+    :shop_count_variance_percent,
+    :social_spaces_variance_percent, :green_spaces_variance_percent
 
   def initialize(args = {})
     self.tables_count = TABLE_CONTENT_SETS.count
+
+    # ---
+    self.construction_rules = {}
+		self.construction_rules[:story_height_in_m] = 3.5
+		self.construction_rules[:efficiency_of_design] = 0.70
+		self.construction_rules[:home_volume_in_m3] = 700
+    self.construction_rules[:people_per_home] = 3.5
+    montreal_retail_stores = 7700.0
+    montreal_city_population = 1906865.0
+		self.construction_rules[:shops_per_person] = montreal_retail_stores / montreal_city_population
+
+    social_floor_count_per_sixty_stories  = 44
+    sixty_stories_single_floor_area = 14700
+    arbitrary_house_to_social_ratio = 1.77
+    arbitrary_social_to_green_ratio = 2.20
+
+    self.construction_rules[:base_area_social_space_fraction] = (sixty_stories_single_floor_area / social_floor_count_per_sixty_stories)
+    self.construction_rules[:social_space_size_ea_msq] = self.construction_rules[:home_volume_in_m3] * arbitrary_house_to_social_ratio
+
+    self.construction_rules[:base_area_green_space_fraction] = self.construction_rules[:base_area_social_space_fraction] / arbitrary_social_to_green_ratio
+    self.construction_rules[:green_space_size_ea_msq] = self.construction_rules[:social_space_size_ea_msq] * arbitrary_house_to_social_ratio
+
+    # ---
+    self.economy_rules = {}
+		self.economy_rules[:worker_annual_salary_in_nafta] = 35000
+
+    # ---
     self.name = "example"
     self.primary_industry_index = -1
     self.number_of_floors = -1
     self.building_profile = {:bottom => "unset", :middle => "unset",
 			:crown => "unset", :crown_cap => "unset"}
     self.primary_employer_scale = -1
-    self.shop_count_variance_percent = -111
-    self.social_spaces_variance_percent = -111
+    self.shop_count_variance_percent    = 0.0
+    self.social_spaces_variance_percent = 0.0
+    self.green_spaces_variance_percent  = 0.0
 
-		self.construction_rules = {}
-		self.construction_rules[:story_height_in_m] = 3.5
-		self.construction_rules[:efficiency_of_design] = 0.70
-		self.construction_rules[:home_volume_in_m3] = 700
-    self.construction_rules[:people_per_home] = 3.5
-		self.construction_rules[:shops_per_person] = 7700.0/1906865.0 # Montreal 7700 retail stores for 1,906,865 people
+  end # def initialize
 
-    sixty_stories_single_floor_area = 14700
-    floor_count_per_sixty_stories   = 44
-    self.construction_rules[:base_area_social_space_fraction] = (sixty_stories_single_floor_area / floor_count_per_sixty_stories)
-    self.construction_rules[:social_space_size_msq] = self.construction_rules[:home_volume_in_m3] * 1.77
+  # ---
+  def get_green_spaces_data
+    green_spaces_data = {}
+    green_spaces_data.default = -1.1
 
-    self.economy_rules = {}
-		self.economy_rules[:worker_annual_salary_in_nafta] = 35000
+    change_modifier = 1 + self.green_spaces_variance_percent.percent
+
+    green_spaces_data[:total_msq] = change_modifier * self.construction_rules[:base_area_green_space_fraction] * self.number_of_floors
+    green_spaces_data[:size_ea_msq] = change_modifier * self.construction_rules[:green_space_size_ea_msq]
+
+    return green_spaces_data
+  end
+
+# ---
+  def get_green_spaces_data_as_text
+    green_spaces_data = {}
+    green_spaces_data = self.get_green_spaces_data
+
+    green_spaces_data[:floors_used] = green_spaces_data[:total_msq] / self.get_building_foot_print[:sq] * 3.0
+
+    green_spaces_data[:number_of_spaces] = green_spaces_data[:total_msq] / green_spaces_data[:size_ea_msq]
+
+    "#{green_spaces_data[:number_of_spaces].round_to_nearest_5} or so #{green_spaces_data[:size_ea_msq].round_to_nearest_5}m.sq spaces, totaling #{green_spaces_data[:total_msq].round_to_nearest_5}m.sq over #{green_spaces_data[:floors_used].round_up(0)} floors"
   end
 
 # ---
   def get_social_spaces_data
-    social_spaces_data = {} if self.social_spaces_variance_percent != -111
+    social_spaces_data = {}
     social_spaces_data.default = -1.1
 
     change_modifier = 1 + self.social_spaces_variance_percent.percent
 
-    social_spaces_data[:social_space_total_msq] = change_modifier * self.construction_rules[:base_area_social_space_fraction] * self.number_of_floors
-    social_spaces_data[:social_space_size_msq] = change_modifier * self.construction_rules[:social_space_size_msq]
+    social_spaces_data[:total_msq] = change_modifier * self.construction_rules[:base_area_social_space_fraction] * self.number_of_floors
+    social_spaces_data[:size_ea_msq] = change_modifier * self.construction_rules[:social_space_size_ea_msq]
 
     return social_spaces_data
   end
@@ -56,11 +96,11 @@ class Towerville2056
     social_spaces_data = {}
     social_spaces_data = self.get_social_spaces_data
 
-    social_spaces_data[:floors_used] = social_spaces_data[:social_space_total_msq] / self.get_building_foot_print[:sq]
+    social_spaces_data[:floors_used] = social_spaces_data[:total_msq] / self.get_building_foot_print[:sq]
 
-    social_spaces_data[:number_of_spaces] = social_spaces_data[:social_space_total_msq] / social_spaces_data[:social_space_size_msq]
+    social_spaces_data[:number_of_spaces] = social_spaces_data[:total_msq] / social_spaces_data[:size_ea_msq]
 
-    "#{social_spaces_data[:number_of_spaces].round_to_nearest_5} or so #{social_spaces_data[:social_space_size_msq].round_to_nearest_5}m.sq spaces, totaling #{social_spaces_data[:social_space_total_msq].round_to_nearest_5}m.sq over #{social_spaces_data[:floors_used].round_up(0)} floors"
+    "#{social_spaces_data[:number_of_spaces].round_to_nearest_5} or so #{social_spaces_data[:size_ea_msq].round_to_nearest_5}m.sq spaces, totaling #{social_spaces_data[:total_msq].round_to_nearest_5}m.sq over #{social_spaces_data[:floors_used].round_up(0)} floors"
   end
 
 # ---

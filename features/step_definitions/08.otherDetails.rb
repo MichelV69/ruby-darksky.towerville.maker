@@ -39,12 +39,11 @@ end
 
 When('I set get_random_variance_by_primary_economic_rating to 0.0 with get_social_spaces_data_as_text') do
   @subject.social_spaces_variance_percent = 0.0
-
-  @socialSpacesText = @subject.get_social_spaces_data_as_text
+  @social_spaces_text = @subject.get_social_spaces_data_as_text
 end
 
 Then('the description of Social Spaces should be {string}') do |expected_string|
-  expect(@socialSpacesText).to eq(expected_string)
+  expect(@social_spaces_text).to eq(expected_string)
 end
 
 When('I use get_social_spaces with set get_random_variance_by_primary_economic_rating fully randomized') do
@@ -57,21 +56,22 @@ Then('the Social Spaces data should be reasonable') do
   low_variance  = 1.0 + @roll4d6[:min]
   high_variance = 1.0 + @roll4d6[:max]
 
-  expect(@subject.get_social_spaces_data[:social_space_total_msq].to_i).to be_greater_than((@social_spaces_median_data[:social_space_total_msq] * low_variance).to_i)
+  expect(@subject.get_social_spaces_data[:total_msq].to_i).to be_greater_than((@social_spaces_median_data[:total_msq] * low_variance).to_i)
 
-  expect(@subject.get_social_spaces_data[:social_space_total_msq].to_i).to be_less_than((@social_spaces_median_data[:social_space_total_msq] * high_variance).to_i)
+  expect(@subject.get_social_spaces_data[:total_msq].to_i).to be_less_than((@social_spaces_median_data[:total_msq] * high_variance).to_i)
 
-  expect(@subject.get_social_spaces_data[:social_space_size_msq].to_i).to be_greater_than((@social_spaces_median_data[:social_space_size_msq] * low_variance).to_i)
+  expect(@subject.get_social_spaces_data[:size_ea_msq].to_i).to be_greater_than((@social_spaces_median_data[:size_ea_msq] * low_variance).to_i)
 
-  expect(@subject.get_social_spaces_data[:social_space_size_msq].to_i).to be_less_than((@social_spaces_median_data[:social_space_size_msq] * high_variance).to_i)
+  expect(@subject.get_social_spaces_data[:size_ea_msq].to_i).to be_less_than((@social_spaces_median_data[:size_ea_msq] * high_variance).to_i)
 end
 
-When('I set get_random_variance_by_primary_economic_rating to {float} with get_green_spaces_data_as_text') do |float|
-  pending # Write code here that turns the phrase above into concrete actions
+When('I set get_random_variance_by_primary_economic_rating to 0.0 with get_green_spaces_data_as_text') do
+  @subject.green_spaces_variance_percent = 0.0
+  @green_spaces_text = @subject.get_green_spaces_data_as_text
 end
 
-Then('the description of Green Spaces should be {string}') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the description of Green Spaces should be {string}') do |expected_string|
+  expect(@green_spaces_text).to eq(expected_string)
 end
 
 When('I use get_green_spaces_data with set get_random_variance_by_primary_economic_rating fully randomized') do
