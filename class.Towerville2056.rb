@@ -29,9 +29,10 @@ class Towerville2056
     self.construction_rules[:people_per_home] = 3.5
 		self.construction_rules[:shops_per_person] = 7700.0/1906865.0 # Montreal 7700 retail stores for 1,906,865 people
 
-    self.construction_rules[:base_area_social_space_percent] = (3.0 / 70.0)
-    self.construction_rules[:social_spaces_count_by_floor_count] = (22.0 / 70.0)
-    self.construction_rules[:social_space_size_msq] = (12421.0 * 3  / 22).round(-1)
+    sixty_stories_single_floor_area = 14700
+    floor_count_per_sixty_stories   = 44
+    self.construction_rules[:base_area_social_space_fraction] = (sixty_stories_single_floor_area / floor_count_per_sixty_stories)
+    self.construction_rules[:social_space_size_msq] = self.construction_rules[:home_volume_in_m3] * 1.77
 
     self.economy_rules = {}
 		self.economy_rules[:worker_annual_salary_in_nafta] = 35000
@@ -46,27 +47,30 @@ class Towerville2056
 # ---
   def getSocialSpacesData
     socialSpacesData = {} if self.socialSpacesVariancePercent != -111
+    socialSpacesData.default = -1.1
 
-    change_modifier = 1 + self.construction_rules[:base_area_social_space_percent] + self.socialSpacesVariancePercent.percent
-
+    change_modifier = 1 + self.socialSpacesVariancePercent.percent
     puts "change_modifier => #{change_modifier}"
 
-    socialSpacesData[:number_of_spaces] = (self.construction_rules[:social_spaces_count_by_floor_count] * self.howManyFloors * change_modifier).round
-
-    socialSpacesData[:social_space_size_avg_msq] = (self.construction_rules[:social_space_size_msq] * change_modifier).round(-1)
-
-    socialSpacesData[:total_m_sq] = socialSpacesData[:social_space_size_avg_msq] * socialSpacesData[:number_of_spaces]
-
-    socialSpacesData[:floors_used] = (socialSpacesData[:total_m_sq] / self.getBuildingFootPrint[:sq]).to_f.round(1)
-
+    socialSpacesData[:social_space_total_msq] = change_modifier * self.construction_rules[:base_area_social_space_fraction] * self.howManyFloors
+    socialSpacesData[:social_space_size_msq] = change_modifier * self.construction_rules[:social_space_size_msq]
 
     return socialSpacesData
   end
 
 # ---
   def getSocialSpaces_as_Text
+    socialSpacesData = {}
     socialSpacesData = self.getSocialSpacesData
-    "socialSpacesData => #{socialSpacesData.inspect}"
+
+    socialSpacesData[:floors_used] = socialSpacesData[:social_space_total_msq] / self.getBuildingFootPrint[:sq]
+
+    socialSpacesData[:number_of_spaces] = socialSpacesData[:social_space_total_msq] / socialSpacesData[:social_space_size_msq]
+
+
+    #"#{socialSpacesData.inspect}"
+
+    "#{socialSpacesData[:number_of_spaces].round_to_nearest_5} or so #{socialSpacesData[:social_space_size_msq].round_to_nearest_5}m.sq spaces, totaling #{socialSpacesData[:social_space_total_msq].round_to_nearest_5}m.sq over #{socialSpacesData[:floors_used].round_up(0)} floors"
   end
 
 # ---
