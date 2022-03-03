@@ -1,39 +1,39 @@
 ---
-:PrimaryIndustry:
+:primary_industry:
   :dice_rule:  1.d8
   1:
-    summaryDesc : Primary Sector
-    broadDesc   :  Processing & Refining of externally extracted or harvested goods.  Ore, Minerals, Oils, Produce, Forest Products and the like are examples.
+    summary_desc : Primary Sector
+    broad_desc   :  Processing & Refining of externally extracted or harvested goods.  Ore, Minerals, Oils, Produce, Forest Products and the like are examples.
 
   2:
-    summaryDesc :  Secondary Sector
-    broadDesc   :  Processing & Construction using Primary Sector goods
+    summary_desc :  Secondary Sector
+    broad_desc   :  Processing & Construction using Primary Sector goods
 
   3:
-    summaryDesc:  Tertiary Sector
-    broadDesc:    "The service industry; Retail and Wholesale sales, Transportation and Distribution, Restaurants, Clerical Services, Media, Tourism, Insurance, Banking, Health Care, and Law"
+    summary_desc:  Tertiary Sector
+    broad_desc:    "The service industry; Retail and Wholesale sales, Transportation and Distribution, Restaurants, Clerical Services, Media, Tourism, Insurance, Banking, Health Care, and Law"
 
   4:
-    summaryDesc:  Tertiary Sector
-    broadDesc:    "The service industry; Retail and Wholesale sales, Transportation and Distribution, Restaurants, Clerical Services, Media, Tourism, Insurance, Banking, Health Care, and Law"
+    summary_desc:  Tertiary Sector
+    broad_desc:    "The service industry; Retail and Wholesale sales, Transportation and Distribution, Restaurants, Clerical Services, Media, Tourism, Insurance, Banking, Health Care, and Law"
 
   5:
-    summaryDesc:  Tertiary Sector
-    broadDesc:    "The service industry; Retail and Wholesale sales, Transportation and Distribution, Restaurants, Clerical Services, Media, Tourism, Insurance, Banking, Health Care, and Law"
+    summary_desc:  Tertiary Sector
+    broad_desc:    "The service industry; Retail and Wholesale sales, Transportation and Distribution, Restaurants, Clerical Services, Media, Tourism, Insurance, Banking, Health Care, and Law"
 
   6:
-    summaryDesc:  Quaternary Sector
-    broadDesc:    The knowledge economy. Activities associated with this sector include government, culture, libraries, scientific research, education, and information technology. These intellectual services drive technological advancement
+    summary_desc:  Quaternary Sector
+    broad_desc:    The knowledge economy. Activities associated with this sector include government, culture, libraries, scientific research, education, and information technology. These intellectual services drive technological advancement
 
   7:
-    summaryDesc:  Quinary Sector
-    broadDesc:    The highest levels of decision-making in a society or economy. This sector includes top executives or officials in such fields as government, science, universities, nonprofits, health care, culture, and the media. It also includes police and fire departments, when those are actually are public services
+    summary_desc:  Quinary Sector
+    broad_desc:    The highest levels of decision-making in a society or economy. This sector includes top executives or officials in such fields as government, science, universities, nonprofits, health care, culture, and the media. It also includes police and fire departments, when those are actually are public services
 
   8:
-    summaryDesc:  Split Decsion
-    broadDesc:    Roll twice again, ignoring repeats of this result.
+    summary_desc:  Split Decsion
+    broad_desc:    Roll twice again, ignoring repeats of this result.
 # - eot -
-:BuildingShape:
+:building_shape:
   :bottom:
     :dice_rule:  1.d6({ex:true})
     1:  Rectangle
@@ -95,7 +95,7 @@
   :supporting_info:
     pillar_blurb: “Pillars” are [roll:2d4+2] in number and [roll:1d4+1d6+1] stories tall, and leave 50% void space of the foot print.
 # - eot -
-:PrimaryEmployerScale:
+:primary_employer_scale:
   :dice_rule:  1.d6({ex:true})
   1:  Independent Workers Cooperative
   2:  City-Level Meta-Corp
@@ -113,7 +113,7 @@
   14: International-Level Neo-Corp
   15: Split Decsion - Roll twice again, ignoring repeats of this result.
 # - eot -
-:primaryEconomicRatingScale:
+:primary_economic_rating_scale:
   :dice_rule: 0.d0
   0:      Application Error
   270:    Collapsed / Ruined  !e

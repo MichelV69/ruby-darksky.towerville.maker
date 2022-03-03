@@ -19,12 +19,12 @@ I want to create a randomly generated TV for DarkSky
 
   Scenario Outline: Test Primary Industry Table
     Given that I have an instance of Towerville2056
-    When I provide a Number other than 8 to the getRandomPrimaryIndustry method
-    Then the array I am returned shoud include the rollIndex, the summaryDesc and the broadDesc
+    When I provide a Number other than 8 to the getRandomprimary_industry method
+    Then the array I am returned shoud include the rollIndex, the summary_desc and the broad_desc
 
   Scenario Outline: Test Random Primary Industry Getter
     Given that I have an instance of Towerville2056
-    Then the Base Class should respond to "getRandomPrimaryIndustry"
+    Then the Base Class should respond to "getRandomprimary_industry"
     And correctly set the Primary Industry
 
   Scenario Outline: Determine Number of Floors to Towerville
@@ -135,13 +135,13 @@ I want to create a randomly generated TV for DarkSky
 @WIP
   Scenario Outline: Provide other Details; Building Footprint
     Given a "5/6/78" Test-Build Towerville
-    When I use getBuildingFootPrint_as_Text
+    When I use get_building_foot_print_as_text
     Then the Building Footprint text should be "136.5m by 91.0m, totalling 12421.5m.sq"
 
 @WIP
  Scenario Outline: Provide other Details; How Many Social Spaces?
    Given a "5/6/78" Test-Build Towerville
-   When I set get_random_variance_by_primary_economic_rating to 0.0 with getSocialSpaces_as_Text
+   When I set get_random_variance_by_primary_economic_rating to 0.0 with get_social_spaces_data_as_text
    Then the description of Social Spaces should be "25 or so 1240m.sq spaces, totaling 26055m.sq over 3 floors"
 
 @WIP

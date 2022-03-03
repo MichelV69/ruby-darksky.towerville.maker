@@ -5,29 +5,29 @@ require_relative('../../class.ExternalRandom.rb')
 
 # ---
 
-When ('I provide a Number other than {int} to the getRandomPrimaryIndustry method') do |int|
+When ('I provide a Number other than {int} to the getRandomprimary_industry method') do |int|
   @testVar_TableSize = int -1
 end
 
-Then('the array I am returned shoud include the rollIndex, the summaryDesc and the broadDesc') do
-  primaryIndustryTable = @all_tables[:PrimaryIndustry]
+Then('the array I am returned shoud include the rollIndex, the summary_desc and the broad_desc') do
+  table_primary_industry = @all_tables[:primary_industry]
 
   1.upto(@testVar_TableSize) do | ptr |
 		puts "#{ptr}"
-		@subject.primaryIndustryIndex = ptr
-    @method_output = @subject.getPrimaryIndustry_as_text
+		@subject.primary_industry_index = ptr
+    @method_output = @subject.get_primary_industry_as_text
 
     fields = {}
-    fields[1] = primaryIndustryTable[ptr]["summaryDesc"]
-    fields[2] = primaryIndustryTable[ptr]["broadDesc"]
+    fields[1] = table_primary_industry[ptr]["summary_desc"]
+    fields[2] = table_primary_industry[ptr]["broad_desc"]
 
-    expect(@method_output["summaryDesc".to_sym]).to		eq(fields[1])
-    expect(@method_output["broadDesc".to_sym]).to  		eq(fields[2])
+    expect(@method_output["summary_desc".to_sym]).to		eq(fields[1])
+    expect(@method_output["broad_desc".to_sym]).to  		eq(fields[2])
   end
 end
 
-Then('the summaryDesc & broadDesc should contain {string}') do |string|
-  expect(@method_output["broadDesc".to_sym]).to    include(string)
+Then('the summary_desc & broad_desc should contain {string}') do |string|
+  expect(@method_output["broad_desc".to_sym]).to    include(string)
 end
 
 Then('the Base Class should respond to {string}') do |string|
@@ -35,8 +35,8 @@ Then('the Base Class should respond to {string}') do |string|
 end
 
 Then('correctly set the Primary Industry') do
-  @subject.primaryIndustryIndex = Towerville2056.getRandomPrimaryIndustryIndex()
-  expect(@subject.primaryIndustryIndex).not_to eq(-1)
+  @subject.primary_industry_index = Towerville2056.get_random_primary_industry_index()
+  expect(@subject.primary_industry_index).not_to eq(-1)
 end
 
 # --- end of file ---

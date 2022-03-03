@@ -5,13 +5,13 @@ require_relative('../../class.Towerville2056.rb')
 require_relative('../../class.ExternalRandom.rb')
 
 Given('a {string} Test-Build Towerville') do |build_config|
-  @subject.primaryIndustryIndex = build_config.split("/")[0].to_i
-  @subject.primaryEmployerScale = build_config.split("/")[1].to_i
-  @subject.howManyFloors = build_config.split("/")[2].to_i
+  @subject.primary_industry_index = build_config.split("/")[0].to_i
+  @subject.primary_employer_scale = build_config.split("/")[1].to_i
+  @subject.number_of_floors = build_config.split("/")[2].to_i
 end
 
 When('I use get_random_variance_by_primary_economic_rating') do
-  @subject.shopCountVariancePercent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.getPrimaryEconomicRating)
+  @subject.shop_count_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.get_primary_economic_rating)
 end
 
 Then('the number of shops should be around {int}') do |expectedShopCountEstimate|
@@ -25,22 +25,22 @@ Then('the number of shops should be around {int}') do |expectedShopCountEstimate
   highShopCount = expectedShopCountEstimate * maxShopCountModifierPercent
   lowShopCount  = expectedShopCountEstimate * minShopCountModifierPercent
 
-  expect(@subject.getShopCountEstimate).to be_greater_than(lowShopCount)
-  expect(@subject.getShopCountEstimate).to be_less_than(highShopCount)
+  expect(@subject.get_shop_count_estimate).to be_greater_than(lowShopCount)
+  expect(@subject.get_shop_count_estimate).to be_less_than(highShopCount)
 end
 
-When('I use getBuildingFootPrint_as_Text') do
-  @buildingFootPrintText = @subject.getBuildingFootPrint_as_Text
+When('I use get_building_foot_print_as_text') do
+  @buildingFootPrintText = @subject.get_building_foot_print_as_text
 end
 
 Then('the Building Footprint text should be {string}') do |expected_string|
   expect(@buildingFootPrintText).to eq(expected_string)
 end
 
-When('I set get_random_variance_by_primary_economic_rating to 0.0 with getSocialSpaces_as_Text') do
-  @subject.socialSpacesVariancePercent = 0.0
+When('I set get_random_variance_by_primary_economic_rating to 0.0 with get_social_spaces_data_as_text') do
+  @subject.social_spaces_variance_percent = 0.0
 
-  @socialSpacesText = @subject.getSocialSpaces_as_Text
+  @socialSpacesText = @subject.get_social_spaces_data_as_text
 end
 
 Then('the description of Social Spaces should be {string}') do |expected_string|
@@ -48,21 +48,21 @@ Then('the description of Social Spaces should be {string}') do |expected_string|
 end
 
 When('I use getSocialSpaces with set get_random_variance_by_primary_economic_rating fully randomized') do
-  @subject.socialSpacesVariancePercent = 0.0
-  @social_spaces_median_data = @subject.getSocialSpacesData
-  @subject.socialSpacesVariancePercent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.getPrimaryEconomicRating)
+  @subject.social_spaces_variance_percent = 0.0
+  @social_spaces_median_data = @subject.get_social_spaces_data
+  @subject.social_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.get_primary_economic_rating)
 end
 
 Then('the Social Spaces data should be reasonable') do
   low_variance  = 1.0 + @roll4d6[:min]
   high_variance = 1.0 + @roll4d6[:max]
 
-  expect(@subject.getSocialSpacesData[:social_space_total_msq].to_i).to be_greater_than((@social_spaces_median_data[:social_space_total_msq] * low_variance).to_i)
+  expect(@subject.get_social_spaces_data[:social_space_total_msq].to_i).to be_greater_than((@social_spaces_median_data[:social_space_total_msq] * low_variance).to_i)
 
-  expect(@subject.getSocialSpacesData[:social_space_total_msq].to_i).to be_less_than((@social_spaces_median_data[:social_space_total_msq] * high_variance).to_i)
+  expect(@subject.get_social_spaces_data[:social_space_total_msq].to_i).to be_less_than((@social_spaces_median_data[:social_space_total_msq] * high_variance).to_i)
 
-  expect(@subject.getSocialSpacesData[:social_space_size_msq].to_i).to be_greater_than((@social_spaces_median_data[:social_space_size_msq] * low_variance).to_i)
+  expect(@subject.get_social_spaces_data[:social_space_size_msq].to_i).to be_greater_than((@social_spaces_median_data[:social_space_size_msq] * low_variance).to_i)
 
-  expect(@subject.getSocialSpacesData[:social_space_size_msq].to_i).to be_less_than((@social_spaces_median_data[:social_space_size_msq] * high_variance).to_i)
+  expect(@subject.get_social_spaces_data[:social_space_size_msq].to_i).to be_less_than((@social_spaces_median_data[:social_space_size_msq] * high_variance).to_i)
 end
 # ---

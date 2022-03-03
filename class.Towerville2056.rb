@@ -7,20 +7,20 @@ class Towerville2056
 
   attr_accessor :tables_count,
     :construction_rules, :economy_rules,
-    :name, :howManyFloors, :buildingProfile,
-    :primaryIndustryIndex, :primaryEmployerScale,
-    :shopCountVariancePercent, :socialSpacesVariancePercent
+    :name, :number_of_floors, :building_profile,
+    :primary_industry_index, :primary_employer_scale,
+    :shop_count_variance_percent, :social_spaces_variance_percent
 
   def initialize(args = {})
     self.tables_count = TABLE_CONTENT_SETS.count
     self.name = "example"
-    self.primaryIndustryIndex = -1
-    self.howManyFloors = -1
-    self.buildingProfile = {:bottom => "unset", :middle => "unset",
+    self.primary_industry_index = -1
+    self.number_of_floors = -1
+    self.building_profile = {:bottom => "unset", :middle => "unset",
 			:crown => "unset", :crown_cap => "unset"}
-    self.primaryEmployerScale = -1
-    self.shopCountVariancePercent = -111
-    self.socialSpacesVariancePercent = -111
+    self.primary_employer_scale = -1
+    self.shop_count_variance_percent = -111
+    self.social_spaces_variance_percent = -111
 
 		self.construction_rules = {}
 		self.construction_rules[:story_height_in_m] = 3.5
@@ -39,124 +39,124 @@ class Towerville2056
   end
 
 # ---
-  def getSocialSpacesData
-    socialSpacesData = {} if self.socialSpacesVariancePercent != -111
-    socialSpacesData.default = -1.1
+  def get_social_spaces_data
+    social_spaces_data = {} if self.social_spaces_variance_percent != -111
+    social_spaces_data.default = -1.1
 
-    change_modifier = 1 + self.socialSpacesVariancePercent.percent
+    change_modifier = 1 + self.social_spaces_variance_percent.percent
 
-    socialSpacesData[:social_space_total_msq] = change_modifier * self.construction_rules[:base_area_social_space_fraction] * self.howManyFloors
-    socialSpacesData[:social_space_size_msq] = change_modifier * self.construction_rules[:social_space_size_msq]
+    social_spaces_data[:social_space_total_msq] = change_modifier * self.construction_rules[:base_area_social_space_fraction] * self.number_of_floors
+    social_spaces_data[:social_space_size_msq] = change_modifier * self.construction_rules[:social_space_size_msq]
 
-    return socialSpacesData
+    return social_spaces_data
   end
 
 # ---
-  def getSocialSpaces_as_Text
-    socialSpacesData = {}
-    socialSpacesData = self.getSocialSpacesData
+  def get_social_spaces_data_as_text
+    social_spaces_data = {}
+    social_spaces_data = self.get_social_spaces_data
 
-    socialSpacesData[:floors_used] = socialSpacesData[:social_space_total_msq] / self.getBuildingFootPrint[:sq]
+    social_spaces_data[:floors_used] = social_spaces_data[:social_space_total_msq] / self.get_building_foot_print[:sq]
 
-    socialSpacesData[:number_of_spaces] = socialSpacesData[:social_space_total_msq] / socialSpacesData[:social_space_size_msq]
+    social_spaces_data[:number_of_spaces] = social_spaces_data[:social_space_total_msq] / social_spaces_data[:social_space_size_msq]
 
-    "#{socialSpacesData[:number_of_spaces].round_to_nearest_5} or so #{socialSpacesData[:social_space_size_msq].round_to_nearest_5}m.sq spaces, totaling #{socialSpacesData[:social_space_total_msq].round_to_nearest_5}m.sq over #{socialSpacesData[:floors_used].round_up(0)} floors"
+    "#{social_spaces_data[:number_of_spaces].round_to_nearest_5} or so #{social_spaces_data[:social_space_size_msq].round_to_nearest_5}m.sq spaces, totaling #{social_spaces_data[:social_space_total_msq].round_to_nearest_5}m.sq over #{social_spaces_data[:floors_used].round_up(0)} floors"
   end
 
 # ---
-  def getBuildingFootPrint
+  def get_building_foot_print
     building_in_m = {}
-		building_in_m[:height]	= self.getBuildingHeight()
+		building_in_m[:height]	= self.get_building_height()
 		building_in_m[:width]		= building_in_m[:height].half.round(1)
 		building_in_m[:depth]		= building_in_m[:width].two_thirds.round(1)
     building_in_m[:sq]      = (building_in_m[:width] * building_in_m[:depth]).round(1)
     return building_in_m
   end
 # ---
-  def getBuildingFootPrint_as_Text
-    building_in_m = self.getBuildingFootPrint
+  def get_building_foot_print_as_text
+    building_in_m = self.get_building_foot_print
 
     "#{building_in_m[:width]}m by #{building_in_m[:depth]}m, totalling #{building_in_m[:sq]}m.sq"
   end
 
 # ---
-  def self.get_random_variance_by_primary_economic_rating(primaryEconomicRating)
-    dieMod = -14.0 + (primaryEconomicRating/500.0 - 9.0)
+  def self.get_random_variance_by_primary_economic_rating(primary_economic_rating)
+    dieMod = -14.0 + (primary_economic_rating/500.0 - 9.0)
     return (4.d6 + dieMod)
   end
 
 # ---
-  def getShopCountEstimate
-    ((self.getPopulationEstimate * self.construction_rules[:shops_per_person]) * (1.0 + self.shopCountVariancePercent.percent))
-    .round(0) if self.shopCountVariancePercent != -111
+  def get_shop_count_estimate
+    ((self.get_population_estimate * self.construction_rules[:shops_per_person]) * (1.0 + self.shop_count_variance_percent.percent))
+    .round(0) if self.shop_count_variance_percent != -111
   end
 
 # ---
-  def getPrimaryEconomicRating_as_Text()
+  def get_primary_economic_rating_as_text()
     per_text ="undefined"
 
-    primaryEconomicRatingTable = TABLE_CONTENT_SETS[:primaryEconomicRatingScale].select {|minimum_roll, desc| minimum_roll != :dice_rule}
+    table_primary_economic_rating = TABLE_CONTENT_SETS[:primary_economic_rating_scale].select {|minimum_roll, desc| minimum_roll != :dice_rule}
 
-    primaryEconomicRatingTable.each do |minimum_roll, desc|
-      per_text = desc if self.getPrimaryEconomicRating >= minimum_roll
+    table_primary_economic_rating.each do |minimum_roll, desc|
+      per_text = desc if self.get_primary_economic_rating >= minimum_roll
     end
     return per_text.gsub("!e", "economy").gsub("\w", "with")
   end
 
 # ---
-  def getPrimaryEconomicRating()
-    primaryEconomicRating = -1
-    unless (self.primaryIndustryIndex == -1 ||
-      self.howManyFloors == -1 ||
-      self.primaryEmployerScale == -1)
+  def get_primary_economic_rating()
+    primary_economic_rating = -1
+    unless (self.primary_industry_index == -1 ||
+      self.number_of_floors == -1 ||
+      self.primary_employer_scale == -1)
 
       spare_tv = Towerville2056.new
 
-      pii_value = self.primaryIndustryIndex
-      if self.primaryIndustryIndex.to_s.size == 2
-        first_industry = self.primaryEmployerScale % 10
-        second_industry = self.primaryEmployerScale / 10
+      pii_value = self.primary_industry_index
+      if self.primary_industry_index.to_s.size == 2
+        first_industry = self.primary_employer_scale % 10
+        second_industry = self.primary_employer_scale / 10
         pes_value = first_industry + second_industry
       end
 
-      pes_value = self.primaryEmployerScale
-      if self.primaryEmployerScale.to_s.size > 2
-        first_industry = self.primaryEmployerScale % 100
-        second_industry = self.primaryEmployerScale / 100
+      pes_value = self.primary_employer_scale
+      if self.primary_employer_scale.to_s.size > 2
+        first_industry = self.primary_employer_scale % 100
+        second_industry = self.primary_employer_scale / 100
         pes_value = first_industry + second_industry
       end
-      nohs_value = Math.sqrt(self.getNumberOfHomesEstimate).to_f.round
+      nohs_value = Math.sqrt(self.get_number_of_homes_estimate).to_f.round
 
       pii_pes_relevance_scalar = 4
-      primaryEconomicRating =  (pii_value + pes_value) * pii_pes_relevance_scalar + nohs_value
+      primary_economic_rating =  (pii_value + pes_value) * pii_pes_relevance_scalar + nohs_value
     end
 
     dbz_scalar =  9000.0/624.0 # 14.42
-    return (primaryEconomicRating > 0 ? (primaryEconomicRating * dbz_scalar).round : primaryEconomicRating)
+    return (primary_economic_rating > 0 ? (primary_economic_rating * dbz_scalar).round : primary_economic_rating)
   end
 
 # ---
-  def self.getRandomPrimaryEmployerScale()
-    max_value = TABLE_CONTENT_SETS[:PrimaryEmployerScale].last.first
-    roll_string = TABLE_CONTENT_SETS[:PrimaryEmployerScale][:dice_rule].gsub("}",", cap: #{max_value}}")
+  def self.get_random_primary_employer_scale()
+    max_value = TABLE_CONTENT_SETS[:primary_employer_scale].last.first
+    roll_string = TABLE_CONTENT_SETS[:primary_employer_scale][:dice_rule].gsub("}",", cap: #{max_value}}")
     return eval(roll_string)
   end
 
 # ---
-	def getprimaryEmployerScale_as_text
-    TABLE_CONTENT_SETS[:PrimaryEmployerScale][self.primaryEmployerScale] || "undefined"
+	def get_primary_employer_scale_as_text
+    TABLE_CONTENT_SETS[:primary_employer_scale][self.primary_employer_scale] || "undefined"
 	end
 
 # ---
-  def getPopulationEstimate()
-		estimated_population = self.getNumberOfHomesEstimate * self.construction_rules[:people_per_home]
+  def get_population_estimate()
+		estimated_population = self.get_number_of_homes_estimate * self.construction_rules[:people_per_home]
 
 		return estimated_population.round_up().to_i
   end
 
 	# ---
-	def getNumberOfHomesEstimate()
-		building_in_m = self.getBuildingFootPrint
+	def get_number_of_homes_estimate()
+		building_in_m = self.get_building_foot_print
 
 		functional_volume_in_m3	= building_in_m[:height] * building_in_m[:sq] * self.construction_rules[:efficiency_of_design]
 
@@ -166,12 +166,12 @@ class Towerville2056
 	end
 
   # ---
-  def getBuildingHeight()
-    return self.howManyFloors * self.construction_rules[:story_height_in_m]
+  def get_building_height()
+    return self.number_of_floors * self.construction_rules[:story_height_in_m]
   end
 
   # ---
-  def self.getRandomFloorCount(args = {})
+  def self.get_random_floor_count(args = {})
     tens = 4
     twentys = 2
     const = 20
@@ -183,54 +183,54 @@ class Towerville2056
   end
 
 	# ---
-  def self.getRandomBuildingProfile(section, args={})
-    tableColumn = "unset"
-    tableData = TABLE_CONTENT_SETS[:BuildingShape][section]
+  def self.get_random_building_profile(section, args={})
+    table_column = "unset"
+    table_data = TABLE_CONTENT_SETS[:building_shape][section]
 
 		cap_by_section = {}
 		cap_by_section[:bottom] = 18
 		cap_by_section[:middle] = 24
 		cap_by_section[:crown] = 12
 
-		tableColumn = {}
+		table_column = {}
 		unless section == :crown_cap
       unless ! args[:get_row_value].nil?
-        tableColumn = tableData[1.d6({ex: true, cap: cap_by_section[section]})]
+        table_column = table_data[1.d6({ex: true, cap: cap_by_section[section]})]
       else
-        tableColumn = tableData[args[:get_row_value]]
+        table_column = table_data[args[:get_row_value]]
       end
 		else
 			percent_lower_has_cap = 70
 			ptr_1 = 1.d100
 			unless ptr_1 <= percent_lower_has_cap
-				tableColumn = "(none)"
+				table_column = "(none)"
 			else
 				how_tall = 1.d4 + 1.d6
-				tableColumn = "The 'Crown' is capped with forest of RF antennas, microwave link dishes, aircraft warning lights, weather sensors, cameras, and even very short range anti-aircraft systems. Additionally, there will heavy cables, struts, hatches, ladders and scaffolding to allow access and maintenance to all that hardware.  The 'Crown Forest' unofficially increases the height of the building another #{how_tall} stories."
+				table_column = "The 'Crown' is capped with forest of RF antennas, microwave link dishes, aircraft warning lights, weather sensors, cameras, and even very short range anti-aircraft systems. Additionally, there will heavy cables, struts, hatches, ladders and scaffolding to allow access and maintenance to all that hardware.  The 'Crown Forest' unofficially increases the height of the building another #{how_tall} stories."
 			end
 		end
 
-    if tableColumn.downcase.include? "pillars"
-      text_to_insert = DiceStrings.parse TABLE_CONTENT_SETS[:BuildingShape][:supporting_info]["pillar_blurb"]
-      tableColumn = "#{tableColumn} (#{text_to_insert})"
+    if table_column.downcase.include? "pillars"
+      text_to_insert = DiceStrings.parse TABLE_CONTENT_SETS[:building_shape][:supporting_info]["pillar_blurb"]
+      table_column = "#{table_column} (#{text_to_insert})"
     end
 
-    return tableColumn
+    return table_column
   end
 
   # ---
-  def self.getRandomPrimaryIndustryIndex()
+  def self.get_random_primary_industry_index()
 		roll_result = 0
 
-		end_of_table = TABLE_CONTENT_SETS[:PrimaryIndustry].last.first
+		end_of_table = TABLE_CONTENT_SETS[:primary_industry].last.first
 		max_value = end_of_table
-    roll_string = TABLE_CONTENT_SETS[:PrimaryIndustry][:dice_rule].gsub("}",", cap: #{max_value}}")
+    roll_string = TABLE_CONTENT_SETS[:primary_industry][:dice_rule].gsub("}",", cap: #{max_value}}")
 
     roll_result =  eval(roll_string)
 		roll_result_10x = 0
     if roll_result == end_of_table then
 			max_value = end_of_table - 1
-			roll_string = TABLE_CONTENT_SETS[:PrimaryIndustry][:dice_rule].gsub("}",", cap: #{max_value}}")
+			roll_string = TABLE_CONTENT_SETS[:primary_industry][:dice_rule].gsub("}",", cap: #{max_value}}")
 
 			1.upto(2) do |pointer|
 				roll_result = 0
@@ -247,29 +247,29 @@ class Towerville2056
     return roll_result
   end
 
-  def getPrimaryIndustry_as_text()
-    # RandomPrimaryIndustryIndex
+  def get_primary_industry_as_text()
+    # Randomprimary_industry_index
     # each digit is a different Industry
     # 26 would be three industries, indexes of 2 & 6.
 
 		table_col_1 = ""
     table_col_2 = ""
-    primaryIndustryTable = TABLE_CONTENT_SETS[:PrimaryIndustry]
+    table_primary_industry = TABLE_CONTENT_SETS[:primary_industry]
 
-		0.upto(self.primaryIndustryIndex.to_s.length - 1) do |pi_ptr|
-			row_pointer = self.primaryIndustryIndex.to_s[pi_ptr].to_i
-			table_row = primaryIndustryTable[row_pointer]
+		0.upto(self.primary_industry_index.to_s.length - 1) do |pi_ptr|
+			row_pointer = self.primary_industry_index.to_s[pi_ptr].to_i
+			table_row = table_primary_industry[row_pointer]
 
 			if pi_ptr !=  0 then
 				table_col_1 = table_col_1 + " | "
 				table_col_2 = table_col_2 + " | "
 			end
 
-			table_col_1 = table_col_1 + table_row["summaryDesc"]
-      table_col_2 = table_col_2 + table_row["broadDesc"]
+			table_col_1 = table_col_1 + table_row["summary_desc"]
+      table_col_2 = table_col_2 + table_row["broad_desc"]
 		end # if index == 2
 
-    return {summaryDesc: table_col_1, broadDesc: table_col_2}
+    return {summary_desc: table_col_1, broad_desc: table_col_2}
   end # 1.upto
 
 end # class Towerville2056

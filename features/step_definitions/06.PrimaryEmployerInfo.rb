@@ -9,36 +9,36 @@ When('initialize has run') do
 end
 
 Then('Primary Employer Scale should be {int}') do |expect_value|
-  expect(@subject.primaryEmployerScale).to eq(expect_value)
+  expect(@subject.primary_employer_scale).to eq(expect_value)
 end
 
 Given('the Primary Industry has been generated') do
-  @subject.primaryIndustryIndex = Towerville2056::getRandomPrimaryIndustryIndex
-	p @subject.primaryIndustryIndex
+  @subject.primary_industry_index = Towerville2056::get_random_primary_industry_index
+	p @subject.primary_industry_index
 end
 
 When('I directly set the Primary Employer Scale') do
   @new_primary_employers_scale = 1
-	@subject.primaryEmployerScale = @new_primary_employers_scale
+	@subject.primary_employer_scale = @new_primary_employers_scale
 end
 
 Then('I should get the details for the Primary Employer Scale that I expect') do
-  @table_row_data = @all_tables[:PrimaryEmployerScale][@new_primary_employers_scale]
+  @table_row_data = @all_tables[:primary_employer_scale][@new_primary_employers_scale]
 
-  expect(@subject.getprimaryEmployerScale_as_text).to eq(@table_row_data)
+  expect(@subject.get_primary_employer_scale_as_text).to eq(@table_row_data)
 end
 
 When('I randomly set the Primary Employer Scale') do
-  @subject.primaryEmployerScale = Towerville2056::getRandomPrimaryEmployerScale()
+  @subject.primary_employer_scale = Towerville2056::get_random_primary_employer_scale()
 end
 
 Then('Primary Employer Scale should be valid') do
-  expect(@subject.primaryEmployerScale).to be_greater_than(0)
-  expect(@subject.primaryEmployerScale).to be_less_than(16)
+  expect(@subject.primary_employer_scale).to be_greater_than(0)
+  expect(@subject.primary_employer_scale).to be_less_than(16)
 end
 
 Then('I should get valid details for the Primary Employer Scale') do
-  expect(@subject.getprimaryEmployerScale_as_text).not_to eq("")
+  expect(@subject.get_primary_employer_scale_as_text).not_to eq("")
 end
 
 # --- end of file ---

@@ -17,9 +17,9 @@ Before do
 
   def object_post_intialize_expectations()
     expect(@subject.name).to eq("example")
-    expect(@subject.primaryIndustryIndex).to eq(-1)
-    expect(@subject.howManyFloors).to eq(-1)
-    expect(@subject.primaryEmployerScale).to eq(-1)
+    expect(@subject.primary_industry_index).to eq(-1)
+    expect(@subject.number_of_floors).to eq(-1)
+    expect(@subject.primary_employer_scale).to eq(-1)
   end
 end
 
@@ -40,11 +40,11 @@ Then('I should see the name {string}') do |new_building_name|
 end
 
 Given('that I set the Tower height to {int} stories') do |stories_tall|
-  @subject.howManyFloors = stories_tall
+  @subject.number_of_floors = stories_tall
 end
 
 Then('I should see a height in metres of {int}m') do |metres_tall|
-  expect(@subject.getBuildingHeight).to eq(metres_tall)
+  expect(@subject.get_building_height).to eq(metres_tall)
 end
 
 # --- end of file ---

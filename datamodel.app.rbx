@@ -28,14 +28,14 @@ puts "Finished result > '#{DiceStrings.parse example_string}'"
 
 puts title_line "height to housing check"
 tv = Towerville2056.new
-tv.howManyFloors = Towerville2056::getRandomFloorCount({force: :min})
-puts "min houses for #{tv.howManyFloors} is #{tv.getNumberOfHomesEstimate} w/ SQRT #{Math.sqrt(tv.getNumberOfHomesEstimate)}"
+tv.number_of_floors = Towerville2056::get_random_floor_count({force: :min})
+puts "min houses for #{tv.number_of_floors} is #{tv.get_number_of_homes_estimate} w/ SQRT #{Math.sqrt(tv.get_number_of_homes_estimate)}"
 
-tv.howManyFloors = Towerville2056::getRandomFloorCount({force: :avg})
-puts "avg houses for #{tv.howManyFloors} is #{tv.getNumberOfHomesEstimate} w/ SQRT #{Math.sqrt(tv.getNumberOfHomesEstimate)}"
+tv.number_of_floors = Towerville2056::get_random_floor_count({force: :avg})
+puts "avg houses for #{tv.number_of_floors} is #{tv.get_number_of_homes_estimate} w/ SQRT #{Math.sqrt(tv.get_number_of_homes_estimate)}"
 
-tv.howManyFloors = Towerville2056::getRandomFloorCount({force: :max})
-puts "max houses for #{tv.howManyFloors} is #{tv.getNumberOfHomesEstimate} w/ SQRT #{Math.sqrt(tv.getNumberOfHomesEstimate)}"
+tv.number_of_floors = Towerville2056::get_random_floor_count({force: :max})
+puts "max houses for #{tv.number_of_floors} is #{tv.get_number_of_homes_estimate} w/ SQRT #{Math.sqrt(tv.get_number_of_homes_estimate)}"
 
 puts title_line "Economic Scale Curve Test"
 stat_analysis = Hash.new
@@ -49,15 +49,15 @@ pes_tens = 0
 #0.upto(7) do |pii_tens|
   1.upto(7) do |pii_ones|
     putc "+"
-    primaryIndustryIndex = "#{pii_tens}#{pii_ones}".to_i
+    primary_industry_index = "#{pii_tens}#{pii_ones}".to_i
 #    0.upto(6) do |pes_tens|
       1.upto(6) do |pes_ones|
-        primaryEmployerScale = "#{pes_tens}#{pes_ones}".to_i
-        26.upto(100) do |howManyFloors|
-          tv.primaryIndustryIndex = primaryIndustryIndex
-          tv.primaryEmployerScale = primaryEmployerScale
-          tv.howManyFloors = howManyFloors
-          pER = tv.getPrimaryEconomicRating
+        primary_employer_scale = "#{pes_tens}#{pes_ones}".to_i
+        26.upto(100) do |number_of_floors|
+          tv.primary_industry_index = primary_industry_index
+          tv.primary_employer_scale = primary_employer_scale
+          tv.number_of_floors = number_of_floors
+          pER = tv.get_primary_economic_rating
           stat_analysis[pER].nil? ? stat_analysis[pER] = 1 : stat_analysis[pER] += 1
       end
     end
