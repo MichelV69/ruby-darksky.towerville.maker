@@ -49,4 +49,12 @@ end
 Then('the description of Social Spaces should be {string}') do |expected_string|
   expect(@socialSpacesText).to eq(expected_string)
 end
+
+When('I use getSocialSpaces with set getRandomSocialSpacesVariancePercent fully randomized') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('the Social Spaces data should be reasonable') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
 # ---
