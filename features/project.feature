@@ -142,7 +142,7 @@ I want to create a randomly generated TV for DarkSky
  Scenario Outline: Provide other Details; How Many Social Spaces?
    Given a "5/6/78" Test-Build Towerville
    When I set getRandomSocialSpacesVariancePercent to 0.0 with getSocialSpaces_as_Text
-   Then the description of Social Spaces should be "22 or so 1400m.sq spaces, totaling 28000m.sq over 2 floors"
+   Then the description of Social Spaces should be "25 or so 1240m.sq spaces, totaling 26055m.sq over 3 floors"
 
 # @WIP
 #   Scenario Outline: Provide other Details; How Many Green Spaces?
