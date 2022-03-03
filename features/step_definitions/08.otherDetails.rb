@@ -47,7 +47,7 @@ Then('the description of Social Spaces should be {string}') do |expected_string|
   expect(@socialSpacesText).to eq(expected_string)
 end
 
-When('I use getSocialSpaces with set get_random_variance_by_primary_economic_rating fully randomized') do
+When('I use get_social_spaces with set get_random_variance_by_primary_economic_rating fully randomized') do
   @subject.social_spaces_variance_percent = 0.0
   @social_spaces_median_data = @subject.get_social_spaces_data
   @subject.social_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.get_primary_economic_rating)
@@ -65,4 +65,21 @@ Then('the Social Spaces data should be reasonable') do
 
   expect(@subject.get_social_spaces_data[:social_space_size_msq].to_i).to be_less_than((@social_spaces_median_data[:social_space_size_msq] * high_variance).to_i)
 end
+
+When('I set get_random_variance_by_primary_economic_rating to {float} with get_green_spaces_data_as_text') do |float|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('the description of Green Spaces should be {string}') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When('I use get_green_spaces_data with set get_random_variance_by_primary_economic_rating fully randomized') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('the Green Spaces data should be reasonable') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
 # ---
