@@ -136,6 +136,12 @@ class	Float
 		self.floor(bar)
 	end
 
+  def round_to_nearest_5
+    return self if self % 5 == 0
+    rounded = self.round(-1)
+    rounded > self ? rounded : rounded + 5
+  end
+
   def percent
     self / 100.0000
   end # def percent
