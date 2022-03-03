@@ -8,12 +8,10 @@ Given('a {string} Test-Build Towerville') do |build_config|
   @subject.primaryIndustryIndex = build_config.split("/")[0].to_i
   @subject.primaryEmployerScale = build_config.split("/")[1].to_i
   @subject.howManyFloors = build_config.split("/")[2].to_i
-  puts "Number of Homes:  #{@subject.getNumberOfHomesEstimate}"
 end
 
 When('I use getRandomShopCountVariancePercent') do
   @subject.shopCountVariancePercent = Towerville2056.getRandomShopCountVariancePercent(@subject.getPrimaryEconomicRating)
-  puts @subject.shopCountVariancePercent
 end
 
 Then('the number of shops should be around {int}') do |expectedShopCountEstimate|
@@ -31,7 +29,6 @@ Then('the number of shops should be around {int}') do |expectedShopCountEstimate
 
   expect(@subject.getShopCountEstimate).to be_greater_than(lowShopCount)
   expect(@subject.getShopCountEstimate).to be_less_than(highShopCount)
-  puts @subject.getShopCountEstimate
 end
 
 When('I use getBuildingFootPrint_as_Text') do
@@ -45,7 +42,6 @@ end
 When('I set getRandomSocialSpacesVariancePercent to 0.0 with getSocialSpaces_as_Text') do
   #@subject.socialSpacesVariancePercent = Towerville2056.getRandomSocialSpacesVariancePercent(@subject.getPrimaryEconomicRating)
   @subject.socialSpacesVariancePercent = 0.0
-  puts @subject.socialSpacesVariancePercent
 
   @socialSpacesText = @subject.getSocialSpaces_as_Text
 end
