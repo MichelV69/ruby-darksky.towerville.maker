@@ -39,12 +39,6 @@ class Towerville2056
   end
 
 # ---
-  def self.getRandomSocialSpacesVariancePercent(primaryEconomicRating)
-    dieMod = -14.0 + (primaryEconomicRating/500.0 - 9.0)
-    return (4.d6 + dieMod)
-  end
-
-# ---
   def getSocialSpacesData
     socialSpacesData = {} if self.socialSpacesVariancePercent != -111
     socialSpacesData.default = -1.1
@@ -86,7 +80,7 @@ class Towerville2056
   end
 
 # ---
-  def self.getRandomShopCountVariancePercent(primaryEconomicRating)
+  def self.get_random_variance_by_primary_economic_rating(primaryEconomicRating)
     dieMod = -14.0 + (primaryEconomicRating/500.0 - 9.0)
     return (4.d6 + dieMod)
   end

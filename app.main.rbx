@@ -23,7 +23,7 @@ tv.buildingProfile[:crown] = Towerville2056.getRandomBuildingProfile(:crown)
 tv.buildingProfile[:crown_cap] = Towerville2056.getRandomBuildingProfile(:crown_cap)
 
 tv.primaryEmployerScale = Towerville2056::getRandomPrimaryEmployerScale()
-tv.shopCountVariancePercent = Towerville2056::getRandomShopCountVariancePercent(tv.primaryIndustryIndex)
+tv.shopCountVariancePercent = Towerville2056::get_random_variance_by_primary_economic_rating(tv.primaryIndustryIndex)
 
 space_bar = spaces(tv.name.length)
 puts "\n\n ----- \n #{tv.name} :: #{tv.getPrimaryIndustry_as_text[:summaryDesc]} (#{tv.getPrimaryIndustry_as_text[:broadDesc]})"

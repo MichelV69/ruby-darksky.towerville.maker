@@ -129,7 +129,7 @@ I want to create a randomly generated TV for DarkSky
 
   Scenario Outline: Provide other Details; How Many Shops?
     Given a "5/6/78" Test-Build Towerville
-    When I use getRandomShopCountVariancePercent
+    When I use get_random_variance_by_primary_economic_rating
     Then the number of shops should be around 50
 
 @WIP
@@ -141,13 +141,13 @@ I want to create a randomly generated TV for DarkSky
 @WIP
  Scenario Outline: Provide other Details; How Many Social Spaces?
    Given a "5/6/78" Test-Build Towerville
-   When I set getRandomSocialSpacesVariancePercent to 0.0 with getSocialSpaces_as_Text
+   When I set get_random_variance_by_primary_economic_rating to 0.0 with getSocialSpaces_as_Text
    Then the description of Social Spaces should be "25 or so 1240m.sq spaces, totaling 26055m.sq over 3 floors"
 
 @WIP
   Scenario Outline: Provide other Details; How Many Social Spaces?
     Given a "5/6/78" Test-Build Towerville
-    When I use getSocialSpaces with set getRandomSocialSpacesVariancePercent fully randomized
+    When I use getSocialSpaces with set get_random_variance_by_primary_economic_rating fully randomized
     Then the Social Spaces data should be reasonable
 
 # @WIP

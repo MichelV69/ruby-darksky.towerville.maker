@@ -10,8 +10,8 @@ Given('a {string} Test-Build Towerville') do |build_config|
   @subject.howManyFloors = build_config.split("/")[2].to_i
 end
 
-When('I use getRandomShopCountVariancePercent') do
-  @subject.shopCountVariancePercent = Towerville2056.getRandomShopCountVariancePercent(@subject.getPrimaryEconomicRating)
+When('I use get_random_variance_by_primary_economic_rating') do
+  @subject.shopCountVariancePercent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.getPrimaryEconomicRating)
 end
 
 Then('the number of shops should be around {int}') do |expectedShopCountEstimate|
@@ -37,7 +37,7 @@ Then('the Building Footprint text should be {string}') do |expected_string|
   expect(@buildingFootPrintText).to eq(expected_string)
 end
 
-When('I set getRandomSocialSpacesVariancePercent to 0.0 with getSocialSpaces_as_Text') do
+When('I set get_random_variance_by_primary_economic_rating to 0.0 with getSocialSpaces_as_Text') do
   @subject.socialSpacesVariancePercent = 0.0
 
   @socialSpacesText = @subject.getSocialSpaces_as_Text
@@ -47,10 +47,10 @@ Then('the description of Social Spaces should be {string}') do |expected_string|
   expect(@socialSpacesText).to eq(expected_string)
 end
 
-When('I use getSocialSpaces with set getRandomSocialSpacesVariancePercent fully randomized') do
+When('I use getSocialSpaces with set get_random_variance_by_primary_economic_rating fully randomized') do
   @subject.socialSpacesVariancePercent = 0.0
   @social_spaces_median_data = @subject.getSocialSpacesData
-  @subject.socialSpacesVariancePercent = Towerville2056.getRandomSocialSpacesVariancePercent(@subject.getPrimaryEconomicRating)
+  @subject.socialSpacesVariancePercent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.getPrimaryEconomicRating)
 end
 
 Then('the Social Spaces data should be reasonable') do
