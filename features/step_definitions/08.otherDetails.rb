@@ -75,11 +75,22 @@ Then('the description of Green Spaces should be {string}') do |expected_string|
 end
 
 When('I use get_green_spaces_data with set get_random_variance_by_primary_economic_rating fully randomized') do
-  pending # Write code here that turns the phrase above into concrete actions
+  @subject.green_spaces_variance_percent = 0.0
+  @green_spaces_median_data = @subject.get_social_spaces_data
+  @subject.green_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.get_primary_economic_rating)
 end
 
 Then('the Green Spaces data should be reasonable') do
-  pending # Write code here that turns the phrase above into concrete actions
+  low_variance  = 1.0 + @roll4d6[:min]
+  high_variance = 1.0 + @roll4d6[:max]
+
+  expect(@subject.get_green_spaces_data[:total_msq].to_i).to be_greater_than((@green_spaces_median_data[:total_msq] * low_variance).to_i)
+
+  expect(@subject.get_green_spaces_data[:total_msq].to_i).to be_less_than((@green_spaces_median_data[:total_msq] * high_variance).to_i)
+
+  expect(@subject.get_green_spaces_data[:size_ea_msq].to_i).to be_greater_than((@green_spaces_median_data[:size_ea_msq] * low_variance).to_i)
+
+  expect(@subject.get_green_spaces_data[:size_ea_msq].to_i).to be_less_than((@green_spaces_median_data[:size_ea_msq] * high_variance).to_i)
 end
 
 # ---
