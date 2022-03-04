@@ -42,17 +42,13 @@ puts " #{space_bar} :: 'Crown Forest': #{tv.building_profile[:crown_cap]} "
 puts "\n #{tv.name} :: # of Floors: #{tv.number_of_floors}"
 puts " #{space_bar} :: Height: #{tv.get_building_height} meters tall"
 puts " #{space_bar} :: Ground area footprint: #{tv.get_building_foot_print_as_text}"
-puts " #{space_bar} :: # of Homes : #{tv.get_number_of_homes_estimate}"
-puts " #{space_bar} :: # of People : #{tv.get_population_estimate}"
+puts " #{space_bar} :: # of Homes : #{tv.get_number_of_homes_estimate.to_s_formated}"
+puts " #{space_bar} :: # of People : #{tv.get_population_estimate.to_s_formated}"
 
 puts "\n #{tv.name} :: Relative Economic Status : #{tv.get_primary_economic_rating } : #{tv.get_primary_economic_rating_as_text}"
-<<<<<<< HEAD
-puts " #{space_bar} :: Approximate # of shops : #{tv.get_shop_count_estimate}"
-=======
 puts " #{space_bar} :: Approximate # of shops: #{tv.get_shop_count_estimate}"
 puts " #{space_bar} :: Approximate # of social spaces : #{tv.get_social_spaces_data_as_text}"
-puts " #{space_bar} :: Approximate # of green spaces : #{tv.get_social_spaces_data_as_text}"
+puts " #{space_bar} :: Approximate # of green spaces : #{tv.get_green_spaces_data_as_text}"
 
 puts "\n\n  #{space_bar}"
->>>>>>> 6312845 (Update main app to take advantage of the newest two features.)
 # --- ---

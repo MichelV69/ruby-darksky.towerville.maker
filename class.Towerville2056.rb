@@ -1,5 +1,6 @@
 # --- # ---
 require('psych')
+require_relative('lib.wolfstar_studios.rb')
 
 class Towerville2056
   TABLE_FILENAME = "tables.randomTowerville.yaml"
@@ -75,7 +76,7 @@ class Towerville2056
 
     green_spaces_data[:number_of_spaces] = green_spaces_data[:total_msq] / green_spaces_data[:size_ea_msq]
 
-    "#{green_spaces_data[:number_of_spaces].round} or so #{green_spaces_data[:size_ea_msq].round_to_nearest_5}m.sq spaces, totaling #{green_spaces_data[:total_msq].round_to_nearest_5}m.sq over #{green_spaces_data[:floors_used].round_up(0)} floors"
+    "#{green_spaces_data[:number_of_spaces].round} or so #{green_spaces_data[:size_ea_msq].round_to_nearest_5.to_s_formated}m.sq spaces, totaling #{green_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{green_spaces_data[:floors_used].round_up(0)} floors"
   end
 
 # ---
@@ -100,7 +101,7 @@ class Towerville2056
 
     social_spaces_data[:number_of_spaces] = social_spaces_data[:total_msq] / social_spaces_data[:size_ea_msq]
 
-    "#{social_spaces_data[:number_of_spaces].round_to_nearest_5} or so #{social_spaces_data[:size_ea_msq].round_to_nearest_5}m.sq spaces, totaling #{social_spaces_data[:total_msq].round_to_nearest_5}m.sq over #{social_spaces_data[:floors_used].round_up(0)} floors"
+    "#{social_spaces_data[:number_of_spaces].round_to_nearest_5.to_s_formated} or so #{social_spaces_data[:size_ea_msq].round_to_nearest_5}m.sq spaces, totaling #{social_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{social_spaces_data[:floors_used].round_up(0)} floors"
   end
 
 # ---
@@ -116,7 +117,7 @@ class Towerville2056
   def get_building_foot_print_as_text
     building_in_m = self.get_building_foot_print
 
-    "#{building_in_m[:width]}m by #{building_in_m[:depth]}m, totalling #{building_in_m[:sq]}m.sq"
+    "#{building_in_m[:width]}m by #{building_in_m[:depth]}m, totalling #{building_in_m[:sq].round_to_nearest_5.to_s_formated}m.sq"
   end
 
 # ---
