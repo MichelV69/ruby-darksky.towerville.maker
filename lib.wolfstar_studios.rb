@@ -116,6 +116,10 @@ class Integer
   def greater_than?(test)
     self > test
   end
+
+  def to_s_formated(spacer = ' ')
+    self.to_s.gsub(/\B(?=(...)*\b)/, spacer)
+  end
 end
 
 # --- # ---
@@ -145,6 +149,10 @@ class	Float
   def percent
     self / 100.0000
   end # def percent
+
+  def to_s_formated(spacer = ' ')
+    self.to_s.gsub(/\B(?=(...)*\b)/, spacer)
+  end
 end
 
 # --- # ---
