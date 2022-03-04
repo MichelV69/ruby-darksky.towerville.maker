@@ -28,12 +28,12 @@ class Towerville2056
     social_floor_count_per_sixty_stories  = 44
     sixty_stories_single_floor_area = 14700
     arbitrary_house_to_social_ratio = 1.77
-    arbitrary_social_to_green_ratio = 2.20
+    arbitrary_social_to_green_ratio = 1.0 / 1.67
 
     self.construction_rules[:base_area_social_space_fraction] = (sixty_stories_single_floor_area / social_floor_count_per_sixty_stories)
     self.construction_rules[:social_space_size_ea_msq] = self.construction_rules[:home_volume_in_m3] * arbitrary_house_to_social_ratio
 
-    self.construction_rules[:base_area_green_space_fraction] = self.construction_rules[:base_area_social_space_fraction] / arbitrary_social_to_green_ratio
+    self.construction_rules[:base_area_green_space_fraction] = self.construction_rules[:base_area_social_space_fraction] * arbitrary_social_to_green_ratio
     self.construction_rules[:green_space_size_ea_msq] = self.construction_rules[:social_space_size_ea_msq] * arbitrary_house_to_social_ratio
 
     # ---
@@ -75,7 +75,7 @@ class Towerville2056
 
     green_spaces_data[:number_of_spaces] = green_spaces_data[:total_msq] / green_spaces_data[:size_ea_msq]
 
-    "#{green_spaces_data[:number_of_spaces].round_to_nearest_5} or so #{green_spaces_data[:size_ea_msq].round_to_nearest_5}m.sq spaces, totaling #{green_spaces_data[:total_msq].round_to_nearest_5}m.sq over #{green_spaces_data[:floors_used].round_up(0)} floors"
+    "#{green_spaces_data[:number_of_spaces].round} or so #{green_spaces_data[:size_ea_msq].round_to_nearest_5}m.sq spaces, totaling #{green_spaces_data[:total_msq].round_to_nearest_5}m.sq over #{green_spaces_data[:floors_used].round_up(0)} floors"
   end
 
 # ---
