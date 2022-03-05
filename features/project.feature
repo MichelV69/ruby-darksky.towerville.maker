@@ -141,7 +141,7 @@ I want to create a randomly generated TV for DarkSky
  Scenario Outline: Provide other Details; How Many Social Spaces?
    Given a "5/6/78" Test-Build Towerville
    When I set get_random_variance_by_primary_economic_rating to 0.0 with get_social_spaces_data_as_text
-   Then the description of Social Spaces should be "25 or so 1240m.sq spaces, totaling 26055m.sq over 3 floors"
+   Then the description of Social Spaces should be "25 or so 1240m.sq spaces, totalling 26055m.sq over 3 floors"
 
 @WIP
   Scenario Outline: Provide other Details; How Many Social Spaces?
@@ -153,7 +153,7 @@ I want to create a randomly generated TV for DarkSky
  Scenario Outline: Provide other Details; How Many Green Spaces?
    Given a "5/6/78" Test-Build Towerville
    When I set get_random_variance_by_primary_economic_rating to 0.0 with get_green_spaces_data_as_text
-   Then the description of Green Spaces should be "7 or so 2195m.sq spaces, totaling 15605m.sq over 4 floors"
+   Then the description of Green Spaces should be "7 or so 2195m.sq spaces, totalling 15605m.sq over 4 floors"
 
 @WIP
   Scenario Outline: Provide other Details; How Many Green Spaces?
