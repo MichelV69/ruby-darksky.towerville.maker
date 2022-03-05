@@ -4,15 +4,17 @@
 [_metadata_:project_start_date]:- "01 Dec 2021 - Afternoon"
 [_metadata_:tags]:- "ttrpg ruby markdown"
 
-[_metadata_:version]:- "1.0.0"
-[_metadata_:last_change_date]:- "01 Dec 2021 @ 14h00"
+[_metadata_:version]:- "1.1.0"
+[_metadata_:last_change_date]:- "05 Mar 2022 @ 08h55ADT"
 
 
-#Project Purpose#
+Project Purpose
+---------------
 
 Project intends to develop a simple to use random roller that will build "Towervilles" based on the "Dark Sky - Dark Future" rules for Open Legend.
 
-##What It Does##
+What It Does
+============
 
   * Performs a series of API calls to random.org to simulate various die rolls.
   * Uses rules from "Dark Sky - Dark Future" in code as well as YAML-formated look-up tables to determine roll results.
@@ -24,7 +26,8 @@ Project intends to develop a simple to use random roller that will build "Towerv
     + Population
     + Key economic data
 
-##How To Use##
+How To Use
+==========
 
  * Clone or Unpack the source into a directory on the working machine.
  * Switch to that directory.
@@ -32,7 +35,8 @@ Project intends to develop a simple to use random roller that will build "Towerv
 
 `ruby ./app.main.rbx`
 
-##Example Output##
+Example Output
+==============
 
     Example Tower :: # of Floors: 68
                   :: Height: 238.0 meters tall
@@ -63,7 +67,8 @@ Project intends to develop a simple to use random roller that will build "Towerv
                   :: primary Employer Scale: 2: City-Level Meta-Corp
                   :: Relative Economic Status : 1197 : Healthy economy, with/ noticeable City influence
 
-#Future Plans#
+Future Plans
+------------
 
 * Add glossary-style footnotes to output.
 * Batch-build mode.
