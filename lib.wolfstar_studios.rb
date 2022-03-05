@@ -301,4 +301,27 @@ def spaces(number_of = 4)
   number_of.times do spaces = spaces + " " end
   return spaces
 end
+
+# ---
+def word_wrap_this(text, args={})
+  page_width = 80
+  page_width = args[:at] unless args[:at].nil?
+  column = 0
+  default_margin = (page_width * 0.1).round_up(0)
+
+  while column + page_width < text.size
+    search_from = column + page_width - default_margin
+    found_at = text.slice(search_from, default_margin).index(" ")
+    while found_at.nil?
+      search_from -= 2
+      found_at = text.slice(search_from, default_margin).index(' ')
+      stop if search_from < 1
+    end
+    column_break = search_from + found_at
+    puts "#{text.slice(column, column_break - column)}"
+    column = column_break
+  end
+  puts "#{text.slice(column, text.size - column)}"
+end
+
 # --- end of file ---
