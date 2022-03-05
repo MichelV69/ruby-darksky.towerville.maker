@@ -101,7 +101,7 @@ class Towerville2056
 
     social_spaces_data[:number_of_spaces] = social_spaces_data[:total_msq] / social_spaces_data[:size_ea_msq]
 
-    "#{social_spaces_data[:number_of_spaces].round_to_nearest_5.to_s_formated} or so #{social_spaces_data[:size_ea_msq].round_to_nearest_5}m.sq spaces, totaling #{social_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{social_spaces_data[:floors_used].round_up(0)} floors"
+    "#{social_spaces_data[:number_of_spaces].round_to_nearest_5} or so #{social_spaces_data[:size_ea_msq].round_to_nearest_5.to_s_formated}m.sq spaces, totaling #{social_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{social_spaces_data[:floors_used].round_up(0)} floors"
   end
 
 # ---

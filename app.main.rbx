@@ -29,15 +29,17 @@ tv.social_spaces_variance_percent = Towerville2056.get_random_variance_by_primar
 
 tv.green_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(tv.get_primary_economic_rating)
 
-
 space_bar = spaces(tv.name.length)
-puts "\n\n ----- \n #{tv.name} :: #{tv.get_primary_industry_as_text[:summary_desc]} (#{tv.get_primary_industry_as_text[:broad_desc]})"
+puts "\n\n ----- \n #{tv.name} :: #{tv.get_primary_industry_as_text[:summary_desc]}"
+word_wrap_this tv.get_primary_industry_as_text[:broad_desc]
+
 puts " #{space_bar} :: primary Employer Scale: #{tv.primary_employer_scale}: #{tv.get_primary_employer_scale_as_text} "
 
 puts "\n #{tv.name} :: Bottom section: #{tv.building_profile[:bottom]} "
 puts " #{space_bar} :: Middle section: #{tv.building_profile[:middle]} "
 puts " #{space_bar} :: Crown section: #{tv.building_profile[:crown]} "
-puts " #{space_bar} :: 'Crown Forest': #{tv.building_profile[:crown_cap]} "
+puts " #{space_bar} :: 'Crown Forest': "
+word_wrap_this tv.building_profile[:crown_cap]
 
 puts "\n #{tv.name} :: # of Floors: #{tv.number_of_floors}"
 puts " #{space_bar} :: Height: #{tv.get_building_height} meters tall"
