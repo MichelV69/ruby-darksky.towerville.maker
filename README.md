@@ -26,6 +26,20 @@ What It Does
     + Population
     + Key economic data
 
+### Pending Specification Changes
+
+ * Building shape / form-factor should be changed from 3 to 5 sections
+    + Basement is +5% of total height
+    + Ground is 1/8th total height, max 11.
+    + Ground to F22.
+    + Above F22
+    + Above 2/3 total height.
+    + Crown is last 10%
+
+  * Building shape / form-factor descriptions should be listed "sky to ground", which is the inverse of how they are currently listed.
+
+  * Add glossary-style footnotes to output such that repetitive large descriptions are taken out of main "stat block".
+
 How To Use
 ==========
 
@@ -70,7 +84,6 @@ Example Output
 Future Plans
 ------------
 
-* Add glossary-style footnotes to output.
 * Batch-build mode.
 * Command-line key arguments for building configuration.
 * Add HTML generation for inclusion in webpage.
