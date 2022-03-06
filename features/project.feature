@@ -33,23 +33,57 @@ I want to create a randomly generated TV for DarkSky
     Then the building floor count should be set
     And should be within a valid range
 
-  Scenario Outline: Determine Building Profile for the "Bottom" section of Towerville
+@WIP
+  Scenario Outline: Determine Building Profile for the "basement" section of Towerville
     Given that I have an instance of Towerville2056
-    When I request a random Building Profile for the "Bottom" section
-    Then Building Profile - "Bottom" should be set
+    And the building is 78 stories tall
+    When I request a random Building Profile for the "basement" section
+    Then Building Profile - "basement" should be set
+    And should be 5% of building height
 
-	Scenario Outline: Determine Building Profile for the "Middle" section of Towerville
+@WIP
+	Scenario Outline: Determine Building Profile for the "ground_floors" section of Towerville
     Given that I have an instance of Towerville2056
-    When I request a random Building Profile for the "Middle" section
-    Then Building Profile - "Middle" should be set
+    When I request a random Building Profile for the "ground_floors" section
+    Then Building Profile - "ground_floors" should be set
+    And should be 12% of the building height, but less than 12 floors
 
-	Scenario Outline: Determine Building Profile for the "Crown" section of Towerville
+@WIP
+  Scenario Outline: Determine Building Profile for the "ground_to_f22" section of Towerville
     Given that I have an instance of Towerville2056
-    When I request a random Building Profile for the "Crown" section
-    Then Building Profile - "Crown" should be set
+    And the building is 78 stories tall
+    When I request a random Building Profile for the "ground_to_f22" section
+    Then Building Profile - "ground_to_f22" should be set
+    And shoud be higher than "ground_floors" but less than 22 floors
 
+@WIP
+  Scenario Outline: Determine Building Profile for the "f22_to_bottom_mid" section of Towerville
+    Given that I have an instance of Towerville2056
+    And the building is 78 stories tall
+    When I request a random Building Profile for the "f22_to_bottom_mid" section
+    Then Building Profile - "f22_to_bottom_mid" should be set
+    And should be higher than 22 floors, but less than "bottom_mid_to_top_mid"
+
+@WIP
+  Scenario Outline: Determine Building Profile for the "bottom_mid_to_crown" section of Towerville
+    Given that I have an instance of Towerville2056
+    And the building is 78 stories tall
+    When I request a random Building Profile for the "bottom_mid_to_crown" section
+    Then Building Profile - "bottom_mid_to_crown" should be set
+    And should be higher than "f22_to_bottom_mid" but less than "crown"
+
+@WIP
+	Scenario Outline: Determine Building Profile for the "crown" section of Towerville
+    Given that I have an instance of Towerville2056
+    And the building is 78 stories tall
+    When I request a random Building Profile for the "crown" section
+    Then Building Profile - "crown" should be set
+    And should be 10% of the building height
+
+@WIP
 	Scenario Outline: Determine Building Profile for the "Crown Cap" section of Towerville
     Given that I have an instance of Towerville2056
+    And the building is 78 stories tall
     When I request a random Building Profile for the "Crown Cap" section
     Then Building Profile - "Crown Cap" should be set
 
@@ -137,25 +171,21 @@ I want to create a randomly generated TV for DarkSky
     When I use get_building_foot_print_as_text
     Then the Building Footprint text should be "136.5m by 91.0m, totalling 12421.5m.sq"
 
-@WIP
  Scenario Outline: Provide other Details; How Many Social Spaces?
    Given a "5/6/78" Test-Build Towerville
    When I set get_random_variance_by_primary_economic_rating to 0.0 with get_social_spaces_data_as_text
    Then the description of Social Spaces should be "25 or so 1240m.sq spaces, totalling 26055m.sq over 3 floors"
 
-@WIP
   Scenario Outline: Provide other Details; How Many Social Spaces?
     Given a "5/6/78" Test-Build Towerville
     When I use get_social_spaces with set get_random_variance_by_primary_economic_rating fully randomized
     Then the Social Spaces data should be reasonable
 
-@WIP
  Scenario Outline: Provide other Details; How Many Green Spaces?
    Given a "5/6/78" Test-Build Towerville
    When I set get_random_variance_by_primary_economic_rating to 0.0 with get_green_spaces_data_as_text
    Then the description of Green Spaces should be "7 or so 2195m.sq spaces, totalling 15605m.sq over 4 floors"
 
-@WIP
   Scenario Outline: Provide other Details; How Many Green Spaces?
     Given a "5/6/78" Test-Build Towerville
     When I use get_green_spaces_data with set get_random_variance_by_primary_economic_rating fully randomized

@@ -32,6 +32,19 @@ Then('Building Profile - {string} should be set') do |string|
   expect(@subject.building_profile[building_profile_section]).not_to eq("")
 end
 
+
+Given('the building is {int} stories tall') do |stories_tall|
+  @subject.number_of_floors = stories_tall
+end
+
+Then('should be {int}% of building height') do |building_height|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('should be {int}% of the building height, but less than {int} floors') do |building_height, floor_stack_total|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
 When('I request the Number of Homes in the Building') do
 	@subject.number_of_floors = 60
 end
