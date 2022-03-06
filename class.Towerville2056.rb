@@ -45,7 +45,9 @@ class Towerville2056
     self.name = "example"
     self.primary_industry_index = -1
     self.number_of_floors = -1
-    self.building_profile = {:bottom => "unset", :middle => "unset",
+    self.building_profile = {:basement => "unset",
+      :ground_floors => "unset", :ground_to_f22 => "unset",
+      :f22_to_middle  => "unset", :middle_to_crown => "ground_floors",
 			:crown => "unset", :crown_cap => "unset"}
     self.primary_employer_scale = -1
     self.shop_count_variance_percent    = 0.0
@@ -235,21 +237,27 @@ class Towerville2056
       die_roll_cap = 8
     when :ground_floors
       profile_category = :bottom
+      die_roll_cap = 13
+    when :ground_to_f22
+      profile_category = :bottom
       die_roll_cap = 18
-
+    when :f22_to_middle, :middle_to_crown
+      profile_category = :middle
+      die_roll_cap = 24
+    when :crown
+      profile_category = :crown
+      die_roll_cap = 12
+    when :crown_cap
+      profile_category = :crown_cap
+      die_roll_cap = -1
     end
 
-    table_data = TABLE_CONTENT_SETS[:building_shape][section]
-
-		cap_by_section = {}
-		cap_by_section[:bottom] = 18
-		cap_by_section[:middle] = 24
-		cap_by_section[:crown] = 12
+    table_data = TABLE_CONTENT_SETS[:building_shape][profile_category]
 
 		table_column = {}
-		unless section == :crown_cap
-      unless ! args[:get_row_value].nil?
-        table_column = table_data[1.d6({ex: true, cap: cap_by_section[section]})]
+		unless profile_category == :crown_cap
+      if args[:get_row_value].nil?
+        table_column = table_data[1.d6({ex: true, cap: die_roll_cap})]
       else
         table_column = table_data[args[:get_row_value]]
       end

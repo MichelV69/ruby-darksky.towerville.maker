@@ -57,20 +57,20 @@ I want to create a randomly generated TV for DarkSky
     And shoud be higher than "ground_floors" but less than 22 floors
 
 @WIP
-  Scenario Outline: Determine Building Profile for the "f22_to_bottom_mid" section of Towerville
+  Scenario Outline: Determine Building Profile for the "f22_to_middle" section of Towerville
     Given that I have an instance of Towerville2056
     And the building is 78 stories tall
-    When I request a random Building Profile for the "f22_to_bottom_mid" section
-    Then Building Profile - "f22_to_bottom_mid" should be set
-    And should be higher than 22 floors, but less than "bottom_mid_to_top_mid"
+    When I request a random Building Profile for the "f22_to_middle" section
+    Then Building Profile - "f22_to_middle" should be set
+    And should be higher than 22 floors, but less than "middle_to_crown"
 
 @WIP
-  Scenario Outline: Determine Building Profile for the "bottom_mid_to_crown" section of Towerville
+  Scenario Outline: Determine Building Profile for the "middle_to_crown" section of Towerville
     Given that I have an instance of Towerville2056
     And the building is 78 stories tall
-    When I request a random Building Profile for the "bottom_mid_to_crown" section
-    Then Building Profile - "bottom_mid_to_crown" should be set
-    And should be higher than "f22_to_bottom_mid" but less than "crown"
+    When I request a random Building Profile for the "middle_to_crown" section
+    Then Building Profile - "middle_to_crown" should be set
+    And should be higher than "f22_to_middle" but less than "crown"
 
 @WIP
 	Scenario Outline: Determine Building Profile for the "crown" section of Towerville
@@ -81,11 +81,11 @@ I want to create a randomly generated TV for DarkSky
     And should be 10% of the building height
 
 @WIP
-	Scenario Outline: Determine Building Profile for the "Crown Cap" section of Towerville
+	Scenario Outline: Determine Building Profile for the "crown_cap" section of Towerville
     Given that I have an instance of Towerville2056
     And the building is 78 stories tall
-    When I request a random Building Profile for the "Crown Cap" section
-    Then Building Profile - "Crown Cap" should be set
+    When I request a random Building Profile for the "crown_cap" section
+    Then Building Profile - "crown_cap" should be set
 
   Scenario Outline: Calculate the Number of Homes in the Building
 #Comment : NS:	60.0	Stories

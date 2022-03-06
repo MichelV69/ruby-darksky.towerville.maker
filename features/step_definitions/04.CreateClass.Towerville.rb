@@ -32,6 +32,7 @@ Then('Building Profile - {string} should be set') do |string|
   expect(@subject.building_profile[building_profile_section]).not_to eq("")
 end
 
+# --- start new ---
 
 Given('the building is {int} stories tall') do |stories_tall|
   @subject.number_of_floors = stories_tall
@@ -44,6 +45,27 @@ end
 Then('should be {int}% of the building height, but less than {int} floors') do |building_height, floor_stack_total|
   pending # Write code here that turns the phrase above into concrete actions
 end
+
+Then('shoud be higher than {string} but less than {int} floors') do |string, int|
+# Then('shoud be higher than {string} but less than {float} floors') do |string, float|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('should be higher than {int} floors, but less than {string}') do |int, string|
+# Then('should be higher than {float} floors, but less than {string}') do |float, string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('should be higher than {string} but less than {string}') do |string, string2|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then('should be {int}% of the building height') do |int|
+# Then('should be {float}% of the building height') do |float|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+# ---- end new ----
 
 When('I request the Number of Homes in the Building') do
 	@subject.number_of_floors = 60
