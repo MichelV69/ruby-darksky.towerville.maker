@@ -224,8 +224,21 @@ class Towerville2056
   end
 
 	# ---
-  def self.get_random_building_profile(section, args={})
+  def self.get_random_building_profile(section_requested, args={})
     table_column = "unset"
+    profile_category = "unset"
+    die_roll_cap = -1
+
+    case section_requested
+    when :basement
+      profile_category = :bottom
+      die_roll_cap = 8
+    when :ground_floors
+      profile_category = :bottom
+      die_roll_cap = 18
+
+    end
+
     table_data = TABLE_CONTENT_SETS[:building_shape][section]
 
 		cap_by_section = {}
