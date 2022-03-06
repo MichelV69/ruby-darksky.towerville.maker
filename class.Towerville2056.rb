@@ -227,6 +227,9 @@ class Towerville2056
 
 	# ---
   def self.get_random_building_profile(section_requested, args={})
+
+    building_profile_section = building_profile_section.to_s.to_lower.gsub(' ','_').to_sym if section_requested.class != :example.class
+
     table_column = "unset"
     profile_category = "unset"
     die_roll_cap = -1
