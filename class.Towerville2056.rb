@@ -45,10 +45,13 @@ class Towerville2056
     self.name = "example"
     self.primary_industry_index = -1
     self.number_of_floors = -1
-    self.building_profile = {:basement => "unset",
-      :ground_floors => "unset", :ground_to_f22 => "unset",
-      :f22_to_middle  => "unset", :middle_to_crown => "ground_floors",
-			:crown => "unset", :crown_cap => "unset"}
+
+    unset =  {unset: ['unset',-13]}
+    self.building_profile = {:basement => unset,
+      :ground_floors => unset, :ground_to_f22 => unset,
+      :f22_to_middle  => unset, :middle_to_crown => unset,
+			:crown => unset, :crown_cap => unset}
+
     self.primary_employer_scale = -1
     self.shop_count_variance_percent    = 0.0
     self.social_spaces_variance_percent = 0.0
@@ -226,11 +229,12 @@ class Towerville2056
   end
 
 	# ---
-  def self.get_random_building_profile(section_requested, args={})
+  def self.get_random_building_profile(section_requested, building_number_of_floors, args={})
 
-    building_profile_section = building_profile_section.to_s.to_lower.gsub(' ','_').to_sym if section_requested.class != :example.class
+    section_requested = section_requested.to_s.to_lower.gsub(' ','_').to_sym if section_requested.class != :example.class
 
     table_column = "unset"
+    floors_range = (-2..-5)
     profile_category = "unset"
     die_roll_cap = -1
 
@@ -238,26 +242,61 @@ class Towerville2056
     when :basement
       profile_category = :bottom
       die_roll_cap = 8
+
+      first_floor = building_number_of_floors * 5.percent * -1.0
+      last_floor = -1
+      floors_range =  (first_floor..last_floor.to_i)
+
     when :ground_floors
       profile_category = :bottom
       die_roll_cap = 13
+
+      first_floor = 1
+      last_floor = building_number_of_floors * 12.percent
+      last_floor = 12 if last_floor > 12
+      floors_range = (first_floor..last_floor.to_i)
+
     when :ground_to_f22
       profile_category = :bottom
       die_roll_cap = 18
-    when :f22_to_middle, :middle_to_crown
+
+      first_floor = self.building_profile[:ground_floors].last + 1
+      last_floor = 21
+      floors_range = (first_floor..last_floor)
+
+    when :f22_to_middle
       profile_category = :middle
       die_roll_cap = 24
+
+      first_floor = 22
+      last_floor = ((building_number_of_floors  - first_floor) * 90.percent) / 2 + first_floor
+      floors_range = (first_floor..last_floor.to_i)
+
+    when :middle_to_crown
+      profile_category = :middle
+      die_roll_cap = 24
+
+      first_floor = self.building_profile[:f22_to_middle].last + 1
+      last_floor = ((building_number_of_floors  - first_floor) * 90.percent) / 2 + first_floor
+      floors_range = (first_floor..last_floor.to_i)
+
     when :crown
       profile_category = :crown
       die_roll_cap = 12
+
+      first_floor = self.building_profile[:middle_to_crown].last + 1
+      last_floor = self.number_of_floors
+      floors_range = (first_floor..last_floor.to_i)
+
     when :crown_cap
       profile_category = :crown_cap
       die_roll_cap = -1
+      floors_range = (self.number_of_floors+1..self.number_of_floors+2)
     end
 
+    puts ">>> (#{section_requested.class}) #{section_requested} => #{profile_category} (#{die_roll_cap})"
     table_data = TABLE_CONTENT_SETS[:building_shape][profile_category]
 
-		table_column = {}
 		unless profile_category == :crown_cap
       if args[:get_row_value].nil?
         table_column = table_data[1.d6({ex: true, cap: die_roll_cap})]
@@ -280,7 +319,7 @@ class Towerville2056
       table_column = "#{table_column} (#{text_to_insert})"
     end
 
-    return table_column
+    return [table_column, floors_range]
   end
 
   # ---

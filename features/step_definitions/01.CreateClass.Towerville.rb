@@ -21,6 +21,12 @@ Before do
     expect(@subject.number_of_floors).to eq(-1)
     expect(@subject.primary_employer_scale).to eq(-1)
   end
+
+  def as_table_target(request)
+    table_target = request
+    table_target = request.to_s.to_lower.gsub(' ','_').to_sym if request.class != :example.class
+    return table_target
+  end
 end
 
 Given('that I have an instance of Towerville2056') do

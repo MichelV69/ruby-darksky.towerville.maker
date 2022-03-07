@@ -22,12 +22,12 @@ Then('should be within a valid range') do
 end
 
 Given('I request a random Building Profile for the {string} section') do |building_profile_section|
-  @subject.building_profile[building_profile_section] = Towerville2056.get_random_building_profile(building_profile_section)
+  @subject.building_profile[as_table_target building_profile_section] = Towerville2056.get_random_building_profile(as_table_target(building_profile_section), @subject.number_of_floors)
 end
 
 Then('Building Profile - {string} should be set') do |building_profile_section|
-	expect(@subject.building_profile[building_profile_section]).not_to eq("unset")
-  expect(@subject.building_profile[building_profile_section]).not_to eq("")
+	expect(@subject.building_profile[as_table_target  building_profile_section]).not_to eq("unset")
+  expect(@subject.building_profile[as_table_target  building_profile_section]).not_to eq("")
 end
 
 # --- start new ---
@@ -37,7 +37,9 @@ Given('the building is {int} stories tall') do |stories_tall|
 end
 
 Then('the {string} section should be {int}% of building height') do |section_requested, building_height|
-  section_proportion = 1.0 * @subject.building_profile[section_requested][:floor_range].count / @subject.number_of_floors
+
+  section_proportion = 1.0 * @subject.building_profile[as_table_target section_requested][:floor_range].count / @subject.number_of_floors
+
   expect(section_proportion.round(0)).to eq(building_height.round(0))
 end
 
