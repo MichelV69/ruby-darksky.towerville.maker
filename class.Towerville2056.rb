@@ -229,7 +229,7 @@ class Towerville2056
   end
 
 	# ---
-  def self.get_random_building_profile(section_requested, building_number_of_floors, args={})
+  def self.get_random_building_profile(section_requested, tv_object, args={})
 
     section_requested = section_requested.to_s.to_lower.gsub(' ','_').to_sym if section_requested.class != :example.class
 
@@ -243,24 +243,24 @@ class Towerville2056
       profile_category = :bottom
       die_roll_cap = 8
 
-      first_floor = building_number_of_floors * 5.percent * -1.0
-      last_floor = -1
-      floors_range =  (first_floor..last_floor.to_i)
+			last_floor = -1
+      first_floor = (tv_object.number_of_floors * 5.percent * -1.0).to_i + last_floor
+      floors_range =  (first_floor..last_floor)
 
     when :ground_floors
       profile_category = :bottom
       die_roll_cap = 13
 
       first_floor = 1
-      last_floor = building_number_of_floors * 12.percent
+      last_floor = (tv_object.number_of_floors * 12.percent).to_i
       last_floor = 12 if last_floor > 12
-      floors_range = (first_floor..last_floor.to_i)
+      floors_range = (first_floor..last_floor)
 
     when :ground_to_f22
       profile_category = :bottom
       die_roll_cap = 18
 
-      first_floor = self.building_profile[:ground_floors].last + 1
+      first_floor = tv_object.building_profile[:ground_floors].last + 1
       last_floor = 21
       floors_range = (first_floor..last_floor)
 
@@ -269,29 +269,29 @@ class Towerville2056
       die_roll_cap = 24
 
       first_floor = 22
-      last_floor = ((building_number_of_floors  - first_floor) * 90.percent) / 2 + first_floor
-      floors_range = (first_floor..last_floor.to_i)
+      last_floor = (((tv_object.number_of_floors  - first_floor) * 90.percent) / 2 + first_floor).to_i
+      floors_range = (first_floor..last_floor)
 
     when :middle_to_crown
       profile_category = :middle
       die_roll_cap = 24
 
-      first_floor = self.building_profile[:f22_to_middle].last + 1
-      last_floor = ((building_number_of_floors  - first_floor) * 90.percent) / 2 + first_floor
-      floors_range = (first_floor..last_floor.to_i)
+      first_floor = tv_object.building_profile[:f22_to_middle].last + 1
+      last_floor = (((tv_object.number_of_floors  - first_floor) * 90.percent) / 2 + first_floor).to_i
+      floors_range = (first_floor..last_floor)
 
     when :crown
       profile_category = :crown
       die_roll_cap = 12
 
-      first_floor = self.building_profile[:middle_to_crown].last + 1
-      last_floor = self.number_of_floors
-      floors_range = (first_floor..last_floor.to_i)
+      first_floor = tv_object.building_profile[:middle_to_crown].last + 1
+      last_floor = tv_object.number_of_floors
+      floors_range = (first_floor..last_floor)
 
     when :crown_cap
       profile_category = :crown_cap
       die_roll_cap = -1
-      floors_range = (self.number_of_floors+1..self.number_of_floors+2)
+      floors_range = (tv_object.number_of_floors+1..self.number_of_floors+2)
     end
 
     puts ">>> (#{section_requested.class}) #{section_requested} => #{profile_category} (#{die_roll_cap})"
@@ -319,6 +319,7 @@ class Towerville2056
       table_column = "#{table_column} (#{text_to_insert})"
     end
 
+		puts ">> floors_range:#{floors_range.inspect}"
     return [table_column, floors_range]
   end
 
