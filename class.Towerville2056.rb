@@ -260,7 +260,7 @@ class Towerville2056
       profile_category = :bottom
       die_roll_cap = 18
 
-      first_floor = tv_object.building_profile[:ground_floors].last + 1
+      first_floor = tv_object.building_profile[:ground_floors].last.last	 + 1
       last_floor = 21
       floors_range = (first_floor..last_floor)
 
@@ -294,7 +294,6 @@ class Towerville2056
       floors_range = (tv_object.number_of_floors+1..self.number_of_floors+2)
     end
 
-    puts ">>> (#{section_requested.class}) #{section_requested} => #{profile_category} (#{die_roll_cap})"
     table_data = TABLE_CONTENT_SETS[:building_shape][profile_category]
 
 		unless profile_category == :crown_cap
@@ -319,7 +318,6 @@ class Towerville2056
       table_column = "#{table_column} (#{text_to_insert})"
     end
 
-		puts ">> floors_range:#{floors_range.inspect}"
     return [table_column, floors_range]
   end
 

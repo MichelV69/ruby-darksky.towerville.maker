@@ -53,18 +53,27 @@ Then('{string} section should be {int}% of the building height, but less than {i
 	expect(floors_range.count).to be_less_than(expected_floors_max_count)
 end
 
-Then('the {string} section should be higher than {string} but less than {int} floors') do |string, string2, int|
+Then('the {string} section should be higher than the {string} section but less than {int} floors') do |section_requested, section_prior, expected_floors_max_count|
+
+	section_requested_floors_range = @subject.building_profile[as_table_target section_requested].last
+	puts "#{section_requested} =>> #{section_requested_floors_range}"
+	section_prior_floors_range = @subject.building_profile[as_table_target section_prior].last
+
+	expect(section_requested_floors_range.first).to be_greater_than(section_prior_floors_range.last)
+	expect(section_requested_floors_range.count).to be_less_than(expected_floors_max_count)
+end
+
+Then('the {string} section should be higher than {int} floors, but less than the {string} section') do |string, int, string2|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then('the {string} section should be higher than {int} floors, but less than {string}') do |string, int, string2|
+Then('should be higher than the {string} section but less than the {string} section') do |string, string2|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then('the {string} section should be {int}% of the building height') do |string, int|
-  pending # Write code here that turns the phrase above into concrete actions
+Given('I have aleady requested a random Building Profile for the {string} section') do |section_requested|
+	@subject.building_profile[as_table_target section_requested] = Towerville2056.get_random_building_profile(as_table_target(section_requested), @subject)
 end
-
 # ---- end new ----
 
 When('I request the Number of Homes in the Building') do
