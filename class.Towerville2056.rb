@@ -49,7 +49,7 @@ class Towerville2056
     unset =  {unset: ['unset',-13]}
     self.building_profile = {:basement => unset,
       :ground_floors => unset, :ground_to_f22 => unset,
-      :f22_to_middle  => unset, :middle_to_crown => unset,
+      :f23_to_middle  => unset, :middle_to_crown => unset,
 			:crown => unset, :crown_cap => unset}
 
     self.primary_employer_scale = -1
@@ -261,14 +261,14 @@ class Towerville2056
       die_roll_cap = 18
 
       first_floor = tv_object.building_profile[:ground_floors].last.last	 + 1
-      last_floor = 21
+      last_floor = 22
       floors_range = (first_floor..last_floor)
 
-    when :f22_to_middle
+    when :f23_to_middle
       profile_category = :middle
       die_roll_cap = 24
 
-      first_floor = 22
+      first_floor = 23
       last_floor = (((tv_object.number_of_floors  - first_floor) * 90.percent) / 2 + first_floor).to_i
       floors_range = (first_floor..last_floor)
 
@@ -276,7 +276,7 @@ class Towerville2056
       profile_category = :middle
       die_roll_cap = 24
 
-      first_floor = tv_object.building_profile[:f22_to_middle].last.last
+      first_floor = tv_object.building_profile[:f23_to_middle].last.last
       puts ">> first_floor #{first_floor}"
       first_floor += 1
       last_floor = (((tv_object.number_of_floors  - first_floor) * 90.percent) / 2 + first_floor).to_i

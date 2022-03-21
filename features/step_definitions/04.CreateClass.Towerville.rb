@@ -63,8 +63,19 @@ Then('the {string} section should be higher than the {string} section but less t
 	expect(section_requested_floors_range.count).to be_less_than(expected_floors_max_count)
 end
 
-Then('the {string} section should be higher than {int} floors, but less than the estimated {string} section') do |string, int, string2|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the {string} section should be higher than {int} floors, but less than the estimated {string} section') do |section_requested, expected_floors_count, section_after|
+
+  section_requested_floors_range = @subject.building_profile[as_table_target section_requested].last
+	puts "#{section_requested} =>> #{section_requested_floors_range}"
+
+  expect(section_requested_floors_range.first).to be_greater_than(expected_floors_count)
+
+  skyline_floor = 22
+  middle_slabs_thickness = ((( @subject.number_of_floors  - skyline_floor) * 90.percent) / 2).to_i
+  this_slab_stop = skyline_floor + 1 + middle_slabs_thickness
+  this_slab_stop += middle_slabs_thickness if section_after == "middle_to_crown"
+
+  expect(section_requested_floors_range.last).to be_less_than(this_slab_stop)
 end
 
 Then('should be higher than the {string} section but less than the estimated {string} section') do |string, string2|
