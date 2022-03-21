@@ -276,7 +276,9 @@ class Towerville2056
       profile_category = :middle
       die_roll_cap = 24
 
-      first_floor = tv_object.building_profile[:f22_to_middle].last + 1
+      first_floor = tv_object.building_profile[:f22_to_middle].last.last
+      puts ">> first_floor #{first_floor}"
+      first_floor += 1
       last_floor = (((tv_object.number_of_floors  - first_floor) * 90.percent) / 2 + first_floor).to_i
       floors_range = (first_floor..last_floor)
 
@@ -284,7 +286,7 @@ class Towerville2056
       profile_category = :crown
       die_roll_cap = 12
 
-      first_floor = tv_object.building_profile[:middle_to_crown].last + 1
+      first_floor = tv_object.building_profile[:middle_to_crown].last.last + 1
       last_floor = tv_object.number_of_floors
       floors_range = (first_floor..last_floor)
 

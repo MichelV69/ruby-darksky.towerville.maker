@@ -63,11 +63,11 @@ Then('the {string} section should be higher than the {string} section but less t
 	expect(section_requested_floors_range.count).to be_less_than(expected_floors_max_count)
 end
 
-Then('the {string} section should be higher than {int} floors, but less than the {string} section') do |string, int, string2|
+Then('the {string} section should be higher than {int} floors, but less than the estimated {string} section') do |string, int, string2|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Then('should be higher than the {string} section but less than the {string} section') do |string, string2|
+Then('should be higher than the {string} section but less than the estimated {string} section') do |string, string2|
   pending # Write code here that turns the phrase above into concrete actions
 end
 
