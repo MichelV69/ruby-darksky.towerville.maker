@@ -61,12 +61,12 @@ I want to create a randomly generated TV for DarkSky
     And the "ground_to_f22" section should be higher than the "ground_floors" section but less than 22 floors
 
 @WIP
-  Scenario Outline: Determine Building Profile for the "f22_to_middle" section of Towerville
+  Scenario Outline: Determine Building Profile for the "f23_to_middle" section of Towerville
     Given that I have an instance of Towerville2056
     And the building is 78 stories tall
-    When I request a random Building Profile for the "f22_to_middle" section
-    Then Building Profile - "f22_to_middle" should be set
-    And the "f22_to_middle" section should be higher than 22 floors, but less than the estimated "middle_to_crown" section
+    When I request a random Building Profile for the "f23_to_middle" section
+    Then Building Profile - "f23_to_middle" should be set
+    And the "f23_to_middle" section should be higher than 22 floors, but less than the estimated "middle_to_crown" section
 
 @WIP
   Scenario Outline: Determine Building Profile for the "middle_to_crown" section of Towerville
@@ -74,7 +74,7 @@ I want to create a randomly generated TV for DarkSky
     And the building is 78 stories tall
     When I request a random Building Profile for the "middle_to_crown" section
     Then Building Profile - "middle_to_crown" should be set
-    And should be higher than the "f22_to_middle" section but less than the estimated "crown" section
+    And should be higher than the "f23_to_middle" section but less than the estimated "crown" section
 
 @WIP
 	Scenario Outline: Determine Building Profile for the "crown" section of Towerville
