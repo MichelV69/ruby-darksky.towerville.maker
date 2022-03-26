@@ -89,6 +89,19 @@ Given('I have aleady requested a random Building Profile for the {string} sectio
   section_requested = as_table_target building_profile_section
 	@subject.building_profile[section_requested] = Towerville2056.get_random_building_profile(as_table_target(section_requested), @subject)
 end
+
+Then('the {string} section should be higher than the {string} section with the top at floor number {int}') do |building_profile_section, comparison_profile_section, top_floor_number|
+
+  section_requested     = as_table_target building_profile_section
+  comparison_requested  = as_table_target comparison_profile_section
+
+  section_requested_floors_range = @subject.building_profile[section_requested].last
+  comparison_requested_floors_range = @subject.building_profile[comparison_requested].last
+
+  expect(section_requested_floors_range.first).to be_greater_than(comparison_requested_floors_range.last)
+  expect(section_requested_floors_range.last).to eq(top_floor_number)
+end
+
 # ---- end new ----
 
 When('I request the Number of Homes in the Building') do
