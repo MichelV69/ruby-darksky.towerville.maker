@@ -58,7 +58,7 @@ I want to create a randomly generated TV for DarkSky
 		And I have aleady requested a random Building Profile for the "ground_floors" section
     When I request a random Building Profile for the "ground_to_f22" section
     Then Building Profile - "ground_to_f22" should be set
-    And the "ground_to_f22" section should be higher than the "ground_floors" section but less than 22 floors
+    And the "ground_to_f22" section should be higher than the "ground_floors" section with the top at floor number 22 
 
 @WIP
   Scenario Outline: Determine Building Profile for the "f23_to_middle" section of Towerville
