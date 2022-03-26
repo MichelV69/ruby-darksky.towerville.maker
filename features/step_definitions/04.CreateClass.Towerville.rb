@@ -21,14 +21,8 @@ Then('should be within a valid range') do
   expect(@subject.number_of_floors).to be_less_than(101)
 end
 
-
 Given('I request a random Building Profile for the {string} section') do |building_profile_section|
   section_requested = as_table_target building_profile_section
-
-  if section_requested == :middle_to_crown &&
-    @subject.building_profile[:f23_to_middle].last.last == -13
-    @subject.building_profile[:f23_to_middle] = Towerville2056.get_random_building_profile(:f23_to_middle, @subject)
-  end
 
   @subject.building_profile[section_requested] = Towerville2056.get_random_building_profile(section_requested, @subject)
 end
