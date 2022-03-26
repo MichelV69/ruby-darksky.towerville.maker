@@ -21,13 +21,22 @@ Then('should be within a valid range') do
   expect(@subject.number_of_floors).to be_less_than(101)
 end
 
+
 Given('I request a random Building Profile for the {string} section') do |building_profile_section|
-  @subject.building_profile[as_table_target building_profile_section] = Towerville2056.get_random_building_profile(as_table_target(building_profile_section), @subject)
+  section_requested = as_table_target building_profile_section
+
+  if section_requested == :middle_to_crown &&
+    @subject.building_profile[:f23_to_middle].last.last == -13
+    @subject.building_profile[:f23_to_middle] = Towerville2056.get_random_building_profile(:f23_to_middle, @subject)
+  end
+
+  @subject.building_profile[section_requested] = Towerville2056.get_random_building_profile(section_requested, @subject)
 end
 
 Then('Building Profile - {string} should be set') do |building_profile_section|
-	expect(@subject.building_profile[as_table_target  building_profile_section].first).not_to eq("unset")
-  expect(@subject.building_profile[as_table_target  building_profile_section].first).not_to eq("")
+  section_requested = as_table_target building_profile_section
+	expect(@subject.building_profile[section_requested].first).not_to eq("unset")
+  expect(@subject.building_profile[section_requested].first).not_to eq("")
 end
 
 # --- start new ---
@@ -36,36 +45,36 @@ Given('the building is {int} stories tall') do |stories_tall|
   @subject.number_of_floors = stories_tall
 end
 
-Then('the {string} section should be {int}% of building height') do |section_requested, expected_floors_percent|
-
-	floors_range = @subject.building_profile[as_table_target section_requested].last
+Then('the {string} section should be {int}% of building height') do |building_profile_section, expected_floors_percent|
+  section_requested = as_table_target building_profile_section
+	floors_range = @subject.building_profile[section_requested].last
   actual_floors_percent = 100.00 * (floors_range.count.to_f / @subject.number_of_floors.to_f)
 
   expect(actual_floors_percent.round(0)).to eq(expected_floors_percent.round(0))
 end
 
-Then('{string} section should be {int}% of the building height, but less than {int} floors') do |section_requested, expected_floors_percent, expected_floors_max_count|
-
-	floors_range = @subject.building_profile[as_table_target section_requested].last
+Then('{string} section should be {int}% of the building height, but less than {int} floors') do |building_profile_section, expected_floors_percent, expected_floors_max_count|
+  section_requested = as_table_target building_profile_section
+	floors_range = @subject.building_profile[section_requested].last
 	actual_floors_percent = 100.00 * (floors_range.count.to_f / @subject.number_of_floors.to_f)
 
 	expect(actual_floors_percent.round(0)).to eq(expected_floors_percent.round(0))
 	expect(floors_range.count).to be_less_than(expected_floors_max_count)
 end
 
-Then('the {string} section should be higher than the {string} section but less than {int} floors') do |section_requested, section_prior, expected_floors_max_count|
-
-	section_requested_floors_range = @subject.building_profile[as_table_target section_requested].last
+Then('the {string} section should be higher than the {string} section but less than {int} floors') do |building_profile_section, section_prior, expected_floors_max_count|
+  section_requested = as_table_target building_profile_section
+	section_requested_floors_range = @subject.building_profile[section_requested].last
 	puts "#{section_requested} =>> #{section_requested_floors_range}"
-	section_prior_floors_range = @subject.building_profile[as_table_target section_prior].last
+	section_prior_floors_range = @subject.building_profile[section_prior].last
 
 	expect(section_requested_floors_range.first).to be_greater_than(section_prior_floors_range.last)
 	expect(section_requested_floors_range.count).to be_less_than(expected_floors_max_count)
 end
 
-Then('the {string} section should be higher than {int} floors, but less than the estimated {string} section') do |section_requested, expected_floors_count, section_after|
-
-  section_requested_floors_range = @subject.building_profile[as_table_target section_requested].last
+Then('the {string} section should be higher than {int} floors, but less than the estimated {string} section') do |building_profile_section, expected_floors_count, section_after|
+  section_requested = as_table_target building_profile_section
+  section_requested_floors_range = @subject.building_profile[section_requested].last
 	puts "#{section_requested} =>> #{section_requested_floors_range}"
 
   expect(section_requested_floors_range.first).to be_greater_than(expected_floors_count)
@@ -82,8 +91,9 @@ Then('should be higher than the {string} section but less than the estimated {st
   pending # Write code here that turns the phrase above into concrete actions
 end
 
-Given('I have aleady requested a random Building Profile for the {string} section') do |section_requested|
-	@subject.building_profile[as_table_target section_requested] = Towerville2056.get_random_building_profile(as_table_target(section_requested), @subject)
+Given('I have aleady requested a random Building Profile for the {string} section') do |building_profile_section|
+  section_requested = as_table_target building_profile_section
+	@subject.building_profile[section_requested] = Towerville2056.get_random_building_profile(as_table_target(section_requested), @subject)
 end
 # ---- end new ----
 
