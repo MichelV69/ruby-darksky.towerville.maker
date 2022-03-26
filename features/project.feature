@@ -64,6 +64,9 @@ I want to create a randomly generated TV for DarkSky
   Scenario Outline: Determine Building Profile for the "f23_to_middle" section of Towerville
     Given that I have an instance of Towerville2056
     And the building is 78 stories tall
+    And I have aleady requested a random Building Profile for the "basement" section
+    And I have aleady requested a random Building Profile for the "ground_floors" section
+		And I have aleady requested a random Building Profile for the "ground_to_f22" section
     When I request a random Building Profile for the "f23_to_middle" section
     Then Building Profile - "f23_to_middle" should be set
     And the "f23_to_middle" section should be higher than 22 floors, but less than the estimated "middle_to_crown" section
