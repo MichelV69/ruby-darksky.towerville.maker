@@ -237,6 +237,7 @@ class Towerville2056
     floors_range = (-2..-5)
     profile_category = "unset"
     die_roll_cap = -1
+    skyline_floor = 22
 
     case section_requested
     when :basement
@@ -261,14 +262,14 @@ class Towerville2056
       die_roll_cap = 18
 
       first_floor = tv_object.building_profile[:ground_floors].last.last	 + 1
-      last_floor = 22
+      last_floor = skyline_floor
       floors_range = (first_floor..last_floor)
 
     when :f23_to_middle
       profile_category = :middle
       die_roll_cap = 24
 
-      first_floor = 23
+      first_floor = skyline_floor + 1
       last_floor = (((tv_object.number_of_floors  - first_floor) * 90.percent) / 2 + first_floor).to_i
       floors_range = (first_floor..last_floor)
 
@@ -277,9 +278,9 @@ class Towerville2056
       die_roll_cap = 24
 
       first_floor = tv_object.building_profile[:f23_to_middle].last.last
-      puts ">> first_floor #{first_floor}"
       first_floor += 1
       last_floor = (((tv_object.number_of_floors  - first_floor) * 90.percent) / 2 + first_floor).to_i
+
       floors_range = (first_floor..last_floor)
 
     when :crown
@@ -296,6 +297,7 @@ class Towerville2056
       floors_range = (tv_object.number_of_floors+1..self.number_of_floors+2)
     end
 
+    puts ">> floors_range #{floors_range}"
     table_data = TABLE_CONTENT_SETS[:building_shape][profile_category]
 
 		unless profile_category == :crown_cap

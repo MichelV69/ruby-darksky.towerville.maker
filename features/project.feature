@@ -78,7 +78,7 @@ I want to create a randomly generated TV for DarkSky
     And I have aleady requested a random Building Profile for the "basement" section
     And I have aleady requested a random Building Profile for the "ground_floors" section
     And I have aleady requested a random Building Profile for the "ground_to_f22" section
-		And I have aleady requested a random Building Profile for the "f23_to_middle" section    
+		And I have aleady requested a random Building Profile for the "f23_to_middle" section
     When I request a random Building Profile for the "middle_to_crown" section
     Then Building Profile - "middle_to_crown" should be set
     And should be higher than the "f23_to_middle" section but less than the estimated "crown" section
@@ -87,9 +87,14 @@ I want to create a randomly generated TV for DarkSky
 	Scenario Outline: Determine Building Profile for the "crown" section of Towerville
     Given that I have an instance of Towerville2056
     And the building is 78 stories tall
+    And I have aleady requested a random Building Profile for the "basement" section
+    And I have aleady requested a random Building Profile for the "ground_floors" section
+    And I have aleady requested a random Building Profile for the "ground_to_f22" section
+    And I have aleady requested a random Building Profile for the "f23_to_middle" section
+		And I have aleady requested a random Building Profile for the "middle_to_crown" section
     When I request a random Building Profile for the "crown" section
     Then Building Profile - "crown" should be set
-    And the "crown" section should be 10% of the building height
+    And the "crown" section should be 10% of building height
 
 @WIP
 	Scenario Outline: Determine Building Profile for the "crown_cap" section of Towerville
