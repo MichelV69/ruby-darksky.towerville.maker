@@ -233,16 +233,16 @@ class Towerville2056
 
     section_requested = section_requested.to_s.to_lower.gsub(' ','_').to_sym if section_requested.class != :example.class
 
-    def get_basement_depth(tv_object)
+    get_basement_depth = lambda do |tv_object|
       (tv_object.number_of_floors * 5.percent * -1.0).to_i
     end
 
-    def get_crown_height(tv_object)
+    get_crown_height = lambda do |tv_object|
       (tv_object.number_of_floors * 10.percent).to_i
     end
 
-    def get_middle_mass(tv_object)
-      tv_object.number_of_floors - get_crown_height(tv_object) - 1
+    get_middle_mass = lambda do |tv_object|
+      tv_object.number_of_floors - get_crown_height.call(tv_object) - 1
     end
 
     table_column = "unset"
@@ -257,7 +257,7 @@ class Towerville2056
       die_roll_cap = 8
 
 			last_floor = -1
-      first_floor =  get_basement_depth(tv_object) + last_floor
+      first_floor =  get_basement_depth.call(tv_object) + last_floor
       floors_range =  (first_floor..last_floor)
 
     when :ground_floors
@@ -282,7 +282,7 @@ class Towerville2056
       die_roll_cap = 24
 
       first_floor = skyline_floor + 1
-      last_floor = half_of(first_floor + get_middle_mass(tv_object)).to_i
+      last_floor = half_of(first_floor + get_middle_mass.call(tv_object)).to_i
       floors_range = (first_floor..last_floor)
 
     when :middle_to_crown
@@ -290,7 +290,7 @@ class Towerville2056
       die_roll_cap = 24
 
       first_floor = tv_object.building_profile[:f23_to_middle].last.last + 1
-      last_floor = tv_object.number_of_floors - get_crown_height(tv_object) - 1
+      last_floor = tv_object.number_of_floors - get_crown_height.call(tv_object) - 1
 
       floors_range = (first_floor..last_floor)
 
@@ -299,13 +299,13 @@ class Towerville2056
       die_roll_cap = 12
 
       last_floor = tv_object.number_of_floors
-      first_floor = last_floor - get_crown_height(tv_object)
+      first_floor = last_floor - get_crown_height.call(tv_object)
       floors_range = (first_floor..last_floor)
 
     when :crown_cap
       profile_category = :crown_cap
       die_roll_cap = -1
-      floors_range = (tv_object.number_of_floors+1..self.number_of_floors+2)
+      floors_range = (tv_object.number_of_floors+1..tv_object.number_of_floors+2)
     end
 
     puts ">> floors_range #{floors_range}"
