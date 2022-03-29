@@ -124,9 +124,13 @@ end
 
 # --- # ---
 class	Float
-	def half
+	def halved
 		self * 1.00/2.00
 	end
+
+  def half
+    self.halved
+  end
 
 	def two_thirds
 		self * 2.00/3.00
@@ -258,7 +262,7 @@ class Hash
 end
 
 # ---
-def leastof(first, second)
+def least_of(first, second)
 
 	if first < second then
 		return first
@@ -268,7 +272,7 @@ def leastof(first, second)
 end # def leastof(first, second)
 
 # ---
-def mostof(first, second)
+def most_of(first, second)
 
 	if first > second then
 		return first
@@ -276,6 +280,11 @@ def mostof(first, second)
 		return second
 	end # if first, second
 end # def leastof(first, second)
+
+# ---
+def half_of(a_number)
+  a_number.to_f.halved
+end
 
 # ---
 def dev_msg(message)
