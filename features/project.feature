@@ -33,7 +33,6 @@ I want to create a randomly generated TV for DarkSky
     Then the building floor count should be set
     And should be within a valid range
 
-@WIP
   Scenario Outline: Determine Building Profile for the "basement" section of Towerville
     Given that I have an instance of Towerville2056
     And the building is 78 stories tall
@@ -41,7 +40,6 @@ I want to create a randomly generated TV for DarkSky
     Then Building Profile - "basement" should be set
     And the "basement" section should be 5% of building height
 
-@WIP
 	Scenario Outline: Determine Building Profile for the "ground_floors" section of Towerville
     Given that I have an instance of Towerville2056
 		And the building is 78 stories tall
@@ -50,7 +48,6 @@ I want to create a randomly generated TV for DarkSky
     Then Building Profile - "ground_floors" should be set
     And "ground floors" section should be 12% of the building height, but less than 12 floors
 
-@WIP
   Scenario Outline: Determine Building Profile for the "ground_to_f22" section of Towerville
     Given that I have an instance of Towerville2056
     And the building is 78 stories tall
@@ -60,7 +57,6 @@ I want to create a randomly generated TV for DarkSky
     Then Building Profile - "ground_to_f22" should be set
     And the "ground_to_f22" section should be higher than the "ground_floors" section with the top at floor number 22
 
-@WIP
   Scenario Outline: Determine Building Profile for the "f23_to_middle" section of Towerville
     Given that I have an instance of Towerville2056
     And the building is 78 stories tall
@@ -81,7 +77,7 @@ I want to create a randomly generated TV for DarkSky
 		And I have aleady requested a random Building Profile for the "f23_to_middle" section
     When I request a random Building Profile for the "middle_to_crown" section
     Then Building Profile - "middle_to_crown" should be set
-    And should be higher than the "f23_to_middle" section but less than the estimated "crown" section
+    And the "middle_to_crown" section should start at the floor number 48 and end at floor number 69
 
 @WIP
 	Scenario Outline: Determine Building Profile for the "crown" section of Towerville
@@ -94,6 +90,7 @@ I want to create a randomly generated TV for DarkSky
 		And I have aleady requested a random Building Profile for the "middle_to_crown" section
     When I request a random Building Profile for the "crown" section
     Then Building Profile - "crown" should be set
+    And the "crown" section should start at the floor number 70 and end at floor number 78
     And the "crown" section should be 10% of building height
 
 @WIP

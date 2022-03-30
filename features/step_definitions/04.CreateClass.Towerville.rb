@@ -59,7 +59,6 @@ end
 Then('the {string} section should be higher than the {string} section but less than {int} floors') do |building_profile_section, section_prior, expected_floors_max_count|
   section_requested = as_table_target building_profile_section
 	section_requested_floors_range = @subject.building_profile[section_requested].last
-	puts "#{section_requested} =>> #{section_requested_floors_range}"
 	section_prior_floors_range = @subject.building_profile[section_prior].last
 
 	expect(section_requested_floors_range.first).to be_greater_than(section_prior_floors_range.last)
@@ -69,7 +68,6 @@ end
 Then('the {string} section should be higher than {int} floors, but less than the estimated {string} section') do |building_profile_section, expected_floors_count, section_after|
   section_requested = as_table_target building_profile_section
   section_requested_floors_range = @subject.building_profile[section_requested].last
-	puts "#{section_requested} =>> #{section_requested_floors_range}"
 
   expect(section_requested_floors_range.first).to be_greater_than(expected_floors_count)
 
@@ -81,8 +79,14 @@ Then('the {string} section should be higher than {int} floors, but less than the
   expect(section_requested_floors_range.last).to be_less_than(this_slab_stop)
 end
 
-Then('should be higher than the {string} section but less than the estimated {string} section') do |string, string2|
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the {string} section should start at the floor number {int} and end at floor number {int}') do |building_profile_section, section_first_floor, section_last_floor|
+
+  section_requested = as_table_target building_profile_section
+  section_requested_floors_range = @subject.building_profile[section_requested].last
+	puts "#{section_requested} =>> #{section_requested_floors_range}"
+
+  expect(section_requested_floors_range.first).to eq(section_first_floor)
+  expect(section_requested_floors_range.last).to  eq(section_last_floor)
 end
 
 Given('I have aleady requested a random Building Profile for the {string} section') do |building_profile_section|

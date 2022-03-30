@@ -22,6 +22,7 @@ class Towerville2056
 		self.construction_rules[:efficiency_of_design] = 0.70
 		self.construction_rules[:home_volume_in_m3] = 700
     self.construction_rules[:people_per_home] = 3.5
+    self.construction_rules[:ground_floors_cap] = 12
     montreal_retail_stores = 7700.0
     montreal_city_population = 1906865.0
 		self.construction_rules[:shops_per_person] = montreal_retail_stores / montreal_city_population
@@ -234,15 +235,21 @@ class Towerville2056
     section_requested = section_requested.to_s.to_lower.gsub(' ','_').to_sym if section_requested.class != :example.class
 
     get_basement_depth = lambda do |tv_object|
-      (tv_object.number_of_floors * 5.percent * -1.0).to_i
+      (tv_object.number_of_floors * 5.percent * -1.0).round
+    end
+
+    get_ground_floors_capped_height = lambda do |tv_object|
+      gfc = tv_object.construction_rules[:ground_floors_cap]
+      last_floor = (tv_object.number_of_floors * 12.percent).round
+      last_floor < gfc ? last_floor : gfc
     end
 
     get_crown_height = lambda do |tv_object|
-      (tv_object.number_of_floors * 10.percent).to_i
+      (tv_object.number_of_floors * 10.percent).round
     end
 
-    get_middle_mass = lambda do |tv_object|
-      tv_object.number_of_floors - get_crown_height.call(tv_object) - 1
+    get_crown_first_floor = lambda do |tv_object|
+      tv_object.number_of_floors - get_crown_height.call(tv_object)
     end
 
     table_column = "unset"
@@ -265,8 +272,7 @@ class Towerville2056
       die_roll_cap = 13
 
       first_floor = 1
-      last_floor = (tv_object.number_of_floors * 12.percent).to_i
-      last_floor = 12 if last_floor > 12
+      last_floor = get_ground_floors_capped_height.call(tv_object)
       floors_range = (first_floor..last_floor)
 
     when :ground_to_f22
@@ -282,7 +288,7 @@ class Towerville2056
       die_roll_cap = 24
 
       first_floor = skyline_floor + 1
-      last_floor = half_of(first_floor + get_middle_mass.call(tv_object)).to_i
+      last_floor = first_floor + half_of(get_crown_first_floor.call(tv_object) - first_floor).round
       floors_range = (first_floor..last_floor)
 
     when :middle_to_crown
@@ -290,7 +296,7 @@ class Towerville2056
       die_roll_cap = 24
 
       first_floor = tv_object.building_profile[:f23_to_middle].last.last + 1
-      last_floor = tv_object.number_of_floors - get_crown_height.call(tv_object) - 1
+      last_floor = get_crown_first_floor.call(tv_object) - 1
 
       floors_range = (first_floor..last_floor)
 
@@ -298,8 +304,8 @@ class Towerville2056
       profile_category = :crown
       die_roll_cap = 12
 
+      first_floor = get_crown_first_floor.call(tv_object)
       last_floor = tv_object.number_of_floors
-      first_floor = last_floor - get_crown_height.call(tv_object)
       floors_range = (first_floor..last_floor)
 
     when :crown_cap
@@ -308,7 +314,6 @@ class Towerville2056
       floors_range = (tv_object.number_of_floors+1..tv_object.number_of_floors+2)
     end
 
-    puts ">> floors_range #{floors_range}"
     table_data = TABLE_CONTENT_SETS[:building_shape][profile_category]
 
 		unless profile_category == :crown_cap
