@@ -38,7 +38,7 @@ I want to create a randomly generated TV for DarkSky
     And the building is 78 stories tall
     When I request a random Building Profile for the "basement" section
     Then Building Profile - "basement" should be set
-    And the "basement" section should be 5% of building height
+    And the "basement" section should be around 5% of building height
 
 	Scenario Outline: Determine Building Profile for the "ground_floors" section of Towerville
     Given that I have an instance of Towerville2056
@@ -91,7 +91,7 @@ I want to create a randomly generated TV for DarkSky
     When I request a random Building Profile for the "crown" section
     Then Building Profile - "crown" should be set
     And the "crown" section should start at the floor number 70 and end at floor number 78
-    And the "crown" section should be 10% of building height
+    And the "crown" section should be around 10% of building height
 
 @WIP
 	Scenario Outline: Determine Building Profile for the "crown_cap" section of Towerville

@@ -12,7 +12,6 @@ When ('I request a random floor count') do
 end
 
 Then('the building floor count should be set') do
-  puts "building floor count: #{@subject.number_of_floors}"
   expect(@subject.number_of_floors).not_to eq(-1)
 end
 
@@ -33,18 +32,16 @@ Then('Building Profile - {string} should be set') do |building_profile_section|
   expect(@subject.building_profile[section_requested].first).not_to eq("")
 end
 
-# --- start new ---
-
 Given('the building is {int} stories tall') do |stories_tall|
   @subject.number_of_floors = stories_tall
 end
 
-Then('the {string} section should be {int}% of building height') do |building_profile_section, expected_floors_percent|
+Then('the {string} section should be around {int}% of building height') do |building_profile_section, expected_floors_percent|
   section_requested = as_table_target building_profile_section
 	floors_range = @subject.building_profile[section_requested].last
   actual_floors_percent = 100.00 * (floors_range.count.to_f / @subject.number_of_floors.to_f)
 
-  expect(actual_floors_percent.round(0)).to eq(expected_floors_percent.round(0))
+  expect(actual_floors_percent.is_around? expected_floors_percent).to eq(true)
 end
 
 Then('{string} section should be {int}% of the building height, but less than {int} floors') do |building_profile_section, expected_floors_percent, expected_floors_max_count|
@@ -83,7 +80,6 @@ Then('the {string} section should start at the floor number {int} and end at flo
 
   section_requested = as_table_target building_profile_section
   section_requested_floors_range = @subject.building_profile[section_requested].last
-	puts "#{section_requested} =>> #{section_requested_floors_range}"
 
   expect(section_requested_floors_range.first).to eq(section_first_floor)
   expect(section_requested_floors_range.last).to  eq(section_last_floor)
@@ -105,8 +101,6 @@ Then('the {string} section should be higher than the {string} section with the t
   expect(section_requested_floors_range.first).to be_greater_than(comparison_requested_floors_range.last)
   expect(section_requested_floors_range.last).to eq(top_floor_number)
 end
-
-# ---- end new ----
 
 When('I request the Number of Homes in the Building') do
 	@subject.number_of_floors = 60
