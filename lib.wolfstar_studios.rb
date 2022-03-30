@@ -124,6 +124,13 @@ end
 
 # --- # ---
 class	Float
+  def is_around?(test_value)
+    margin = 1.00 + 25.percent
+    high = test_value * margin
+    low = test_value / margin
+    self.between? low, high
+  end
+
 	def halved
 		self * 1.00/2.00
 	end
@@ -161,6 +168,13 @@ end
 
 # --- # ---
 class Fixnum
+  def is_around?(test_value)
+    margin = 1.00 + 25.percent
+    high = test_value * margin
+    low = test_value / margin
+    self.between? low, high
+  end
+
   def billion
     self * 1000000000
   end # def billion
