@@ -29,21 +29,22 @@ end
 
 Given('that a Building Section is added') do
   data_row_index = 21
-  @subject.building_profile[:middle] = Towerville2056.get_random_building_profile(:middle, {get_row_value: data_row_index})
+  @subject.building_profile[:f23_to_middle] = Towerville2056.get_random_building_profile(:f23_to_middle, @subject, {get_row_value: data_row_index})
   @table_row_data = @all_tables[:building_shape][:middle][data_row_index]
 end
 
 When('the table result is {string}') do |table_result|
   if table_result.downcase == "pillars"
-    expect(@subject.building_profile[:middle].downcase).to include(table_result.downcase)
+    building_section_desc = @subject.building_profile[:f23_to_middle].first
+    expect(building_section_desc.downcase).to include(table_result.downcase)
   end
 end
 
 Then('Shape Description should have the {string} added to it.') do |pillar_blurb|
-  expect(@subject.building_profile[:middle]).not_to eq(@table_row_data)
+  expect(@subject.building_profile[:f23_to_middle]).not_to eq(@table_row_data)
 end
 
 Then('the inline dice string should be parsed and replaced with the result rolled.') do
-  expect(@subject.building_profile[:middle]).not_to  include("[roll:")
+  expect(@subject.building_profile[:f23_to_middle]).not_to  include("[roll:")
 end
 # --- end of file ---

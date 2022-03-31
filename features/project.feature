@@ -179,6 +179,7 @@ I want to create a randomly generated TV for DarkSky
     When I use get_random_variance_by_primary_economic_rating
     Then the number of shops should be around 50
 
+@REGRESS
   Scenario Outline: Provide other Details; Building Footprint
     Given a "5/6/78" Test-Build Towerville
     When I use get_building_foot_print_as_text
