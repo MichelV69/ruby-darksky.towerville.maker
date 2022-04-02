@@ -61,6 +61,7 @@ class Towerville2056
   end # def initialize
 
   # ---
+
   def get_green_spaces_data
     green_spaces_data = {}
     green_spaces_data.default = -1.1
@@ -394,6 +395,27 @@ class Towerville2056
 
     return {summary_desc: table_col_1, broad_desc: table_col_2}
   end # 1.upto
+
+  # ---
+  private
+  # ---
+  def method_missing(method_name, *args, &block)
+    puts "!! #{method_name}"
+
+    if method_name.to_s.include? "_to_desc"
+      property_name = method_name.to_s.gsub("_to_desc","")
+      if self.respond_to? property_name then
+        to_desc property_name
+      end
+    else
+      super
+    end
+
+  end
+
+  def to_desc(property_name)
+    puts "to_desc(property_name): #{property_name} : #{eval(property_name)}"
+  end
 
 end # class Towerville2056
 # --- end of file ---
