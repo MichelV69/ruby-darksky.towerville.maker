@@ -87,7 +87,7 @@ end
 
 Given('I have aleady requested a random Building Profile for the {string} section') do |building_profile_section|
   section_requested = as_table_target building_profile_section
-	@subject.building_profile[section_requested] = Towerville2056.get_random_building_profile(as_table_target(section_requested), @subject)
+	@subject.building_profile[section_requested] = Towerville2056.random_building_profile(as_table_target(section_requested), @subject)
 end
 
 Then('the {string} section should be higher than the {string} section with the top at floor number {int}') do |building_profile_section, comparison_profile_section, top_floor_number|
@@ -107,11 +107,11 @@ When('I request the Number of Homes in the Building') do
 end
 
 Then('the Number of Homes in the Building should be {int}') do |int|
-	expect(@subject.get_number_of_homes_estimate()).to eq(int)
+	expect(@subject.number_of_homes_estimate()).to eq(int)
 end
 
 When('I Calculate the Towerville Population') do
-	@test_population = @subject.get_population_estimate()
+	@test_population = @subject.population_estimate()
 end
 
 Then('the Towerville Population should be {string}') do |string|

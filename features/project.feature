@@ -182,12 +182,12 @@ I want to create a randomly generated TV for DarkSky
 @REGRESS
   Scenario Outline: Provide other Details; Building Footprint
     Given a "5/6/78" Test-Build Towerville
-    When I use get_building_foot_print_as_text
+    When I use get_building_foot_print_to_desc
     Then the Building Footprint text should be "136.5m by 91.0m, totalling 12 425m.sq"
 
  Scenario Outline: Provide other Details; How Many Social Spaces?
    Given a "5/6/78" Test-Build Towerville
-   When I set get_random_variance_by_primary_economic_rating to 0.0 with get_social_spaces_data_as_text
+   When I set get_random_variance_by_primary_economic_rating to 0.0 with get_social_spaces_data_to_desc
    Then the description of Social Spaces should be "25 or so 1 240m.sq spaces, totalling 26 055m.sq over 3 floors"
 
   Scenario Outline: Provide other Details; How Many Social Spaces?
@@ -197,7 +197,7 @@ I want to create a randomly generated TV for DarkSky
 
  Scenario Outline: Provide other Details; How Many Green Spaces?
    Given a "5/6/78" Test-Build Towerville
-   When I set get_random_variance_by_primary_economic_rating to 0.0 with get_green_spaces_data_as_text
+   When I set get_random_variance_by_primary_economic_rating to 0.0 with get_green_spaces_data_to_desc
    Then the description of Green Spaces should be "7 or so 2 195m.sq spaces, totalling 15 605m.sq over 4 floors"
 
   Scenario Outline: Provide other Details; How Many Green Spaces?

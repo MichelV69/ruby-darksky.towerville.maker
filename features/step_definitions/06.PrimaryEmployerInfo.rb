@@ -24,11 +24,11 @@ end
 Then('I should get the details for the Primary Employer Scale that I expect') do
   @table_row_data = @all_tables[:primary_employer_scale][@new_primary_employers_scale]
 
-  expect(@subject.get_primary_employer_scale_as_text).to eq(@table_row_data)
+  expect(@subject.primary_employer_scale_to_desc).to eq(@table_row_data)
 end
 
 When('I randomly set the Primary Employer Scale') do
-  @subject.primary_employer_scale = Towerville2056::get_random_primary_employer_scale()
+  @subject.primary_employer_scale = Towerville2056::random_primary_employer_scale()
 end
 
 Then('Primary Employer Scale should be valid') do
@@ -37,7 +37,7 @@ Then('Primary Employer Scale should be valid') do
 end
 
 Then('I should get valid details for the Primary Employer Scale') do
-  expect(@subject.get_primary_employer_scale_as_text).not_to eq("")
+  expect(@subject.primary_employer_scale_to_desc).not_to eq("")
 end
 
 # --- end of file ---

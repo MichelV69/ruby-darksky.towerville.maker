@@ -62,7 +62,7 @@ class Towerville2056
 
   # ---
 
-  def get_green_spaces_data
+  def green_spaces_data
     green_spaces_data = {}
     green_spaces_data.default = -1.1
 
@@ -75,19 +75,7 @@ class Towerville2056
   end
 
 # ---
-  def get_green_spaces_data_as_text
-    green_spaces_data = {}
-    green_spaces_data = self.get_green_spaces_data
-
-    green_spaces_data[:floors_used] = green_spaces_data[:total_msq] / self.get_building_foot_print[:sq] * 3.0
-
-    green_spaces_data[:number_of_spaces] = green_spaces_data[:total_msq] / green_spaces_data[:size_ea_msq]
-
-    "#{green_spaces_data[:number_of_spaces].round} or so #{green_spaces_data[:size_ea_msq].round_to_nearest_5.to_s_formated}m.sq spaces, totalling #{green_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{green_spaces_data[:floors_used].round_up(0)} floors"
-  end
-
-# ---
-  def get_social_spaces_data
+  def social_spaces_data
     social_spaces_data = {}
     social_spaces_data.default = -1.1
 
@@ -100,7 +88,7 @@ class Towerville2056
   end
 
 # ---
-  def get_social_spaces_data_as_text
+  def social_spaces_data_to_desc
     social_spaces_data = {}
     social_spaces_data = self.get_social_spaces_data
 
@@ -112,7 +100,7 @@ class Towerville2056
   end
 
 # ---
-  def get_building_foot_print
+  def building_foot_print
     building_in_m = {}
 		building_in_m[:height]	= self.get_building_height()
 		building_in_m[:width]		= building_in_m[:height].half.round(1)
@@ -120,39 +108,33 @@ class Towerville2056
     building_in_m[:sq]      = (building_in_m[:width] * building_in_m[:depth]).round(1)
     return building_in_m
   end
-# ---
-  def get_building_foot_print_as_text
-    building_in_m = self.get_building_foot_print
-
-    "#{building_in_m[:width]}m by #{building_in_m[:depth]}m, totalling #{building_in_m[:sq].round_to_nearest_5.to_i.to_s_formated}m.sq"
-  end
 
 # ---
-  def self.get_random_variance_by_primary_economic_rating(primary_economic_rating)
+  def self.random_variance_by_primary_economic_rating(primary_economic_rating)
     dieMod = -14.0 + (primary_economic_rating/500.0 - 9.0)
     return (4.d6 + dieMod)
   end
 
 # ---
-  def get_shop_count_estimate
-    ((self.get_population_estimate * self.construction_rules[:shops_per_person]) * (1.0 + self.shop_count_variance_percent.percent))
+  def shop_count_estimate
+    ((self.population_estimate * self.construction_rules[:shops_per_person]) * (1.0 + self.shop_count_variance_percent.percent))
     .round(0) if self.shop_count_variance_percent != -111
   end
 
 # ---
-  def get_primary_economic_rating_as_text()
+  def primary_economic_rating_to_desc()
     per_text ="undefined"
 
     table_primary_economic_rating = TABLE_CONTENT_SETS[:primary_economic_rating_scale].select {|minimum_roll, desc| minimum_roll != :dice_rule}
 
     table_primary_economic_rating.each do |minimum_roll, desc|
-      per_text = desc if self.get_primary_economic_rating >= minimum_roll
+      per_text = desc if self.primary_economic_rating >= minimum_roll
     end
     return per_text.gsub("!e", "economy").gsub("\w", "with")
   end
 
 # ---
-  def get_primary_economic_rating()
+  def primary_economic_rating()
     primary_economic_rating = -1
     unless (self.primary_industry_index == -1 ||
       self.number_of_floors == -1 ||
@@ -173,7 +155,7 @@ class Towerville2056
         second_industry = self.primary_employer_scale / 100
         pes_value = first_industry + second_industry
       end
-      nohs_value = Math.sqrt(self.get_number_of_homes_estimate).to_f.round
+      nohs_value = Math.sqrt(self.number_of_homes_estimate).to_f.round
 
       pii_pes_relevance_scalar = 4
       primary_economic_rating =  (pii_value + pes_value) * pii_pes_relevance_scalar + nohs_value
@@ -184,27 +166,27 @@ class Towerville2056
   end
 
 # ---
-  def self.get_random_primary_employer_scale()
+  def self.random_primary_employer_scale()
     max_value = TABLE_CONTENT_SETS[:primary_employer_scale].last.first
     roll_string = TABLE_CONTENT_SETS[:primary_employer_scale][:dice_rule].gsub("}",", cap: #{max_value}}")
     return eval(roll_string)
   end
 
 # ---
-	def get_primary_employer_scale_as_text
+	def primary_employer_scale_to_desc
     TABLE_CONTENT_SETS[:primary_employer_scale][self.primary_employer_scale] || "undefined"
 	end
 
 # ---
-  def get_population_estimate()
-		estimated_population = self.get_number_of_homes_estimate * self.construction_rules[:people_per_home]
+  def population_estimate()
+		estimated_population = self.number_of_homes_estimate * self.construction_rules[:people_per_home]
 
 		return estimated_population.round_up().to_i
   end
 
 	# ---
-	def get_number_of_homes_estimate()
-		building_in_m = self.get_building_foot_print
+	def number_of_homes_estimate()
+		building_in_m = self.building_foot_print
 
 		functional_volume_in_m3	= building_in_m[:height] * building_in_m[:sq] * self.construction_rules[:efficiency_of_design]
 
@@ -214,12 +196,12 @@ class Towerville2056
 	end
 
   # ---
-  def get_building_height()
+  def gbuilding_height()
     return self.number_of_floors * self.construction_rules[:story_height_in_m]
   end
 
   # ---
-  def self.get_random_floor_count(args = {})
+  def self.random_floor_count(args = {})
     tens = 4
     twentys = 2
     const = 20
@@ -231,7 +213,7 @@ class Towerville2056
   end
 
 	# ---
-  def self.get_random_building_profile(section_requested, tv_object, args={})
+  def self.random_building_profile(section_requested, tv_object, args={})
 
     section_requested = section_requested.to_s.to_lower.gsub(' ','_').to_sym if section_requested.class != :example.class
 
@@ -343,7 +325,7 @@ class Towerville2056
   end
 
   # ---
-  def self.get_random_primary_industry_index()
+  def self.random_primary_industry_index()
 		roll_result = 0
 
 		end_of_table = TABLE_CONTENT_SETS[:primary_industry].last.first
@@ -371,7 +353,7 @@ class Towerville2056
     return roll_result
   end
 
-  def get_primary_industry_as_text()
+  def primary_industry_to_desc()
     # Randomprimary_industry_index
     # each digit is a different Industry
     # 26 would be three industries, indexes of 2 & 6.
@@ -400,22 +382,29 @@ class Towerville2056
   private
   # ---
   def method_missing(method_name, *args, &block)
-    puts "!! #{method_name}"
+    possible_property_name = method_name.to_s.gsub("_to_desc","")
 
-    if method_name.to_s.include? "_to_desc"
-      property_name = method_name.to_s.gsub("_to_desc","")
-      if self.respond_to? property_name then
+    if (method_name.to_s.include? "_to_desc") && (self.respond_to? possible_property_name) then
         to_desc property_name
-      end
     else
+      puts "method_missing :>> #{method_name}"
       super
     end
 
   end
 
   def to_desc(property_name)
-    puts "to_desc(property_name): #{property_name} : #{eval(property_name)}"
-  end
+    case property_name.to_sym
+      when :green_spaces_data
+        self.green_spaces_data[:floors_used] = self.green_spaces_data[:total_msq] / self.get_building_foot_print[:sq] * 3.0
 
+        self.green_spaces_data[:number_of_spaces] = self.green_spaces_data[:total_msq] / self.green_spaces_data[:size_ea_msq]
+
+        "#{self.green_spaces_data[:number_of_spaces].round} or so #{self.green_spaces_data[:size_ea_msq].round_to_nearest_5.to_s_formated}m.sq spaces, totalling #{self.green_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{self.green_spaces_data[:floors_used].round_up(0)} floors"
+      when :building_foot_print
+        building_in_m = self.building_foot_print
+        "#{building_in_m[:width]}m by #{building_in_m[:depth]}m, totalling #{building_in_m[:sq].round_to_nearest_5.to_i.to_s_formated}m.sq"
+      end # case
+    end #def to_desc
 end # class Towerville2056
 # --- end of file ---

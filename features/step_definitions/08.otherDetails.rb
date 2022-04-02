@@ -11,7 +11,7 @@ Given('a {string} Test-Build Towerville') do |build_config|
 end
 
 When('I use get_random_variance_by_primary_economic_rating') do
-  @subject.shop_count_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.get_primary_economic_rating)
+  @subject.shop_count_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.primary_economic_rating)
 end
 
 Then('the number of shops should be around {int}') do |expectedShopCountEstimate|
@@ -29,17 +29,17 @@ Then('the number of shops should be around {int}') do |expectedShopCountEstimate
   expect(@subject.get_shop_count_estimate).to be_less_than(highShopCount)
 end
 
-When('I use get_building_foot_print_as_text') do
-  @buildingFootPrintText = @subject.get_building_foot_print_as_text
+When('I use get_building_foot_print_to_desc') do
+  @buildingFootPrintText = @subject.building_foot_print_to_desc
 end
 
 Then('the Building Footprint text should be {string}') do |expected_string|
   expect(@buildingFootPrintText).to eq(expected_string)
 end
 
-When('I set get_random_variance_by_primary_economic_rating to 0.0 with get_social_spaces_data_as_text') do
+When('I set get_random_variance_by_primary_economic_rating to 0.0 with get_social_spaces_data_to_desc') do
   @subject.social_spaces_variance_percent = 0.0
-  @social_spaces_text = @subject.get_social_spaces_data_as_text
+  @social_spaces_text = @subject.get_social_spaces_data_to_desc
 end
 
 Then('the description of Social Spaces should be {string}') do |expected_string|
@@ -49,7 +49,7 @@ end
 When('I use get_social_spaces with set get_random_variance_by_primary_economic_rating fully randomized') do
   @subject.social_spaces_variance_percent = 0.0
   @social_spaces_median_data = @subject.get_social_spaces_data
-  @subject.social_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.get_primary_economic_rating)
+  @subject.social_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.primary_economic_rating)
 end
 
 Then('the Social Spaces data should be reasonable') do
@@ -65,9 +65,9 @@ Then('the Social Spaces data should be reasonable') do
   expect(@subject.get_social_spaces_data[:size_ea_msq].to_i).to be_less_than((@social_spaces_median_data[:size_ea_msq] * high_variance).to_i)
 end
 
-When('I set get_random_variance_by_primary_economic_rating to 0.0 with get_green_spaces_data_as_text') do
+When('I set get_random_variance_by_primary_economic_rating to 0.0 with get_green_spaces_data_to_desc') do
   @subject.green_spaces_variance_percent = 0.0
-  @green_spaces_text = @subject.get_green_spaces_data_as_text
+  @green_spaces_text = @subject.get_green_spaces_data_to_desc
 end
 
 Then('the description of Green Spaces should be {string}') do |expected_string|
@@ -77,7 +77,7 @@ end
 When('I use get_green_spaces_data with set get_random_variance_by_primary_economic_rating fully randomized') do
   @subject.green_spaces_variance_percent = 0.0
   @green_spaces_median_data = @subject.get_social_spaces_data
-  @subject.green_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.get_primary_economic_rating)
+  @subject.green_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(@subject.primary_economic_rating)
 end
 
 Then('the Green Spaces data should be reasonable') do
