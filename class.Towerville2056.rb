@@ -324,31 +324,6 @@ class Towerville2056
     return roll_result
   end
 
-  def primary_industry.to_desc()
-    # Randomprimary_industry_index
-    # each digit is a different Industry
-    # 26 would be three industries, indexes of 2 & 6.
-
-		table_col_1 = ""
-    table_col_2 = ""
-    table_primary_industry = TABLE_CONTENT_SETS[:primary_industry]
-
-		0.upto(self.primary_industry_index.to_s.length - 1) do |pi_ptr|
-			row_pointer = self.primary_industry_index.to_s[pi_ptr].to_i
-			table_row = table_primary_industry[row_pointer]
-
-			if pi_ptr !=  0 then
-				table_col_1 = table_col_1 + " | "
-				table_col_2 = table_col_2 + " | "
-			end
-
-			table_col_1 = table_col_1 + table_row["summary_desc"]
-      table_col_2 = table_col_2 + table_row["broad_desc"]
-		end # if index == 2
-
-    return {summary_desc: table_col_1, broad_desc: table_col_2}
-  end # 1.upto
-
   # ---
   private
   # ---
@@ -400,6 +375,29 @@ class Towerville2056
         # ---
       when :primary_employer_scale
         TABLE_CONTENT_SETS[:primary_employer_scale][self.primary_employer_scale] || "undefined"
+        # ---
+      when :primary_industry
+        # each digit is a different Industry
+        # 26 would be three industries, indexes of 2 & 6.
+
+    		table_col_1 = ""
+        table_col_2 = ""
+        table_primary_industry = TABLE_CONTENT_SETS[:primary_industry]
+
+    		0.upto(self.primary_industry_index.to_s.length - 1) do |pi_ptr|
+    			row_pointer = self.primary_industry_index.to_s[pi_ptr].to_i
+    			table_row = table_primary_industry[row_pointer]
+
+    			if pi_ptr !=  0 then
+    				table_col_1 = table_col_1 + " | "
+    				table_col_2 = table_col_2 + " | "
+    			end
+
+    			table_col_1 = table_col_1 + table_row["summary_desc"]
+          table_col_2 = table_col_2 + table_row["broad_desc"]
+    		end # if index == 2
+
+        return {summary_desc: table_col_1, broad_desc: table_col_2}
         # ---
       end # case
     end #def to_desc
