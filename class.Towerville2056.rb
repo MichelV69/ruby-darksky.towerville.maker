@@ -110,18 +110,6 @@ class Towerville2056
   end
 
 # ---
-  def primary_economic_rating.to_desc()
-    per_text ="undefined"
-
-    table_primary_economic_rating = TABLE_CONTENT_SETS[:primary_economic_rating_scale].select {|minimum_roll, desc| minimum_roll != :dice_rule}
-
-    table_primary_economic_rating.each do |minimum_roll, desc|
-      per_text = desc if self.primary_economic_rating >= minimum_roll
-    end
-    return per_text.gsub("!e", "economy").gsub("\w", "with")
-  end
-
-# ---
   def primary_economic_rating()
     primary_economic_rating = -1
     unless (self.primary_industry_index == -1 ||
@@ -404,6 +392,16 @@ class Towerville2056
         social_spaces_data[:number_of_spaces] = social_spaces_data[:total_msq] / social_spaces_data[:size_ea_msq]
 
         "#{social_spaces_data[:number_of_spaces].round_to_nearest_5} or so #{social_spaces_data[:size_ea_msq].round_to_nearest_5.to_s_formated}m.sq spaces, totalling #{social_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{social_spaces_data[:floors_used].round_up(0)} floors"
+        # ---
+      when :primary_economic_rating
+        per_text ="undefined"
+
+        table_primary_economic_rating = TABLE_CONTENT_SETS[:primary_economic_rating_scale].select {|minimum_roll, desc| minimum_roll != :dice_rule}
+
+        table_primary_economic_rating.each do |minimum_roll, desc|
+          per_text = desc if self.primary_economic_rating >= minimum_roll
+        end
+        return per_text.gsub("!e", "economy").gsub("\w", "with")
         # ---
       end # case
     end #def to_desc
