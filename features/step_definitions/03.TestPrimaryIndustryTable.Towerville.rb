@@ -14,7 +14,7 @@ Then('the array I am returned shoud include the rollIndex, the summary_desc and 
 
   1.upto(@testVar_TableSize) do | ptr |
 		@subject.primary_industry_index = ptr
-    @method_output = @subject.primary_industry_to_desc
+    @method_output = @subject.primary_industry.to_desc
 
     fields = {}
     fields[1] = table_primary_industry[ptr]["summary_desc"]
@@ -34,7 +34,7 @@ Then('the Base Class should respond to {string}') do |string|
 end
 
 Then('correctly set the Primary Industry') do
-  @subject.primary_industry_index = Towerville2056.get_random_primary_industry_index()
+  @subject.primary_industry_index = Towerville2056.random_primary_industry_index()
   expect(@subject.primary_industry_index).not_to eq(-1)
 end
 

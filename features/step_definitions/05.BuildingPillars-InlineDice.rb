@@ -29,7 +29,7 @@ end
 
 Given('that a Building Section is added') do
   data_row_index = 21
-  @subject.building_profile[:f23_to_middle] = Towerville2056.get_random_building_profile(:f23_to_middle, @subject, {get_row_value: data_row_index})
+  @subject.building_profile[:f23_to_middle] = Towerville2056.random_building_profile(:f23_to_middle, @subject, {row_value: data_row_index})
   @table_row_data = @all_tables[:building_shape][:middle][data_row_index]
 end
 

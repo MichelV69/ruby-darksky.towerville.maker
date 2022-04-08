@@ -1,6 +1,6 @@
 # --- # ---
 class StoryTools
-  def self.get_character_gender_by_age_category(age_category)
+  def self.character_gender_by_age_category(age_category)
     case age_category.to_lower
     when "teen"
       case 1.d10
@@ -35,7 +35,7 @@ class AppConfig
     self.general_options = CONFIG_OPTION_SETS[:general]
   end
 
-  def get_options_for(category, args = {})
+  def options_for(category, args = {})
     options_for = CONFIG_OPTION_SETS[category.to_sym]
     if args[:sub_category]
       options_for = CONFIG_OPTION_SETS[category.to_sym][args[:sub_category].to_sym]

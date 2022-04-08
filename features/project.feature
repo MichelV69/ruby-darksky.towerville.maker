@@ -176,32 +176,32 @@ I want to create a randomly generated TV for DarkSky
 
   Scenario Outline: Provide other Details; How Many Shops?
     Given a "5/6/78" Test-Build Towerville
-    When I use get_random_variance_by_primary_economic_rating
+    When I use random_variance_by_primary_economic_rating
     Then the number of shops should be around 50
 
 @REGRESS
   Scenario Outline: Provide other Details; Building Footprint
     Given a "5/6/78" Test-Build Towerville
-    When I use get_building_foot_print_to_desc
+    When I use building_foot_print.to_desc
     Then the Building Footprint text should be "136.5m by 91.0m, totalling 12 425m.sq"
 
  Scenario Outline: Provide other Details; How Many Social Spaces?
    Given a "5/6/78" Test-Build Towerville
-   When I set get_random_variance_by_primary_economic_rating to 0.0 with get_social_spaces_data_to_desc
+   When I set random_variance_by_primary_economic_rating to 0.0 with social_spaces_data.to_desc
    Then the description of Social Spaces should be "25 or so 1 240m.sq spaces, totalling 26 055m.sq over 3 floors"
 
   Scenario Outline: Provide other Details; How Many Social Spaces?
     Given a "5/6/78" Test-Build Towerville
-    When I use get_social_spaces with set get_random_variance_by_primary_economic_rating fully randomized
+    When I use social_spaces with set random_variance_by_primary_economic_rating fully randomized
     Then the Social Spaces data should be reasonable
 
  Scenario Outline: Provide other Details; How Many Green Spaces?
    Given a "5/6/78" Test-Build Towerville
-   When I set get_random_variance_by_primary_economic_rating to 0.0 with get_green_spaces_data_to_desc
+   When I set random_variance_by_primary_economic_rating to 0.0 with green_spaces_data.to_desc
    Then the description of Green Spaces should be "7 or so 2 195m.sq spaces, totalling 15 605m.sq over 4 floors"
 
   Scenario Outline: Provide other Details; How Many Green Spaces?
     Given a "5/6/78" Test-Build Towerville
-    When I use get_green_spaces_data with set get_random_variance_by_primary_economic_rating fully randomized
+    When I use green_spaces_data with set random_variance_by_primary_economic_rating fully randomized
     Then the Green Spaces data should be reasonable
 # ----- end of file -----

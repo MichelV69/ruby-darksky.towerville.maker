@@ -88,11 +88,11 @@ class Towerville2056
   end
 
 # ---
-  def social_spaces_data_to_desc
+  def social_spaces_data.to_desc
     social_spaces_data = {}
-    social_spaces_data = self.get_social_spaces_data
+    social_spaces_data = self.social_spaces_data
 
-    social_spaces_data[:floors_used] = social_spaces_data[:total_msq] / self.get_building_foot_print[:sq]
+    social_spaces_data[:floors_used] = social_spaces_data[:total_msq] / self.building_foot_print[:sq]
 
     social_spaces_data[:number_of_spaces] = social_spaces_data[:total_msq] / social_spaces_data[:size_ea_msq]
 
@@ -102,7 +102,7 @@ class Towerville2056
 # ---
   def building_foot_print
     building_in_m = {}
-		building_in_m[:height]	= self.get_building_height()
+		building_in_m[:height]	= self.building_height()
 		building_in_m[:width]		= building_in_m[:height].half.round(1)
 		building_in_m[:depth]		= building_in_m[:width].two_thirds.round(1)
     building_in_m[:sq]      = (building_in_m[:width] * building_in_m[:depth]).round(1)
@@ -122,7 +122,7 @@ class Towerville2056
   end
 
 # ---
-  def primary_economic_rating_to_desc()
+  def primary_economic_rating.to_desc()
     per_text ="undefined"
 
     table_primary_economic_rating = TABLE_CONTENT_SETS[:primary_economic_rating_scale].select {|minimum_roll, desc| minimum_roll != :dice_rule}
@@ -173,7 +173,7 @@ class Towerville2056
   end
 
 # ---
-	def primary_employer_scale_to_desc
+	def primary_employer_scale.to_desc
     TABLE_CONTENT_SETS[:primary_employer_scale][self.primary_employer_scale] || "undefined"
 	end
 
@@ -196,7 +196,7 @@ class Towerville2056
 	end
 
   # ---
-  def gbuilding_height()
+  def building_height()
     return self.number_of_floors * self.construction_rules[:story_height_in_m]
   end
 
@@ -217,22 +217,22 @@ class Towerville2056
 
     section_requested = section_requested.to_s.to_lower.gsub(' ','_').to_sym if section_requested.class != :example.class
 
-    get_basement_depth = lambda do |tv_object|
+    basement_depth = lambda do |tv_object|
       (tv_object.number_of_floors * 5.percent * -1.0).round
     end
 
-    get_ground_floors_capped_height = lambda do |tv_object|
+    ground_floors_capped_height = lambda do |tv_object|
       gfc = tv_object.construction_rules[:ground_floors_cap]
       last_floor = (tv_object.number_of_floors * 12.percent).round
       last_floor < gfc ? last_floor : gfc
     end
 
-    get_crown_height = lambda do |tv_object|
+    crown_height = lambda do |tv_object|
       (tv_object.number_of_floors * 10.percent).round
     end
 
-    get_crown_first_floor = lambda do |tv_object|
-      tv_object.number_of_floors - get_crown_height.call(tv_object)
+    crown_first_floor = lambda do |tv_object|
+      tv_object.number_of_floors - crown_height.call(tv_object)
     end
 
     table_column = "unset"
@@ -247,7 +247,7 @@ class Towerville2056
       die_roll_cap = 8
 
 			last_floor = -1
-      first_floor =  get_basement_depth.call(tv_object) + last_floor
+      first_floor =  basement_depth.call(tv_object) + last_floor
       floors_range =  (first_floor..last_floor)
 
     when :ground_floors
@@ -255,7 +255,7 @@ class Towerville2056
       die_roll_cap = 13
 
       first_floor = 1
-      last_floor = get_ground_floors_capped_height.call(tv_object)
+      last_floor = ground_floors_capped_height.call(tv_object)
       floors_range = (first_floor..last_floor)
 
     when :ground_to_f22
@@ -271,7 +271,7 @@ class Towerville2056
       die_roll_cap = 24
 
       first_floor = skyline_floor + 1
-      last_floor = first_floor + half_of(get_crown_first_floor.call(tv_object) - first_floor).round
+      last_floor = first_floor + half_of(crown_first_floor.call(tv_object) - first_floor).round
       floors_range = (first_floor..last_floor)
 
     when :middle_to_crown
@@ -279,7 +279,7 @@ class Towerville2056
       die_roll_cap = 24
 
       first_floor = tv_object.building_profile[:f23_to_middle].last.last + 1
-      last_floor = get_crown_first_floor.call(tv_object) - 1
+      last_floor = crown_first_floor.call(tv_object) - 1
 
       floors_range = (first_floor..last_floor)
 
@@ -287,7 +287,7 @@ class Towerville2056
       profile_category = :crown
       die_roll_cap = 12
 
-      first_floor = get_crown_first_floor.call(tv_object)
+      first_floor = crown_first_floor.call(tv_object)
       last_floor = tv_object.number_of_floors
       floors_range = (first_floor..last_floor)
 
@@ -300,10 +300,10 @@ class Towerville2056
     table_data = TABLE_CONTENT_SETS[:building_shape][profile_category]
 
 		unless profile_category == :crown_cap
-      if args[:get_row_value].nil?
+      if args[:row_value].nil?
         table_column = table_data[1.d6({ex: true, cap: die_roll_cap})]
       else
-        table_column = table_data[args[:get_row_value]]
+        table_column = table_data[args[:row_value]]
       end
 		else
 			percent_lower_has_cap = 70
@@ -353,7 +353,7 @@ class Towerville2056
     return roll_result
   end
 
-  def primary_industry_to_desc()
+  def primary_industry.to_desc()
     # Randomprimary_industry_index
     # each digit is a different Industry
     # 26 would be three industries, indexes of 2 & 6.
@@ -382,9 +382,9 @@ class Towerville2056
   private
   # ---
   def method_missing(method_name, *args, &block)
-    possible_property_name = method_name.to_s.gsub("_to_desc","")
+    possible_property_name = method_name.to_s.gsub(".to_desc","")
 
-    if (method_name.to_s.include? "_to_desc") && (self.respond_to? possible_property_name) then
+    if (method_name.to_s.include? ".to_desc") && (self.respond_to? possible_property_name) then
         to_desc property_name
     else
       puts "method_missing :>> #{method_name}"
@@ -396,7 +396,7 @@ class Towerville2056
   def to_desc(property_name)
     case property_name.to_sym
       when :green_spaces_data
-        self.green_spaces_data[:floors_used] = self.green_spaces_data[:total_msq] / self.get_building_foot_print[:sq] * 3.0
+        self.green_spaces_data[:floors_used] = self.green_spaces_data[:total_msq] / self.building_foot_print[:sq] * 3.0
 
         self.green_spaces_data[:number_of_spaces] = self.green_spaces_data[:total_msq] / self.green_spaces_data[:size_ea_msq]
 

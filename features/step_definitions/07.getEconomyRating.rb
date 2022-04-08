@@ -38,7 +38,7 @@ Then('the Primary Economic Rating value should be {int}') do |expect_value|
 end
 
 Then('the Primary Economic Rating description should be {string}') do |expect_text|
-  expect(@subject.primary_economic_rating_to_desc).to eq(expect_text)
+  expect(@subject.primary_economic_rating.to_desc).to eq(expect_text)
 end
 
 # --- end of file ---

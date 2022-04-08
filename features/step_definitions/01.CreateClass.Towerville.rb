@@ -50,7 +50,7 @@ Given('that I set the Tower height to {int} stories') do |stories_tall|
 end
 
 Then('I should see a height in metres of {int}m') do |metres_tall|
-  expect(@subject.get_building_height).to eq(metres_tall)
+  expect(@subject.building_height).to eq(metres_tall)
 end
 
 # --- end of file ---

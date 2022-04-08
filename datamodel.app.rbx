@@ -28,14 +28,14 @@ puts "Finished result > '#{DiceStrings.parse example_string}'"
 
 puts title_line "height to housing check"
 tv = Towerville2056.new
-tv.number_of_floors = Towerville2056::get_random_floor_count({force: :min})
-puts "min houses for #{tv.number_of_floors} is #{tv.get_number_of_homes_estimate} w/ SQRT #{Math.sqrt(tv.get_number_of_homes_estimate)}"
+tv.number_of_floors = Towerville2056::random_floor_count({force: :min})
+puts "min houses for #{tv.number_of_floors} is #{tv.number_of_homes_estimate} w/ SQRT #{Math.sqrt(tv.number_of_homes_estimate)}"
 
-tv.number_of_floors = Towerville2056::get_random_floor_count({force: :avg})
-puts "avg houses for #{tv.number_of_floors} is #{tv.get_number_of_homes_estimate} w/ SQRT #{Math.sqrt(tv.get_number_of_homes_estimate)}"
+tv.number_of_floors = Towerville2056::random_floor_count({force: :avg})
+puts "avg houses for #{tv.number_of_floors} is #{tv.number_of_homes_estimate} w/ SQRT #{Math.sqrt(tv.number_of_homes_estimate)}"
 
-tv.number_of_floors = Towerville2056::get_random_floor_count({force: :max})
-puts "max houses for #{tv.number_of_floors} is #{tv.get_number_of_homes_estimate} w/ SQRT #{Math.sqrt(tv.get_number_of_homes_estimate)}"
+tv.number_of_floors = Towerville2056::random_floor_count({force: :max})
+puts "max houses for #{tv.number_of_floors} is #{tv.number_of_homes_estimate} w/ SQRT #{Math.sqrt(tv.number_of_homes_estimate)}"
 
 puts title_line "Economic Scale Curve Test"
 stat_analysis = Hash.new

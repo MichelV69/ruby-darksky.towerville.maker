@@ -8,7 +8,7 @@ require_relative('../../class.ExternalRandom.rb')
 
 # ---
 When ('I request a random floor count') do
-  @subject.number_of_floors = Towerville2056.get_random_floor_count()
+  @subject.number_of_floors = Towerville2056.random_floor_count()
 end
 
 Then('the building floor count should be set') do
@@ -23,7 +23,7 @@ end
 Given('I request a random Building Profile for the {string} section') do |building_profile_section|
   section_requested = as_table_target building_profile_section
 
-  @subject.building_profile[section_requested] = Towerville2056.get_random_building_profile(section_requested, @subject)
+  @subject.building_profile[section_requested] = Towerville2056.random_building_profile(section_requested, @subject)
 end
 
 Then('Building Profile - {string} should be set') do |building_profile_section|
