@@ -149,11 +149,6 @@ class Towerville2056
   end
 
 # ---
-	def primary_employer_scale.to_desc
-    TABLE_CONTENT_SETS[:primary_employer_scale][self.primary_employer_scale] || "undefined"
-	end
-
-# ---
   def population_estimate()
 		estimated_population = self.number_of_homes_estimate * self.construction_rules[:people_per_home]
 
@@ -402,6 +397,9 @@ class Towerville2056
           per_text = desc if self.primary_economic_rating >= minimum_roll
         end
         return per_text.gsub("!e", "economy").gsub("\w", "with")
+        # ---
+      when :primary_employer_scale
+        TABLE_CONTENT_SETS[:primary_employer_scale][self.primary_employer_scale] || "undefined"
         # ---
       end # case
     end #def to_desc
