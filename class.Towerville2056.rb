@@ -88,18 +88,6 @@ class Towerville2056
   end
 
 # ---
-  def social_spaces_data.to_desc
-    social_spaces_data = {}
-    social_spaces_data = self.social_spaces_data
-
-    social_spaces_data[:floors_used] = social_spaces_data[:total_msq] / self.building_foot_print[:sq]
-
-    social_spaces_data[:number_of_spaces] = social_spaces_data[:total_msq] / social_spaces_data[:size_ea_msq]
-
-    "#{social_spaces_data[:number_of_spaces].round_to_nearest_5} or so #{social_spaces_data[:size_ea_msq].round_to_nearest_5.to_s_formated}m.sq spaces, totalling #{social_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{social_spaces_data[:floors_used].round_up(0)} floors"
-  end
-
-# ---
   def building_foot_print
     building_in_m = {}
 		building_in_m[:height]	= self.building_height()
@@ -393,6 +381,7 @@ class Towerville2056
 
   end
 
+  # ---
   def to_desc(property_name)
     case property_name.to_sym
       when :green_spaces_data
@@ -401,9 +390,21 @@ class Towerville2056
         self.green_spaces_data[:number_of_spaces] = self.green_spaces_data[:total_msq] / self.green_spaces_data[:size_ea_msq]
 
         "#{self.green_spaces_data[:number_of_spaces].round} or so #{self.green_spaces_data[:size_ea_msq].round_to_nearest_5.to_s_formated}m.sq spaces, totalling #{self.green_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{self.green_spaces_data[:floors_used].round_up(0)} floors"
+        # ---
       when :building_foot_print
         building_in_m = self.building_foot_print
         "#{building_in_m[:width]}m by #{building_in_m[:depth]}m, totalling #{building_in_m[:sq].round_to_nearest_5.to_i.to_s_formated}m.sq"
+        # ---
+      when :social_spaces_data
+        social_spaces_data = {}
+        social_spaces_data = self.social_spaces_data
+
+        social_spaces_data[:floors_used] = social_spaces_data[:total_msq] / self.building_foot_print[:sq]
+
+        social_spaces_data[:number_of_spaces] = social_spaces_data[:total_msq] / social_spaces_data[:size_ea_msq]
+
+        "#{social_spaces_data[:number_of_spaces].round_to_nearest_5} or so #{social_spaces_data[:size_ea_msq].round_to_nearest_5.to_s_formated}m.sq spaces, totalling #{social_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{social_spaces_data[:floors_used].round_up(0)} floors"
+        # ---
       end # case
     end #def to_desc
 end # class Towerville2056
