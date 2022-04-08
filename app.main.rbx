@@ -22,25 +22,27 @@ tv.building_profile[:middle] = Towerville2056.get_random_building_profile(:middl
 tv.building_profile[:crown] = Towerville2056.get_random_building_profile(:crown)
 tv.building_profile[:crown_cap] = Towerville2056.get_random_building_profile(:crown_cap)
 
+tv.building_profile.each { |bldg_section| tv.building_profile[bldg_section] =  Towerville2056.get_random_building_profile(bldg_section)}
+
 tv.primary_employer_scale = Towerville2056::get_random_primary_employer_scale()
 tv.shop_count_variance_percent = Towerville2056::get_random_variance_by_primary_economic_rating(tv.primary_industry_index)
 
-tv.social_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(tv.get_primary_economic_rating)
+tv.social_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(tv.primary_economic_rating)
 
-tv.green_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(tv.get_primary_economic_rating)
+tv.green_spaces_variance_percent = Towerville2056.get_random_variance_by_primary_economic_rating(tv.primary_economic_rating)
 
 space_bar = spaces(tv.name.length)
 # ---
 puts "\n\n ----- "
 puts "\n #{tv.name} :: # of Floors: #{tv.number_of_floors}"
 puts " #{space_bar} :: Height: #{tv.get_building_height} meters tall"
-puts " #{space_bar} :: Ground area footprint: #{tv.get_building_foot_print_as_text}"
+puts " #{space_bar} :: Ground area footprint: #{tv.get_building_foot_print_to_desc}"
 puts " #{space_bar} :: # of Homes : #{tv.get_number_of_homes_estimate.to_s_formated}"
 puts " #{space_bar} :: # of People : #{tv.get_population_estimate.to_s_formated}"
 
 puts " #{space_bar} :: Approximate # of shops: #{tv.get_shop_count_estimate}"
-puts " #{space_bar} :: Approximate # of social spaces : #{tv.get_social_spaces_data_as_text}"
-puts " #{space_bar} :: Approximate # of green spaces : #{tv.get_green_spaces_data_as_text}"
+puts " #{space_bar} :: Approximate # of social spaces : #{tv.get_social_spaces_data_to_desc}"
+puts " #{space_bar} :: Approximate # of green spaces : #{tv.get_green_spaces_data_to_desc}"
 
 puts "\n #{tv.name} :: Bottom section: #{tv.building_profile[:bottom]} "
 puts " #{space_bar} :: Middle section: #{tv.building_profile[:middle]} "
@@ -48,11 +50,22 @@ puts " #{space_bar} :: Crown section: #{tv.building_profile[:crown]} "
 puts " #{space_bar} :: 'Crown Forest': "
 word_wrap_this tv.building_profile[:crown_cap]
 
-puts "\n #{tv.name} :: Economics: #{tv.get_primary_industry_as_text[:summary_desc]}"
-word_wrap_this tv.get_primary_industry_as_text[:broad_desc]
+tv.building_profile.each { |bldg_section|
+  front = " #{space_bar}"
+  if bldg_section == :bottom
+    front = "\n #{tv.name}"
+  end
 
-puts " #{space_bar} :: primary Employer Scale: #{tv.primary_employer_scale}: #{tv.get_primary_employer_scale_as_text} "
-puts " #{space_bar} :: Relative Economic Status : #{tv.get_primary_economic_rating } : #{tv.get_primary_economic_rating_as_text}"
+  tv.building_profile[bldg_section] =  Towerville2056.get_random_building_profile(bldg_section)
+
+
+  }
+
+puts "\n #{tv.name} :: Economics: #{tv.primary_industry_to_desc[:summary_desc]}"
+word_wrap_this tv.primary_industry_to_desc[:broad_desc]
+
+puts " #{space_bar} :: primary Employer Scale: #{tv.primary_employer_scale}: #{tv.primary_employer_scale_to_desc} "
+puts " #{space_bar} :: Relative Economic Status : #{tv.primary_economic_rating } : #{tv.primary_economic_rating_to_desc}"
 
 puts "\n\n  #{space_bar}"
 # --- ---

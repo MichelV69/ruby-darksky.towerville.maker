@@ -57,7 +57,7 @@ pes_tens = 0
           tv.primary_industry_index = primary_industry_index
           tv.primary_employer_scale = primary_employer_scale
           tv.number_of_floors = number_of_floors
-          pER = tv.get_primary_economic_rating
+          pER = tv.primary_economic_rating
           stat_analysis[pER].nil? ? stat_analysis[pER] = 1 : stat_analysis[pER] += 1
       end
     end
