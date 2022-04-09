@@ -11,18 +11,14 @@ if myAppConfig.general_options[:use_random_org_for_dice]
 end
 
 tv = Towerville2056.new()
-puts "tables found: #{tv.tables_count}"
-
 tv.name = "Example Tower"
 tv.number_of_floors = Towerville2056::random_floor_count
 tv.primary_industry_index = Towerville2056::random_primary_industry_index
 
-tv.building_profile[:bottom] = Towerville2056.random_building_profile(:bottom)
-tv.building_profile[:middle] = Towerville2056.random_building_profile(:middle)
-tv.building_profile[:crown] = Towerville2056.random_building_profile(:crown)
-tv.building_profile[:crown_cap] = Towerville2056.random_building_profile(:crown_cap)
-
-tv.building_profile.each { |bldg_section| tv.building_profile[bldg_section] =  Towerville2056.random_building_profile(bldg_section)}
+tv.building_profile.each { |bldg_section, section_data|
+    puts "bldg_section: [#{bldg_section}]"
+    tv.building_profile[bldg_section] =  Towerville2056.random_building_profile(bldg_section, tv)
+  }
 
 tv.primary_employer_scale = Towerville2056::random_primary_employer_scale()
 tv.shop_count_variance_percent = Towerville2056::random_variance_by_primary_economic_rating(tv.primary_industry_index)
