@@ -60,8 +60,7 @@ class Towerville2056
 
   end # def initialize
 
-  # ---
-
+# ---
   def green_spaces_data
     green_spaces_data = {}
     green_spaces_data.default = -1.1
@@ -327,17 +326,24 @@ class Towerville2056
   # ---
   private
   # ---
-  def method_missing(method_name, *args, &block)
-    possible_property_name = method_name.to_s.gsub(".to_desc","")
 
-    if (method_name.to_s.include? ".to_desc") && (self.respond_to? possible_property_name) then
-        to_desc property_name
+  def get_sub_method(method_name)
+    puts "get_sub_method >>> [#{method_name.to_s.split('.').last}]"
+    method_name.to_s.split(".").last
+  end
+
+  def method_missing(method_name, *args, &block)
+    if (get_sub_method(method_name).include?("to_desc"))then
+      to_desc property_name
     else
       puts "method_missing :>> #{method_name}"
       super
     end
+  end # def method_missing
 
-  end
+  def respond_to_missing?(method_name, *)
+     get_sub_method(method_name).include?("to_desc")|| super
+  end # def respond_to_missing?
 
   # ---
   def to_desc(property_name)
@@ -376,7 +382,7 @@ class Towerville2056
       when :primary_employer_scale
         TABLE_CONTENT_SETS[:primary_employer_scale][self.primary_employer_scale] || "undefined"
         # ---
-      when :primary_industry
+      when :primary_industry_index
         # each digit is a different Industry
         # 26 would be three industries, indexes of 2 & 6.
 
@@ -400,6 +406,6 @@ class Towerville2056
         return {summary_desc: table_col_1, broad_desc: table_col_2}
         # ---
       end # case
-    end #def to_desc
+  end #def to_desc
 end # class Towerville2056
 # --- end of file ---
