@@ -327,14 +327,24 @@ class Towerville2056
   private
   # ---
 
-  def get_sub_method(method_name)
-    puts "get_sub_method >>> [#{method_name.to_s.split('.').last}]"
-    method_name.to_s.split(".").last
+  def valid_action?(method_name)
+    valid_actions = ["text_block_for_"]
+
+    valid_actions.each { |action|
+      action_requested = method_name.to_s.gsub(action, "") if method_name.to_s.contains? action
+
+      if (!action_requested.nil? &&
+        self.respond_to?(action_requested))
+        return action_requested
+      end
+    }
+
+    return false
   end
 
   def method_missing(method_name, *args, &block)
-    if (get_sub_method(method_name).include?("to_desc"))then
-      to_desc property_name
+    if (valid_action? method_name) then
+      text_block_for (valid_action? method_name)
     else
       puts "method_missing :>> #{method_name}"
       super
@@ -342,11 +352,11 @@ class Towerville2056
   end # def method_missing
 
   def respond_to_missing?(method_name, *)
-     get_sub_method(method_name).include?("to_desc")|| super
+     valid_action? method_name || super
   end # def respond_to_missing?
 
   # ---
-  def to_desc(property_name)
+  def text_block_for(property_name)
     case property_name.to_sym
       when :green_spaces_data
         self.green_spaces_data[:floors_used] = self.green_spaces_data[:total_msq] / self.building_foot_print[:sq] * 3.0
