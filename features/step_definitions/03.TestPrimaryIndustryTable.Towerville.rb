@@ -10,18 +10,19 @@ When ('I provide a Number other than {int} to the getRandomprimary_industry meth
 end
 
 Then('the array I am returned shoud include the rollIndex, the summary_desc and the broad_desc') do
-  table_primary_industry = @all_tables[:primary_industry]
+  rows_primary_industry = @all_tables[:primary_industry]
 
   1.upto(@testVar_TableSize) do | ptr |
 		@subject.primary_industry_index = ptr
-    @method_output = @subject.primary_industry.to_desc
+    puts ">>> debug >>> @subject [#{@subject.inspect}]"
+    @method_output = @subject.primary_industry_index.to_desc
 
-    fields = {}
-    fields[1] = table_primary_industry[ptr]["summary_desc"]
-    fields[2] = table_primary_industry[ptr]["broad_desc"]
+    columns = {}
+    columns[1] = rows_primary_industry[ptr]["summary_desc"]
+    columns[2] = rows_primary_industry[ptr]["broad_desc"]
 
-    expect(@method_output["summary_desc".to_sym]).to		eq(fields[1])
-    expect(@method_output["broad_desc".to_sym]).to  		eq(fields[2])
+    expect(@method_output["summary_desc".to_sym]).to		eq(columns[1])
+    expect(@method_output["broad_desc".to_sym]).to  		eq(columns[2])
   end
 end
 
