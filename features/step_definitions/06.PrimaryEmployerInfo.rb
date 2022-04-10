@@ -24,7 +24,7 @@ end
 Then('I should get the details for the Primary Employer Scale that I expect') do
   @table_row_data = @all_tables[:primary_employer_scale][@new_primary_employers_scale]
 
-  expect(@subject.primary_employer_scale.to_desc).to eq(@table_row_data)
+  expect(@subject.text_block_for_primary_employer_scale).to eq(@table_row_data)
 end
 
 When('I randomly set the Primary Employer Scale') do
@@ -37,7 +37,7 @@ Then('Primary Employer Scale should be valid') do
 end
 
 Then('I should get valid details for the Primary Employer Scale') do
-  expect(@subject.primary_employer_scale.to_desc).not_to eq("")
+  expect(@subject.text_block_for_primary_employer_scale).not_to eq("")
 end
 
 # --- end of file ---

@@ -30,7 +30,7 @@ Then('the number of shops should be around {int}') do |expectedShopCountEstimate
 end
 
 When('I use building_foot_print.to_desc') do
-  @buildingFootPrintText = @subject.building_foot_print.to_desc
+  @buildingFootPrintText = @subject.text_block_for_building_foot_print
 end
 
 Then('the Building Footprint text should be {string}') do |expected_string|
@@ -39,7 +39,7 @@ end
 
 When('I set random_variance_by_primary_economic_rating to 0.0 with social_spaces_data.to_desc') do
   @subject.social_spaces_variance_percent = 0.0
-  @social_spaces_text = @subject.social_spaces_data.to_desc
+  @social_spaces_text = @subject.text_block_for_social_spaces_data
 end
 
 Then('the description of Social Spaces should be {string}') do |expected_string|
@@ -67,7 +67,7 @@ end
 
 When('I set random_variance_by_primary_economic_rating to 0.0 with green_spaces_data.to_desc') do
   @subject.green_spaces_variance_percent = 0.0
-  @green_spaces_text = @subject.green_spaces_data.to_desc
+  @green_spaces_text = @subject.text_block_for_green_spaces_data
 end
 
 Then('the description of Green Spaces should be {string}') do |expected_string|

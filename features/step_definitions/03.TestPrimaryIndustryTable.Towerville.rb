@@ -14,8 +14,7 @@ Then('the array I am returned shoud include the rollIndex, the summary_desc and 
 
   1.upto(@testVar_TableSize) do | ptr |
 		@subject.primary_industry_index = ptr
-    puts ">>> debug >>> @subject [#{@subject.inspect}]"
-    @method_output = @subject.primary_industry_index.to_desc
+    @method_output = @subject.text_block_for_primary_industry_index
 
     columns = {}
     columns[1] = rows_primary_industry[ptr]["summary_desc"]
