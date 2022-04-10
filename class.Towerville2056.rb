@@ -5,6 +5,7 @@ require_relative('lib.wolfstar_studios.rb')
 class Towerville2056
   TABLE_FILENAME = "tables.randomTowerville.yaml"
   TABLE_CONTENT_SETS = Psych.load_file(TABLE_FILENAME)
+  BLURB_TYPICAL_HOME = "ten-room home"
 
   attr_accessor :tables_count,
     :construction_rules, :economy_rules,
@@ -342,15 +343,17 @@ class Towerville2056
     return false
   end
 
+  # ---
   def method_missing(method_name, *args, &block)
     if (valid_action? method_name) then
-      text_block_for (valid_action? method_name)
+      text_block_for (valid_action? method_name, *args)
     else
       puts "method_missing :>> #{method_name}"
       super
     end
   end # def method_missing
 
+  # ---
   def respond_to_missing?(method_name, *)
      valid_action? method_name || super
   end # def respond_to_missing?
@@ -358,6 +361,9 @@ class Towerville2056
   # ---
   def text_block_for(property_name)
     case property_name.to_sym
+      when :number_of_homes_estimate
+        "#{self.number_of_homes_estimate.to_f.round_to_nearest_5.to_i} #{Towerville2056::BLURB_TYPICAL_HOME}s"
+        # ---
       when :green_spaces_data
         self.green_spaces_data[:floors_used] = self.green_spaces_data[:total_msq] / self.building_foot_print[:sq] * 3.0
 
@@ -414,6 +420,9 @@ class Towerville2056
     		end # if index == 2
 
         return {summary_desc: table_col_1, broad_desc: table_col_2}
+        # ---
+      else
+        raise "Towerville2056:: ERR::  text_block_for_#{property_name} => action undefined"
         # ---
       end # case
   end #def to_desc
