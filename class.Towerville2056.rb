@@ -361,8 +361,11 @@ class Towerville2056
   # ---
   def text_block_for(property_name)
     case property_name.to_sym
+      when :population_estimate
+        "#{self.population_estimate.round_to_nearest_5.to_s_formated}"
+      # ---
       when :number_of_homes_estimate
-        "#{self.number_of_homes_estimate.to_f.round_to_nearest_5.to_i} #{Towerville2056::BLURB_TYPICAL_HOME}s"
+        "#{self.number_of_homes_estimate.round_to_nearest_5.to_s_formated} #{Towerville2056::BLURB_TYPICAL_HOME}s"
         # ---
       when :green_spaces_data
         self.green_spaces_data[:floors_used] = self.green_spaces_data[:total_msq] / self.building_foot_print[:sq] * 3.0
