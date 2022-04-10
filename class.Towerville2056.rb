@@ -346,7 +346,7 @@ class Towerville2056
   # ---
   def method_missing(method_name, *args, &block)
     if (valid_action? method_name) then
-      text_block_for (valid_action? method_name, *args)
+      text_block_for(valid_action?(method_name), *args)
     else
       puts "method_missing :>> #{method_name}"
       super
@@ -354,13 +354,17 @@ class Towerville2056
   end # def method_missing
 
   # ---
-  def respond_to_missing?(method_name, *)
+  def respond_to_missing?(method_name, *args)
      valid_action? method_name || super
   end # def respond_to_missing?
 
   # ---
-  def text_block_for(property_name)
+  def text_block_for(property_name, *other)
     case property_name.to_sym
+      when :building_profile
+        profile_data = self.building_profile[other.first]
+        word_wrap_this "Floors : #{profile_data.last} \n Design Notes : #{profile_data.first}"
+      # ---
       when :population_estimate
         "#{self.population_estimate.round_to_nearest_5.to_s_formated}"
       # ---

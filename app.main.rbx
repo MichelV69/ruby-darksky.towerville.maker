@@ -40,13 +40,11 @@ puts " #{space_bar} :: Approximate # of social spaces : #{tv.text_block_for_soci
 puts " #{space_bar} :: Approximate # of green spaces : #{tv.text_block_for_green_spaces_data}"
 
 tv.building_profile.keys.each { |bldg_section|
-  puts ">>> debug >>> bldg_section #{bldg_section.inspect}"
-  puts ">>> debug >>> #{tv.building_profile[bldg_section]}"
   front = " #{space_bar}"
   if bldg_section != :basement
     front = "\n #{tv.name}"
   end
-  text_block = tv.text_block_for_building_profile[bldg_section] ||'Error - No Data'
+  text_block = tv.text_block_for_building_profile(bldg_section) ||'Error - No Data'
   puts "#{front} :: #{bldg_section}: #{text_block} "
   }
 
