@@ -98,13 +98,15 @@ class String
 end
 
 # --- # ---
-class Integer
+class Numeric
   def is_wrong!
     self + 2
   end
+
   def debug
     " >> "+self.to_s
   end
+
   def as_str
     self.to_s
   end
@@ -140,6 +142,16 @@ class Integer
     (self / 100.0000).to_f
   end # def percent
 
+  def round_to_nearest_5
+    return self.to_i if self % 5 == 0
+    rounded = self.round(-1).to_i
+    rounded > self ? rounded : rounded + 5
+  end
+
+end # class Numeric
+
+# --- # ---
+class Integer
   def hex
 		case self
 			when 10 then return "A"
@@ -205,17 +217,10 @@ class Integer
   def d4(args = {ex: false, cap: :no})
     self.d(4, args)
   end # def d4
-end
+end #class Integer
 
 # --- # ---
 class	Float
-  def is_around?(test_value)
-    margin = 1.00 + 28.5.percent
-    high = test_value * margin
-    low = test_value / margin
-    self.between? low, high
-  end
-
 	def halved
 		self * 1.00/2.00
 	end
@@ -235,21 +240,7 @@ class	Float
   def round_down(bar=2)
 		self.floor(bar)
 	end
-
-  def round_to_nearest_5
-    return self if self % 5 == 0
-    rounded = self.round(-1)
-    rounded > self ? rounded : rounded + 5
-  end
-
-  def percent
-    self / 100.0000
-  end # def percent
-
-  def to_s_formated(spacer = ' ')
-    self.to_s.gsub(/\B(?=(...)*\b)/, spacer)
-  end
-end
+end #class	Float
 
 # --- # ---
 class Array
