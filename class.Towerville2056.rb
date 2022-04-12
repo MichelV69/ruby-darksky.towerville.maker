@@ -363,7 +363,7 @@ class Towerville2056
     case property_name.to_sym
       when :building_profile
         profile_data = self.building_profile[other.first]
-        word_wrap_this "Floors : #{profile_data.last} \n Design Notes : #{profile_data.first}"
+        return "Floors : #{profile_data.last} :: Design Form : #{profile_data.first}"
       # ---
       when :population_estimate
         "#{self.population_estimate.round_to_nearest_5.to_s_formated}"
