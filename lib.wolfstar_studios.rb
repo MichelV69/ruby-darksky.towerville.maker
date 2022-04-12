@@ -332,7 +332,11 @@ def word_wrap_this(text, args={})
     puts "#{text.slice(column, column_break - column)}"
     column = column_break
   end
-  puts "#{text.slice(column, text.size - column)}"
+  return "#{text.slice(column, text.size - column)}"
 end
 
+# ---
+def label_for(variable_name)
+  "#{variable_name.to_s.gsub("_"," ").title_case}"
+end
 # --- end of file ---
