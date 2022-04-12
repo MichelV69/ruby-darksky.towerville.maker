@@ -41,11 +41,11 @@ puts " #{space_bar} :: Approximate # of green spaces : #{tv.text_block_for_green
 
 tv.building_profile.keys.each { |bldg_section|
   front = " #{space_bar}"
-  if bldg_section != :basement
-    front = "\n #{tv.name}"
+  if bldg_section == :basement
+    front = "\n Building Profile:"
   end
-  text_block = tv.text_block_for_building_profile(bldg_section) ||'Error - No Data'
-  puts "#{front} :: #{bldg_section}: #{text_block} "
+  text_block = tv.text_block_for_building_profile(bldg_section)
+  puts "#{front} :: #{label_for bldg_section}: #{text_block} "
   }
 
 puts "\n #{tv.name} :: Economics: #{tv.text_block_for_primary_industry[:summary_desc]}"
