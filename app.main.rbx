@@ -44,7 +44,9 @@ tv.building_profile.keys.each { |bldg_section|
   if bldg_section == :basement
     front = "\n Building Profile:"
   end
+  ## REDO :  use the Tabulo.gem here for an output table
   text_block = tv.text_block_for_building_profile(bldg_section)
+  text_block = word_wrap_this(text_block, {at: 77}) if bldg_section == :crown_cap
   puts "#{front} :: #{label_for bldg_section}: #{text_block} "
   }
 

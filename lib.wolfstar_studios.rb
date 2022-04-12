@@ -103,7 +103,6 @@ class String
   def in_title_case
     do_not_title = ["the", "to"]
     working_string_set = self.split(" ")
-    debug_msg "working_string_set #{working_string_set.inspect}"
     working_string_set.each do |word|
       unless do_not_title.contains? word
         title_word = word
@@ -347,6 +346,7 @@ def word_wrap_this(text, args={})
   page_width = args[:at] unless args[:at].nil?
   column = 0
   default_margin = (page_width * 0.1).round_up(0)
+  word_wrapped_text = ""
 
   while column + page_width < text.size
     search_from = column + page_width - default_margin
@@ -357,10 +357,10 @@ def word_wrap_this(text, args={})
       stop if search_from < 1
     end
     column_break = search_from + found_at
-    puts "#{text.slice(column, column_break - column)}"
+    word_wrapped_text += "#{text.slice(column, column_break - column)} \n"
     column = column_break
   end
-  return "#{text.slice(column, text.size - column)}"
+  return "#{word_wrapped_text} #{text.slice(column, text.size - column)}"
 end
 
 # ---
