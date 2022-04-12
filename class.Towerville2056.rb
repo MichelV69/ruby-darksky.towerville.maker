@@ -367,7 +367,7 @@ class Towerville2056
       # ---
       when :building_profile
         profile_data = self.building_profile[other.first]
-        return "Floors : #{profile_data.last} :: Design Form : #{profile_data.first}"
+        return "Floors #{profile_data.last}, layout is #{profile_data.first}"
       # ---
       when :population_estimate
         "#{self.population_estimate.round_to_nearest_5.to_s_formated}"
@@ -375,7 +375,7 @@ class Towerville2056
       when :number_of_homes_estimate
         "#{self.number_of_homes_estimate.round_to_nearest_5.to_s_formated} #{Towerville2056::BLURB_TYPICAL_HOME}s"
         # ---
-      when :green_spaces_data
+      when :green_spac©es_data
         self.green_spaces_data[:floors_used] = self.green_spaces_data[:total_msq] / self.building_foot_print[:sq] * 3.0
 
         self.green_spaces_data[:number_of_spaces] = self.green_spaces_data[:total_msq] / self.green_spaces_data[:size_ea_msq]
