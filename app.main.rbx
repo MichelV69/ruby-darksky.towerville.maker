@@ -46,15 +46,17 @@ tv.building_profile.keys.each { |bldg_section|
   end
   ## REDO :  use the Tabulo.gem here for an output table
   text_block = tv.text_block_for_building_profile(bldg_section)
-  text_block = word_wrap_this(text_block, {at: 77}) if bldg_section == :crown_cap
-  puts "#{front} :: #{label_for bldg_section}: #{text_block} "
+  if bldg_section == :crown_cap
+    text_block = "(not present)" if tv.building_profile[bldg_section].first == "(none)"
+  end
+  puts word_wrap_this("#{front} :: #{label_for bldg_section}: #{text_block} ", {at: 77})
   }
 
-puts "\n #{tv.name} :: Economics: #{tv.text_block_for_primary_industry[:summary_desc]}"
-word_wrap_this tv.text_block_for_primary_industry[:broad_desc]
+puts "\n" + word_wrap_this(" Economics: :: #{label_for 'primary_industry_index'} : #{tv.primary_industry_index} =>  #{tv.text_block_for_primary_industry_index}", {at: 77})
 
-puts " #{space_bar} :: primary Employer Scale: #{tv.primary_employer_scale}: #{tv.text_block_for_primary_employer_scale} "
-puts " #{space_bar} :: Relative Economic Status : #{tv.primary_economic_rating } : #{tv.text_block_for_primary_economic_rating}"
+puts " #{space_bar} :: #{label_for 'primary_employer_scale'}: #{tv.primary_employer_scale} => #{tv.text_block_for_primary_employer_scale} "
+
+puts " #{space_bar} :: #{label_for 'primary_economic_rating'} : #{tv.primary_economic_rating } => #{tv.text_block_for_primary_economic_rating}"
 
 puts "\n\n  #{space_bar}"
 # --- ---

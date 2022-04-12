@@ -283,6 +283,7 @@ class Towerville2056
 				table_column = "(none)"
 			else
 				how_tall = 1.d4 + 1.d6
+        floors_range = (floors_range.first..floors_range.first + how_tall)
 				table_column = "The 'Crown' is capped with forest of RF antennas, microwave link dishes, aircraft warning lights, weather sensors, cameras, and even very short range anti-aircraft systems. Additionally, there will heavy cables, struts, hatches, ladders and scaffolding to allow access and maintenance to all that hardware.  The 'Crown Forest' unofficially increases the height of the building another #{how_tall} stories."
 			end
 		end
@@ -361,6 +362,9 @@ class Towerville2056
   # ---
   def text_block_for(property_name, *other)
     case property_name.to_sym
+      when :unused_right_now
+
+      # ---
       when :building_profile
         profile_data = self.building_profile[other.first]
         return "Floors : #{profile_data.last} :: Design Form : #{profile_data.first}"
@@ -409,8 +413,8 @@ class Towerville2056
         # each digit is a different Industry
         # 26 would be three industries, indexes of 2 & 6.
 
-    		table_col_1 = ""
-        table_col_2 = ""
+    		summary_desc = ""
+        broad_desc = ""
         table_primary_industry = TABLE_CONTENT_SETS[:primary_industry]
 
     		0.upto(self.primary_industry_index.to_s.length - 1) do |pi_ptr|
@@ -418,15 +422,15 @@ class Towerville2056
     			table_row = table_primary_industry[row_pointer]
 
     			if pi_ptr !=  0 then
-    				table_col_1 = table_col_1 + " | "
-    				table_col_2 = table_col_2 + " | "
+    				summary_desc = summary_desc + " | "
+    				broad_desc = broad_desc + " | "
     			end
 
-    			table_col_1 = table_col_1 + table_row["summary_desc"]
-          table_col_2 = table_col_2 + table_row["broad_desc"]
+    			summary_desc = summary_desc + table_row["summary_desc"]
+          broad_desc = broad_desc + table_row["broad_desc"]
     		end # if index == 2
 
-        return {summary_desc: table_col_1, broad_desc: table_col_2}
+        return "#{label_for summary_desc}: #{broad_desc}"
         # ---
       else
         raise "Towerville2056:: ERR::  text_block_for_#{property_name} => action undefined"
