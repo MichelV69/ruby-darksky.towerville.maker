@@ -83,19 +83,38 @@ class String
   def is_wrong!
     self  + "-isWrong"
   end
+
   def debug
     " >> "+self
   end
+
   def as_int
     self.to_i
   end
+
 	def to_lower
 		self.downcase
 	end
-  def contains?(test)
-    self.include?(test)
+
+  def contains?(needle)
+    self.include?(needle)
   end
-end
+
+  def in_title_case
+    do_not_title = ["the", "to"]
+    working_string_set = self.split(" ")
+    debug_msg "working_string_set #{working_string_set.inspect}"
+    working_string_set.each do |word|
+      unless do_not_title.contains? word
+        title_word = word
+        title_word[0] = word[0].upcase
+        index = working_string_set.index word
+        working_string_set[index] = title_word
+      end
+    end
+    "#{working_string_set.join(" ")}"
+  end # def in_title_case
+end # class String
 
 # --- # ---
 class Numeric
@@ -247,6 +266,10 @@ class Array
   def debug
     " >> "+self.to_s
   end
+
+  def contains?(needle)
+    self.include?(needle)
+  end
 end
 
 # --- # ---
@@ -294,6 +317,11 @@ def dev_msg(message)
 end
 
 # ---
+def debug_msg(message)
+  puts " >>> debug_msg >>> #{message} <<< debug_msg <<<"
+end
+
+# ---
 def signi2(to_round)
   up_value = to_round.to_f*100.00
   round_value = up_value.round
@@ -337,6 +365,6 @@ end
 
 # ---
 def label_for(variable_name)
-  "#{variable_name.to_s.gsub("_"," ").title_case}"
+  "#{variable_name.to_s.gsub("_"," ").in_title_case}"
 end
 # --- end of file ---
