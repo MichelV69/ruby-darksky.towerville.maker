@@ -22,9 +22,9 @@ tv.building_profile.each { |bldg_section, section_data|
 tv.primary_employer_scale = Towerville2056::random_primary_employer_scale()
 tv.shop_count_variance_percent = Towerville2056::random_variance_by_primary_economic_rating(tv.primary_industry_index)
 
-tv.social_spaces_variance_percent = Towerville2056.random_variance_by_primary_economic_rating(tv.primary_economic_rating)
+tv.social_spaces_variance = Towerville2056.random_variance_by_primary_economic_rating(tv.primary_economic_rating)
 
-tv.green_spaces_variance_percent = Towerville2056.random_variance_by_primary_economic_rating(tv.primary_economic_rating)
+tv.green_spaces_variance = Towerville2056.random_variance_by_primary_economic_rating(tv.primary_economic_rating)
 
 space_bar = spaces(tv.name.length)
 # ---

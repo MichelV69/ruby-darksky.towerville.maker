@@ -12,7 +12,7 @@ class Towerville2056
     :name, :number_of_floors, :building_profile,
     :primary_industry_index, :primary_employer_scale,
     :shop_count_variance_percent,
-    :social_spaces_variance_percent, :green_spaces_variance_percent
+    :social_spaces_variance, :green_spaces_variance
 
   def initialize(args = {})
     self.tables_count = TABLE_CONTENT_SETS.count
@@ -56,8 +56,8 @@ class Towerville2056
 
     self.primary_employer_scale = -1
     self.shop_count_variance_percent    = 0.0
-    self.social_spaces_variance_percent = 0.0
-    self.green_spaces_variance_percent  = 0.0
+    self.social_spaces_variance = 0.0
+    self.green_spaces_variance  = 0.0
 
   end # def initialize
 
@@ -66,7 +66,7 @@ class Towerville2056
     green_spaces_data = {}
     green_spaces_data.default = -1.1
 
-    change_modifier = 1 + self.green_spaces_variance_percent.percent
+    change_modifier = 1 + self.green_spaces_variance.percent
 
     green_spaces_data[:total_msq] = change_modifier * self.construction_rules[:base_area_green_space_fraction] * self.number_of_floors
     green_spaces_data[:size_ea_msq] = change_modifier * self.construction_rules[:green_space_size_ea_msq]
@@ -79,7 +79,7 @@ class Towerville2056
     social_spaces_data = {}
     social_spaces_data.default = -1.1
 
-    change_modifier = 1 + self.social_spaces_variance_percent.percent
+    change_modifier = 1 + self.social_spaces_variance.percent
 
     social_spaces_data[:total_msq] = change_modifier * self.construction_rules[:base_area_social_space_fraction] * self.number_of_floors
     social_spaces_data[:size_ea_msq] = change_modifier * self.construction_rules[:social_space_size_ea_msq]
@@ -375,12 +375,13 @@ class Towerville2056
       when :number_of_homes_estimate
         "#{self.number_of_homes_estimate.round_to_nearest_5.to_s_formated} #{Towerville2056::BLURB_TYPICAL_HOME}s"
         # ---
-      when :green_spac©es_data
-        self.green_spaces_data[:floors_used] = self.green_spaces_data[:total_msq] / self.building_foot_print[:sq] * 3.0
+      when :green_spaces_data
+        green_spaces_data = self.green_spaces_data
+        green_spaces_data[:floors_used] = green_spaces_data[:total_msq] / self.building_foot_print[:sq] * 3.0
 
-        self.green_spaces_data[:number_of_spaces] = self.green_spaces_data[:total_msq] / self.green_spaces_data[:size_ea_msq]
+        green_spaces_data[:number_of_spaces] = green_spaces_data[:total_msq] / green_spaces_data[:size_ea_msq]
 
-        "#{self.green_spaces_data[:number_of_spaces].round} or so #{self.green_spaces_data[:size_ea_msq].round_to_nearest_5.to_s_formated}m.sq spaces, totalling #{self.green_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{self.green_spaces_data[:floors_used].round_up(0)} floors"
+        "#{green_spaces_data[:number_of_spaces].round} or so #{green_spaces_data[:size_ea_msq].round_to_nearest_5.to_s_formated}m.sq spaces, totalling #{green_spaces_data[:total_msq].round_to_nearest_5.to_s_formated}m.sq over #{green_spaces_data[:floors_used].round_up(0)} floors"
         # ---
       when :building_foot_print
         building_in_m = self.building_foot_print
@@ -404,7 +405,7 @@ class Towerville2056
         table_primary_economic_rating.each do |minimum_roll, desc|
           per_text = desc if self.primary_economic_rating >= minimum_roll
         end
-        return per_text.gsub("!e", "economy").gsub("\w", "with")
+        return per_text.gsub("!e", "economy").gsub("\\w", "with")
         # ---
       when :primary_employer_scale
         TABLE_CONTENT_SETS[:primary_employer_scale][self.primary_employer_scale] || "undefined"

@@ -38,7 +38,7 @@ Then('the Building Footprint text should be {string}') do |expected_string|
 end
 
 When('I set random_variance_by_primary_economic_rating to 0.0 with social_spaces_data.to_desc') do
-  @subject.social_spaces_variance_percent = 0.0
+  @subject.social_spaces_variance = 0.0
   @social_spaces_text = @subject.text_block_for_social_spaces_data
 end
 
@@ -47,9 +47,9 @@ Then('the description of Social Spaces should be {string}') do |expected_string|
 end
 
 When('I use social_spaces with set random_variance_by_primary_economic_rating fully randomized') do
-  @subject.social_spaces_variance_percent = 0.0
+  @subject.social_spaces_variance = 0.0
   @social_spaces_median_data = @subject.social_spaces_data
-  @subject.social_spaces_variance_percent = Towerville2056.random_variance_by_primary_economic_rating(@subject.primary_economic_rating)
+  @subject.social_spaces_variance = Towerville2056.random_variance_by_primary_economic_rating(@subject.primary_economic_rating)
 end
 
 Then('the Social Spaces data should be reasonable') do
