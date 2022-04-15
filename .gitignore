@@ -3,3 +3,4 @@ Dockerfile*
 *.zsh
 *.test.rbx
 *.csv
+example*.txt
