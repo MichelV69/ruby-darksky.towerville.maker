@@ -5,20 +5,22 @@ require_relative('../../class.ExternalRandom.rb')
 
 # ---
 
-When ('I provide a Number other than {int} to the getRandomprimary_industry method') do |int|
+When ('I provide a Number other than {int} to the table_rows_for_primary_industry method') do |int|
   @testVar_TableSize = int -1
 end
 
-Then('the array I am returned shoud include the rollIndex, the summary_desc and the broad_desc') do
-  rows_primary_industry = @all_tables[:primary_industry]
+Then('the array I am returned should include the summary_desc and the broad_desc') do
+  rows_from_table = @table_rows_for[:primary_industry]
 
   1.upto(@testVar_TableSize) do | ptr |
 		@subject.primary_industry_index = ptr
-    @method_output = @subject.text_block_for_primary_industry_index
+    @method_output = @subject.table_rows_for_primary_industry
 
     columns = {}
-    columns[1] = rows_primary_industry[ptr]["summary_desc"]
-    columns[2] = rows_primary_industry[ptr]["broad_desc"]
+    columns[1] = rows_from_table[ptr]["summary_desc"]
+    columns[2] = rows_from_table[ptr]["broad_desc"]
+
+    debug_msg @method_output.inspect
 
     expect(@method_output["summary_desc".to_sym]).to		eq(columns[1])
     expect(@method_output["broad_desc".to_sym]).to  		eq(columns[2])

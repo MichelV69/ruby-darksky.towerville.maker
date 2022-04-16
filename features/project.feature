@@ -19,8 +19,8 @@ I want to create a randomly generated TV for DarkSky
 
   Scenario Outline: Test Primary Industry Table
     Given that I have an instance of Towerville2056
-    When I provide a Number other than 8 to the getRandomprimary_industry method
-    Then the array I am returned shoud include the rollIndex, the summary_desc and the broad_desc
+    When I provide a Number other than 8 to the table_rows_for_primary_industry method
+    Then the array I am returned should include the summary_desc and the broad_desc
 
   Scenario Outline: Test Random Primary Industry Getter
     Given that I have an instance of Towerville2056

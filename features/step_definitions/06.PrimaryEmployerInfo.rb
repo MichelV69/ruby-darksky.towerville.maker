@@ -22,7 +22,7 @@ When('I directly set the Primary Employer Scale') do
 end
 
 Then('I should get the details for the Primary Employer Scale that I expect') do
-  @table_row_data = @all_tables[:primary_employer_scale][@new_primary_employers_scale]
+  @table_row_data = @table_rows_for[:primary_employer_scale][@new_primary_employers_scale]
 
   expect(@subject.text_block_for_primary_employer_scale).to eq(@table_row_data)
 end

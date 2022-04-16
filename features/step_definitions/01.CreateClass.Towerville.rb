@@ -8,7 +8,7 @@ require_relative('../../class.ExternalRandom.rb')
 
 # ---
 Before do
-  @all_tables = Psych.load_file(Towerville2056::TABLE_FILENAME)
+  @table_rows_for = Psych.load_file(Towerville2056::TABLE_FILENAME)
 	@subject = Towerville2056.new
 
   @roll4d6 = {}

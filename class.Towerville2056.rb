@@ -330,7 +330,7 @@ class Towerville2056
   # ---
 
   def valid_action?(method_name)
-    valid_actions = ["text_block_for_"]
+    valid_actions = ["text_block_for_", "table_rows_for_"]
 
     valid_actions.each { |action|
       action_requested = method_name.to_s.gsub(action, "") if method_name.to_s.contains? action
@@ -346,8 +346,8 @@ class Towerville2056
 
   # ---
   def method_missing(method_name, *args, &block)
-    if (valid_action? method_name) then
-      text_block_for(valid_action?(method_name), *args)
+    if (valid_action?(method_name)) then
+      eval(method_name(*args))
     else
       puts "method_missing :>> #{method_name}"
       super
@@ -358,6 +358,11 @@ class Towerville2056
   def respond_to_missing?(method_name, *args)
      valid_action? method_name || super
   end # def respond_to_missing?
+
+  # ---
+  def table_rows_for(property_name, *other)
+    debug_msg "BINGO!"
+  end
 
   # ---
   def text_block_for(property_name, *other)
